@@ -45,13 +45,13 @@ export default function BlogPage({ blog, ogImageUrl }: { blog: Blog; ogImageUrl:
               <HStack spacing="3">
                 <Circle overflow="hidden">
                   <Image
-                    alt="Segun Adebayo"
+                    alt="Gorakh Raj Joshi"
                     src="https://vercel.com/api/www/avatar/6ad338204b00eabaea90981779d3835976b53833?s=64"
                     width={32}
                     height={32}
                   />
                 </Circle>
-                <Text fontWeight="medium">Segun Adebayo</Text>
+                <Text fontWeight="medium">Gorakh Raj Joshi</Text>
               </HStack>
 
               <HStack color="brown.600">
@@ -87,12 +87,12 @@ export default function BlogPage({ blog, ogImageUrl }: { blog: Blog; ogImageUrl:
         </article>
 
         <Flex justify="space-between" my="20">
-          <LinkItem href={blog.tweetUrl} icon={TwitterIcon}>
+          {/* <LinkItem href={blog.tweetUrl} icon={TwitterIcon}>
             Tweet this article
-          </LinkItem>
-          <LinkItem href={blog.editUrl} icon={BlogIcon}>
+          </LinkItem> */}
+          {/* <LinkItem href={blog.editUrl} icon={BlogIcon}>
             Edit on github
-          </LinkItem>
+          </LinkItem> */}
         </Flex>
 
         <Box as="hr" borderColor="whiteAlpha.200" mt="3rem" />

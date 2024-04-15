@@ -91,14 +91,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }}
         >
           <img
-            alt="Segun Adebayo"
-            src={getAbsoluteURL('/static/images/segun-adebayo-headshot.jpg')}
+            alt="Gorakh Raj Joshi"
+            src={getAbsoluteURL('/static/images/gorakh-raj-joshi.jpeg')}
             width={50}
             height={50}
             style={{ objectFit: 'contain', borderRadius: '50%' }}
           />
         </div>
-        <p style={{ fontSize: '20px' }}>Written by Segun Adebayo</p>
+        <p style={{ fontSize: '20px' }}>Written by Gorakh Raj Joshi</p>
       </div>
 
       <div

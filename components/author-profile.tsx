@@ -7,14 +7,14 @@ export default function AuthorProfile() {
     <Flex direction={{ base: 'column', md: 'row' }} gap={{ base: '4', md: '8' }}>
       <Circle size="80px" overflow="hidden">
         <Image
-          alt="Segun Adebayo"
-          src="/static/images/segun-adebayo-headshot.jpg"
+          alt="Gorakh Raj Joshi"
+          src="/static/images/gorakh-raj-joshi.jpeg"
           width={80}
           height={80}
         />
       </Circle>
       <Box>
-        <Heading size="md">Written by Segun Adebayo (Sage)</Heading>
+        <Heading size="md">Written by Gorakh Raj Joshi (Sage)</Heading>
         <Text mt="4" lineHeight="taller">
           Sage is a Github Star <Emoji label="Github star">🌟</Emoji> and Design Engineer{' '}
           <Emoji label="Software developer">👨🏽‍💻</Emoji>. He is passionate about helping people build

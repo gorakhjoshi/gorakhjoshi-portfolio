@@ -20,12 +20,11 @@ export const tags = [
 ];
 
 const shared = {
-  name: 'Segun Adebayo',
+  name: 'Gorakh Raj Joshi',
   repo: 'https://github.com/segunadebayo/adebayosegun.com',
   editUrl: 'https://github.com/segunadebayo/adebayosegun.com/edit/main/data/',
   website: 'https://adebayosegun.com',
-  title:
-    'Segun Adebayo (aka Sage) - UI Engineer (Design Systems), Software Developer and Product Designer',
+  title: 'Gorakh Raj Joshi - UI Engineer (Design Systems), Software Developer and Product Designer',
   description:
     'UI Engineer passionate about design systems, state machines, accessibility, DX and Rust.',
   image: 'https://adebayosegun.com/static/images/banner.png',
@@ -36,14 +35,15 @@ const siteConfig = {
   image: shared.image,
   type: 'website',
   title: shared.title,
-  titleTemplate: '%s - Segun Adebayo',
+  titleTemplate: '%s - Gorakh Raj Joshi',
   description: shared.description,
   siteUrl: shared.website,
   profiles: {
-    github: 'https://github.com/segunadebayo',
-    twitter: 'https://twitter.com/thesegunadebayo',
-    linkedin: 'https://linkedin.com/in/thesegunadebayo',
-    email: 'mailto:sage@adebayosegun.com',
+    github: 'https://github.com/gorakhjoshi',
+    // twitter: 'https://twitter.com/thesegunadebayo',
+    linkedin: 'https://www.linkedin.com/in/gorakhjoshi',
+    email: 'mailto:mail@gorakhjoshi.com',
+    resume: 'https://resume.gorakhjoshi.com/',
   },
   repo: {
     url: shared.repo,
@@ -63,10 +63,10 @@ const siteConfig = {
     description: shared.description,
     images: [
       {
-        url: 'https://adebayosegun.com/static/images/banner.png',
+        url: 'https://gorakhjoshi.com/static/images/gorakh-raj-joshi.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Segun Adebayo (aka Sage) - UI Engineer (Design Systems), Software Developer and Product Designer',
+        alt: 'Gorakh Raj Joshi - UI Engineer (Design Systems), Software Developer and Product Designer',
       },
     ],
   },

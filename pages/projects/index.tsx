@@ -15,7 +15,7 @@ export default function ProjectPage() {
           <Heading as="h1" size="3xl" marginBottom="6" color="white">
             Projects
           </Heading>
-          <Stack fontSize="lg" maxW="60ch" spacing="4">
+          {/* <Stack fontSize="lg" maxW="60ch" spacing="4">
             <Text>
               My primary focus these days is{' '}
               <MDXComponents.a href="https://chakra-ui.com/" target="_blank" rel="noopener">
@@ -29,7 +29,7 @@ export default function ProjectPage() {
               faster by bridging the gap between design and code.
             </Text>
             <Text>Here are some projects I've worked on that I think are worth mentioning.</Text>
-          </Stack>
+          </Stack> */}
         </Box>
 
         <Box marginTop="vGutter">

@@ -65,16 +65,16 @@ interface NavItemData {
 }
 
 const items: NavItemData[] = [
-  { label: 'Talks', href: '/talks', icon: TalksIcon },
-  { label: 'Blog', href: '/blog', icon: BlogIcon },
+  // { label: 'Talks', href: '/talks', icon: TalksIcon },
+  // { label: 'Blog', href: '/blog', icon: BlogIcon },
   { label: 'Projects', href: '/projects', icon: ProjectIcon },
   { label: 'Snippets', href: '/snippets', icon: SnippetIcon },
-  {
-    label: 'Consulting',
-    href: 'https://calendly.com/chakra-ui/technical-consulting-60m',
-    icon: CoachingIcon,
-    primary: true,
-  },
+  // {
+  //   label: 'Consulting',
+  //   href: 'https://calendly.com/chakra-ui/technical-consulting-60m',
+  //   icon: CoachingIcon,
+  //   primary: true,
+  // },
 ];
 
 function DesktopNavItemGroup(props: StackProps) {
@@ -115,8 +115,8 @@ function Headshot() {
         <VisuallyHidden>Home</VisuallyHidden>
         <Image
           priority
-          alt="Segun Adebayo"
-          src="/static/images/segun-adebayo-headshot.jpg"
+          alt="Gorakh Raj Joshi"
+          src="/static/images/gorakh-raj-joshi.jpeg"
           width={32}
           height={32}
           style={{ objectFit: 'cover' }}

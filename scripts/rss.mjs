@@ -4,7 +4,7 @@ import { allBlogs } from '.contentlayer/data';
 
 async function generate() {
   const feed = new RSS({
-    title: 'Segun Adebayo',
+    title: 'Gorakh Raj Joshi',
     site_url: 'https://adebayosegun.com',
     feed_url: 'https://adebayosegun.com/feed.xml',
   });

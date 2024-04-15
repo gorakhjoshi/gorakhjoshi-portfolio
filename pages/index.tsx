@@ -16,6 +16,7 @@ import {
 import ChakraLogo from 'components/chakra-logo';
 import Container from 'components/container';
 import Emoji from 'components/emoji';
+import ElectronicsEngineerIcon from 'components/engineer';
 import GithubStarIcon from 'components/github-star';
 import LinkItem from 'components/link-item';
 import ProjectCard from 'components/project-card';
@@ -67,9 +68,9 @@ function MainHeading(props: HeadingProps) {
 export default function HomePage() {
   return (
     <Container>
-      {/* Segun Adebayo - ui engineer & product designer  */}
+      {/* Gorakh Raj Joshi - ui engineer & product designer  */}
       <Flex direction="column" paddingY="24">
-        <MainHeading>Segun Adebayo</MainHeading>
+        <MainHeading>Gorakh Raj Joshi</MainHeading>
         <Text
           color="brown.600"
           display="block"
@@ -78,7 +79,7 @@ export default function HomePage() {
           fontWeight="bold"
           lineHeight="1.2"
         >
-          Design Engineer &amp; Product Designer
+          Fullstack Engineer (Frontend Heavy)
         </Text>
 
         {/* I'm passionate about... */}
@@ -88,17 +89,17 @@ export default function HomePage() {
           maxWidth="40rem"
           fontSize={{ base: 'lg', md: '2xl' }}
         >
-          I'm passionate about <Emoji label="design system">🎨</Emoji> design systems,{' '}
-          <Emoji label="accessibility">♿️</Emoji> accessibility,{' '}
-          <Emoji label="state machine">⚙️</Emoji> state machines, and{' '}
-          <Emoji label="love">😍 </Emoji> user experience
+          I'm passionate about <Emoji label="design system">🛠️</Emoji> Architectural Design,{' '}
+          <Emoji label="accessibility">🧪</Emoji> Test Driven Development,{' '}
+          <Emoji label="state machine">🚀</Emoji> Performance Optimization, and{' '}
+          <Emoji label="love">🌟 </Emoji> User Experience
         </Text>
 
         {/* Github star and Chakra brag */}
         <Box marginTop={{ base: '8', md: '14' }} width="full">
           <Flex direction={{ base: 'column', md: 'row' }} gap={{ base: '5', md: '10' }}>
-            <AchievementItem icon={GithubStarIcon}>Github Star</AchievementItem>
-            <AchievementItem icon={ChakraLogo}>Creator, Chakra UI</AchievementItem>
+            <AchievementItem icon={ElectronicsEngineerIcon}>Electronics Engineer</AchievementItem>
+            <AchievementItem icon={ChakraLogo}>Frontend Subject Matter Expert</AchievementItem>
           </Flex>
         </Box>
       </Flex>
@@ -121,8 +122,8 @@ export default function HomePage() {
             overflow="hidden"
           >
             <Image
-              alt="Segun adebayo"
-              src="/static/images/segun-adebayo-headshot.jpg"
+              alt="Gorakh Raj Joshi"
+              src="/static/images/gorakh-raj-joshi.jpeg"
               fill
               style={{ objectFit: 'cover' }}
             />
@@ -133,17 +134,17 @@ export default function HomePage() {
             fontSize={{ base: '3rem', md: '5rem', lg: '6.25rem' }}
             letterSpacing="tight"
           >
-            I design{' '}
+            I architect{' '}
             <Box as="span" color="brown.600">
-              component systems
+              software systems
             </Box>
           </Heading>
         </Box>
 
         <Box maxWidth={{ lg: '27.5rem' }} marginTop="4">
           <Text fontSize={{ base: 'lg', md: '2xl' }}>
-            An engineer with a strong design background, specializing in design systems,
-            accessibility and interface design for digital products
+            Senior Fullstack Engineer: Specializing in System Design and Architecture,
+            Accessibility, and Frontend Interface Design
           </Text>
 
           {/* Profile links */}
@@ -157,7 +158,7 @@ export default function HomePage() {
             <LinkItem icon={EmailIcon} href={siteConfig.profiles.email}>
               Email
             </LinkItem>
-            <LinkItem icon={FileIcon} href={siteConfig.profiles.linkedin}>
+            <LinkItem icon={FileIcon} href={siteConfig.profiles.resume}>
               Resume
             </LinkItem>
           </SimpleGrid>
@@ -193,7 +194,7 @@ export default function HomePage() {
       </Box>
 
       {/* Featured Talks */}
-      <Box as="section" py="vGutter" position="relative">
+      {/* <Box as="section" py="vGutter" position="relative">
         <Heading size="3xl" letterSpacing="tight" position="relative">
           Featured Talks
         </Heading>
@@ -208,7 +209,7 @@ export default function HomePage() {
         <Link href="/talks">
           <ViewMore as="div">View all Talks</ViewMore>
         </Link>
-      </Box>
+      </Box> */}
 
       {/* Tools & Softwares */}
       <Box as="section" py="vGutter">
@@ -233,9 +234,9 @@ export default function HomePage() {
       </Box>
 
       {/* Subscribe callout */}
-      <Box as="hr" borderColor="whiteAlpha.300" />
+      {/* <Box as="hr" borderColor="whiteAlpha.300" />
       <SubscribeForm />
-      <Box as="hr" borderColor="whiteAlpha.300" />
+      <Box as="hr" borderColor="whiteAlpha.300" /> */}
     </Container>
   );
 }
