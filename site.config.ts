@@ -40,7 +40,7 @@ const siteConfig = {
   siteUrl: shared.website,
   profiles: {
     github: 'https://github.com/gorakhjoshi',
-    // twitter: 'https://twitter.com/thesegunadebayo',
+    twitter: 'https://twitter.com/thesegunadebayo',
     linkedin: 'https://www.linkedin.com/in/gorakhjoshi',
     email: 'mailto:mail@gorakhjoshi.com',
     resume: 'https://resume.gorakhjoshi.com/',
