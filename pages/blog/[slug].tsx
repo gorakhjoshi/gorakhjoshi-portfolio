@@ -87,12 +87,12 @@ export default function BlogPage({ blog, ogImageUrl }: { blog: Blog; ogImageUrl:
         </article>
 
         <Flex justify="space-between" my="20">
-          {/* <LinkItem href={blog.tweetUrl} icon={TwitterIcon}>
+          <LinkItem href={blog.tweetUrl} icon={TwitterIcon}>
             Tweet this article
-          </LinkItem> */}
-          {/* <LinkItem href={blog.editUrl} icon={BlogIcon}>
+          </LinkItem>
+          <LinkItem href={blog.editUrl} icon={BlogIcon}>
             Edit on github
-          </LinkItem> */}
+          </LinkItem>
         </Flex>
 
         <Box as="hr" borderColor="whiteAlpha.200" mt="3rem" />

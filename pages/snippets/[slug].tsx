@@ -49,14 +49,14 @@ export default function Page({ snippet }: { snippet: Snippet }) {
           </Box>
         </article>
 
-        {/* <Flex justify="space-between" mt="20">
+        <Flex justify="space-between" mt="20">
           <LinkItem href={snippet.tweetUrl} icon={TwitterIcon}>
             Tweet this snippet
           </LinkItem>
           <LinkItem href={snippet.editUrl} icon={BlogIcon}>
             Edit on github
           </LinkItem>
-        </Flex> */}
+        </Flex>
       </Box>
     </Container>
   );
