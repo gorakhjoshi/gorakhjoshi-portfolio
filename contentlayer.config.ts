@@ -17,20 +17,20 @@ const computedFields: ComputedFields = {
     type: 'string',
     resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ''),
   },
-  editUrl: {
-    type: 'string',
-    resolve: (doc) => `${siteConfig.repo.editUrl}${doc._id}`,
-  },
-  tweetUrl: {
-    type: 'string',
-    resolve: (doc) => {
-      const slug = doc._raw.sourceFileName.replace(/\.mdx$/, '');
-      return `https://twitter.com/intent/tweet?${new URLSearchParams({
-        url: `https://adebayosegun.com/${doc.type.toLowerCase()}/${slug}`,
-        text: `I just read "${doc.title}" by @thesegunadebayo\n\n`,
-      })}`;
-    },
-  },
+  // editUrl: {
+  //   type: 'string',
+  //   resolve: (doc) => `${siteConfig.repo.editUrl}${doc._id}`,
+  // },
+  // tweetUrl: {
+  //   type: 'string',
+  //   resolve: (doc) => {
+  //     const slug = doc._raw.sourceFileName.replace(/\.mdx$/, '');
+  //     return `https://twitter.com/intent/tweet?${new URLSearchParams({
+  //       url: `https://gorakhjoshi.com/${doc.type.toLowerCase()}/${slug}`,
+  //       text: `I just read "${doc.title}" by @thesegunadebayo\n\n`,
+  //     })}`;
+  //   },
+  // },
   params: {
     type: 'list',
     resolve: (doc) => doc._raw.flattenedPath.split('/'),
@@ -53,7 +53,7 @@ const Blog = defineDocumentType(() => ({
     ...computedFields,
     ogImageUrl: {
       type: 'string',
-      resolve: (doc) => `https://adebayosegun.com/static/images/og/${toKebabCase(doc.title)}.png`,
+      resolve: (doc) => `https://gorakhjoshi.com/static/images/og/${toKebabCase(doc.title)}.png`,
     },
   },
 }));

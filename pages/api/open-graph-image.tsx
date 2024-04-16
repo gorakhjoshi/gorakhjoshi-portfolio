@@ -114,7 +114,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           padding: '8px 16px',
         }}
       >
-        https://adebayosegun.com
+        https://gorakhjoshi.com
       </div>
     </div>,
     {

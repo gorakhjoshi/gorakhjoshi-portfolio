@@ -1,8 +1,8 @@
 {
-  "name": "adebayosegun.com",
+  "name": "gorakhjoshi.com",
   "version": "1.0.0",
   "description": "My portfolio built with Next.js, Contentlayer, Chakra UI and Vercel",
-  "repository": "git@github.com:segunadebayo/adebayosegun.com.git",
+  "repository": "git@github.com:segunadebayo/gorakhjoshi-portfolio.git",
   "author": "Gorakh Raj Joshi <joseshegs@gmail.com>",
   "license": "MIT",
   "private": true,

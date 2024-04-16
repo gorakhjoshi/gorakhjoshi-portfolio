@@ -79,7 +79,7 @@ export default function HomePage() {
           fontWeight="bold"
           lineHeight="1.2"
         >
-          Fullstack Engineer (Frontend Heavy)
+          Sr. Fullstack Engineer (Frontend Heavy)
         </Text>
 
         {/* I'm passionate about... */}

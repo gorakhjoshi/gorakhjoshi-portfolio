@@ -15,21 +15,9 @@ export default function ProjectPage() {
           <Heading as="h1" size="3xl" marginBottom="6" color="white">
             Projects
           </Heading>
-          {/* <Stack fontSize="lg" maxW="60ch" spacing="4">
-            <Text>
-              My primary focus these days is{' '}
-              <MDXComponents.a href="https://chakra-ui.com/" target="_blank" rel="noopener">
-                Chakra UI{' '}
-              </MDXComponents.a>{' '}
-              — a component libary that provides the building blocks needed to create an accessible
-              app fast <Emoji label="fast">⚡️</Emoji>.
-            </Text>
-            <Text>
-              I'm passionate about building <b>component systems</b> that help teams ship products
-              faster by bridging the gap between design and code.
-            </Text>
+          <Stack fontSize="lg" maxW="60ch" spacing="4">
             <Text>Here are some projects I've worked on that I think are worth mentioning.</Text>
-          </Stack> */}
+          </Stack>
         </Box>
 
         <Box marginTop="vGutter">

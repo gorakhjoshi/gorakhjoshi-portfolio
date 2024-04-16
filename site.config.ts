@@ -21,13 +21,13 @@ export const tags = [
 
 const shared = {
   name: 'Gorakh Raj Joshi',
-  repo: 'https://github.com/segunadebayo/adebayosegun.com',
-  editUrl: 'https://github.com/segunadebayo/adebayosegun.com/edit/main/data/',
-  website: 'https://adebayosegun.com',
-  title: 'Gorakh Raj Joshi - UI Engineer (Design Systems), Software Developer and Product Designer',
+  // repo: 'https://github.com/segunadebayo/gorakhjoshi.com',
+  // editUrl: 'https://github.com/segunadebayo/gorakhjoshi.com/edit/main/data/',
+  website: 'https://gorakhjoshi.com',
+  title: 'Gorakh Raj Joshi - Senior Fullstack Engineer',
   description:
-    'UI Engineer passionate about design systems, state machines, accessibility, DX and Rust.',
-  image: 'https://adebayosegun.com/static/images/banner.png',
+    'Senior Fullstack Engineer: Specializing in System Design and Architecture, Accessibility, and Frontend Interface Design',
+  image: 'https://gorakhjoshi.com/static/images/gorakh-raj-joshi.jpeg',
 };
 
 const siteConfig = {
@@ -46,14 +46,14 @@ const siteConfig = {
     resume: 'https://resume.gorakhjoshi.com/',
   },
   repo: {
-    url: shared.repo,
-    editUrl: shared.editUrl,
+    // url: shared.repo,
+    // editUrl: shared.editUrl,
   },
-  twitter: {
-    handle: '@thesegunadebayo',
-    site: '@thesegunadebayo',
-    cardType: 'summary_large_image',
-  },
+  // twitter: {
+  //   handle: '@thesegunadebayo',
+  //   site: '@thesegunadebayo',
+  //   cardType: 'summary_large_image',
+  // },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -66,7 +66,7 @@ const siteConfig = {
         url: 'https://gorakhjoshi.com/static/images/gorakh-raj-joshi.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Gorakh Raj Joshi - UI Engineer (Design Systems), Software Developer and Product Designer',
+        alt: 'Senior Fullstack Engineer: Specializing in System Design and Architecture, Accessibility, and Frontend Interface Design',
       },
     ],
   },

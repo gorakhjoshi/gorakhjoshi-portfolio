@@ -12,7 +12,8 @@ export default function Footer() {
             Gorakh Raj Joshi
           </Heading>
           <Text fontSize="lg">
-            Passionate UI engineer looking to bridge the gap between design and code
+            Senior Fullstack Engineer: Specializing in System Design and Architecture,
+            Accessibility, and Frontend Interface Design
           </Text>
         </Box>
 
