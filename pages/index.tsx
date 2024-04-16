@@ -20,7 +20,13 @@ import ElectronicsEngineerIcon from 'components/engineer';
 import GithubStarIcon from 'components/github-star';
 import LinkItem from 'components/link-item';
 import ProjectCard from 'components/project-card';
-import { EmailIcon, FileIcon, LinkedInIcon, TwitterIcon } from 'components/social-icons';
+import {
+  EmailIcon,
+  FileIcon,
+  GithubIcon,
+  LinkedInIcon,
+  TwitterIcon,
+} from 'components/social-icons';
 import SubscribeForm from 'components/subscribe-form';
 import TalkCard from 'components/talk-card';
 import TestimonialCard from 'components/testimonial-card';
@@ -152,8 +158,8 @@ export default function HomePage() {
             <LinkItem icon={LinkedInIcon} href={siteConfig.profiles.linkedin}>
               LinkedIn
             </LinkItem>
-            <LinkItem icon={TwitterIcon} href={siteConfig.profiles.twitter}>
-              Twitter
+            <LinkItem icon={GithubIcon} href={siteConfig.profiles.github}>
+              Github
             </LinkItem>
             <LinkItem icon={EmailIcon} href={siteConfig.profiles.email}>
               Email
