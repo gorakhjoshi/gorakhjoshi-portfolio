@@ -1,0 +1,27 @@
+---
+title: Fibonacci Number
+description: Time Complexity O(n)/Space Complexity O(1)
+logo: /static/logos/leetcode.png
+categories: ['LeetCode']
+---
+
+https://leetcode.com/problems/fibonacci-number/
+
+```js
+var fib = function (n) {
+  if (n < 1) return 0;
+  if (n < 3) return 1;
+
+  let a = 1;
+  let b = 1;
+  let c = 0;
+
+  for (i = 3; i <= n; i++) {
+    c = a + b;
+    a = b;
+    b = c;
+  }
+
+  return c;
+};
+```
