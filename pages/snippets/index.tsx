@@ -17,8 +17,7 @@ export default function Page() {
             Snippets
           </Heading>
           <Text fontSize="lg" maxW="560px">
-            A collection of solutions to small problems I've faced in the past. They're all
-            copy-paste ready 😉
+            Browse collection of some of my coding snippets 😉
           </Text>
         </Box>
 
