@@ -1,0 +1,70 @@
+---
+title: Topological Ordering
+description: Topological Sort of a directed graph (a graph with unidirectional edges) is a linear ordering of its vertices such that for every directed edge (U, V) from vertex U to vertex V, U comes before V in the ordering.
+logo: /static/logos/leetcode.png
+categories: [['TopologicalSort']]
+---
+
+Given a directed graph, find the topological ordering of its vertices.
+
+Input: Vertices=4, Edges=[3, 2], [3, 0], [2, 0], [2, 1]
+
+Output: Following are the two valid topological sorts for the given graph:
+
+- 3, 2, 0, 1
+- 3, 2, 1, 0
+
+```js
+function topological_sort(vertices, edges) {
+  const sortedOrder = [];
+  if (vertices <= 0) {
+    return sortedOrder;
+  }
+
+  const inDegree = Array(vertices).fill(0);
+  const graph = Array(vertices)
+    .fill(0)
+    .map(() => Array());
+
+  edges.forEach((edge) => {
+    let parent = edge[0],
+      child = edge[1];
+    graph[parent].push(child);
+    inDegree[child]++;
+  });
+
+  const sources = [];
+  for (let i = 0; i < inDegree.length; i++) {
+    if (inDegree[i] === 0) {
+      sources.push(i);
+    }
+  }
+
+  while (sources.length > 0) {
+    const vertex = sources.shift();
+    sortedOrder.push(vertex);
+    graph[vertex].forEach((child) => {
+      inDegree[child]--;
+      if (inDegree[child] === 0) {
+        sources.push(child);
+      }
+    });
+  }
+
+  if (sortedOrder.length !== vertices) {
+    return [];
+  }
+  return sortedOrder;
+}
+
+console.log(
+  `Topological sort: ${topological_sort(4, [
+    [3, 2],
+    [3, 0],
+    [2, 0],
+    [2, 1],
+  ])}`,
+);
+```
+
+Time Complexity O(V+E)/Space Complexity O(V+E), where ‘V’ is the total number of vertices and ‘E’ is the total number of edges in the graph.
