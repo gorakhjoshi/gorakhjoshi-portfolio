@@ -30,9 +30,9 @@ export default function Page({ snippet }: { snippet: Snippet }) {
                 </Heading>
                 <Text>{snippet.description}</Text>
               </Box>
-              <Flex rounded="md" overflow="hidden" mt="3">
-                <Image width={40} height={40} src={snippet.logo} alt="" />
-              </Flex>
+              {/* <Flex rounded="md" overflow="hidden" mt="3">
+                <Image width={400} height={150} src={snippet.logo} alt="" />
+              </Flex> */}
             </Flex>
 
             <HashTags data={snippet.categories} />
