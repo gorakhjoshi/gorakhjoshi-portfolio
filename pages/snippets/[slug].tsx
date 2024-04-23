@@ -15,9 +15,11 @@ import Image from 'next/image';
 export default function Page({ snippet }: { snippet: Snippet }) {
   const Component = useMDXComponent(snippet.body.code);
 
+  console.log(snippet);
+
   return (
     <Container>
-      <SEO title={snippet.title} description={snippet.description} />
+      <SEO title={snippet.title} description={snippet.description} image={snippet.logo} />
       <Box maxWidth="4xl" marginX="auto" paddingTop="12" paddingBottom="8rem">
         <article>
           <Box marginBottom="6">

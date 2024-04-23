@@ -1,0 +1,63 @@
+---
+title: Binary Tree Level Order Traversal
+description: Since we need to traverse all nodes of each level before moving onto the next level, we can use the Breadth First Search (BFS) technique to solve this problem.
+logo: /static/logos/leetcode.png
+categories: [['LeetCode'], ['BreadthFirstSearch']]
+---
+
+https://leetcode.com/problems/binary-tree-level-order-traversal/
+
+```js
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function traverse(root) {
+  const result = [];
+  if (root === null) {
+    return result;
+  }
+
+  const queue = [];
+  queue.push(root);
+
+  while (queue.length > 0) {
+    const levelSize = queue.length;
+    const currentLevel = [];
+
+    for (let i = 0; i < levelSize; i++) {
+      const currentNode = queue.shift();
+
+      currentLevel.push(currentNode.val);
+
+      if (currentNode.left !== null) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right !== null) {
+        queue.push(currentNode.right);
+      }
+    }
+
+    result.push(currentLevel);
+  }
+
+  return result;
+}
+
+const root = new TreeNode(12);
+root.left = new TreeNode(7);
+root.right = new TreeNode(1);
+root.left.left = new TreeNode(9);
+root.right.left = new TreeNode(10);
+root.right.right = new TreeNode(5);
+
+console.log(`Level order traversal: ${JSON.stringify(traverse(root))}`);
+```
+
+Time Complexity O(n)/Space Complexity O(n)
+
+https://medium.com/swlh/binary-tree-level-order-traversal-a12df61a85d0
