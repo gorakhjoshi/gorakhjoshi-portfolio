@@ -5,10 +5,10 @@ logo: /static/images/algorithm/priority-queue.png
 categories: [['BinaryHeap']]
 ---
 
-https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+https://leetcode.com/problems/kth-largest-element-in-an-array/
 
 ```js
-class MinHeap {
+class MaxHeap {
   constructor() {
     this.heap = [];
   }
@@ -50,7 +50,7 @@ class MinHeap {
     let currentIndex = this.heap.length - 1;
     while (currentIndex > 0) {
       const parentIndex = Math.floor((currentIndex - 1) / 2);
-      if (this.heap[parentIndex] <= this.heap[currentIndex]) {
+      if (this.heap[parentIndex] >= this.heap[currentIndex]) {
         break;
       }
       this.swap(currentIndex, parentIndex);
@@ -98,7 +98,7 @@ class MinHeap {
 }
 
 function findKLargestNumbers(nums, k) {
-  const minHeap = new MinHeap();
+  const minHeap = new MaxHeap();
 
   for (let i = 0; i < k; i++) {
     minHeap.push(nums[i]);
