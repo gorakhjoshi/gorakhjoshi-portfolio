@@ -1,0 +1,125 @@
+---
+title: Kth Largest Element in an Array
+description: MinHeap class and the findKLargestNumbers function implement a priority queue using a min-heap data structure.
+logo: /static/images/algorithm/priority-queue.png
+categories: [['BinaryHeap']]
+---
+
+https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+
+```js
+class MinHeap {
+  constructor() {
+    this.heap = [];
+  }
+
+  push(value) {
+    this.heap.push(value);
+    this.heapifyUp();
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    if (this.heap.length === 1) {
+      return this.heap.pop();
+    }
+    const root = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this.heapifyDown();
+    return root;
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      return null;
+    }
+    return this.heap[0];
+  }
+
+  size() {
+    return this.heap.length;
+  }
+
+  isEmpty() {
+    return this.heap.length === 0;
+  }
+
+  heapifyUp() {
+    let currentIndex = this.heap.length - 1;
+    while (currentIndex > 0) {
+      const parentIndex = Math.floor((currentIndex - 1) / 2);
+      if (this.heap[parentIndex] <= this.heap[currentIndex]) {
+        break;
+      }
+      this.swap(currentIndex, parentIndex);
+      currentIndex = parentIndex;
+    }
+  }
+
+  heapifyDown() {
+    let currentIndex = 0;
+    while (true) {
+      let leftChildIndex = currentIndex * 2 + 1;
+      let rightChildIndex = currentIndex * 2 + 2;
+      let smallestChildIndex = null;
+
+      if (
+        leftChildIndex < this.heap.length &&
+        this.heap[leftChildIndex] < this.heap[currentIndex]
+      ) {
+        smallestChildIndex = leftChildIndex;
+      }
+
+      if (
+        rightChildIndex < this.heap.length &&
+        this.heap[rightChildIndex] < this.heap[currentIndex]
+      ) {
+        smallestChildIndex = rightChildIndex;
+      }
+
+      if (smallestChildIndex === null) {
+        break;
+      }
+
+      this.swap(currentIndex, smallestChildIndex);
+      currentIndex = smallestChildIndex;
+    }
+  }
+
+  swap(i, j) {
+    [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+  }
+
+  toArray() {
+    return [...this.heap];
+  }
+}
+
+function findKLargestNumbers(nums, k) {
+  const minHeap = new MinHeap();
+
+  for (let i = 0; i < k; i++) {
+    minHeap.push(nums[i]);
+  }
+
+  for (let i = k; i < nums.length; i++) {
+    if (nums[i] > minHeap.peek()) {
+      minHeap.pop();
+      minHeap.push(nums[i]);
+    }
+  }
+
+  return minHeap.toArray();
+}
+
+console.log(`Here are the top K numbers: ${findKLargestNumbers([3, 1, 5, 12, 2, 111, 3], 3)}`);
+console.log(`Here are the top K numbers: ${findKLargestNumbers([5, 12, 11, -1, 121, 3], 3)}`);
+```
+
+Time Complexity O(K∗logK+(N−K)∗logK) ~ O(N∗logK)/Space Complexity O(K).
+
+Reference
+
+https://medium.com/geekculture/binary-heaps-in-javascript-94900035ee0c
