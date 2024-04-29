@@ -17,43 +17,53 @@ Output: Following are the two valid topological sorts for the given graph:
 ```js
 function topological_sort(vertices, edges) {
   const sortedOrder = [];
-  if (vertices <= 0) {
-    return sortedOrder;
+  const inDegree = new Array(vertices).fill(0);
+  const graph = new Map();
+
+  // Build the graph and in-degree array
+  for (const [parent, child] of edges) {
+    if (!graph.has(parent)) {
+      graph.set(parent, []);
+    }
+    graph.get(parent).push(child);
+    inDegree[child]++;
   }
 
-  const inDegree = Array(vertices).fill(0);
-  const graph = Array(vertices)
-    .fill(0)
-    .map(() => Array());
-
-  edges.forEach((edge) => {
-    let parent = edge[0],
-      child = edge[1];
-    graph[parent].push(child);
-    inDegree[child]++;
-  });
-
-  const sources = [];
-  for (let i = 0; i < inDegree.length; i++) {
+  // Initialize sources (vertices with zero in-degree)
+  const sources = new Set();
+  for (let i = 0; i < vertices; i++) {
     if (inDegree[i] === 0) {
-      sources.push(i);
+      sources.add(i);
     }
   }
 
-  while (sources.length > 0) {
-    const vertex = sources.shift();
+  let visitedCount = 0;
+
+  // Process vertices with zero in-degree
+  while (sources.size > 0) {
+    const vertex = sources.values().next().value; // Get an arbitrary source
+
+    sources.delete(vertex); // Remove from sources
     sortedOrder.push(vertex);
-    graph[vertex].forEach((child) => {
-      inDegree[child]--;
-      if (inDegree[child] === 0) {
-        sources.push(child);
+    visitedCount++;
+
+    if (graph.has(vertex)) {
+      console.log(vertex);
+
+      for (const child of graph.get(vertex)) {
+        inDegree[child]--;
+        if (inDegree[child] === 0) {
+          sources.add(child);
+        }
       }
-    });
+    }
   }
 
-  if (sortedOrder.length !== vertices) {
-    return [];
+  // Check if all vertices are visited
+  if (visitedCount !== vertices) {
+    return []; // Cycle detected or not all vertices processed
   }
+
   return sortedOrder;
 }
 
