@@ -1,0 +1,39 @@
+---
+title: Calculator
+description: Write a function called calculator that takes in 2 numbers and an operator and returns the result of the calculation.
+logo: /static/images/algorithm/algorithm.png
+categories: ['Basic']
+---
+
+```js
+function calc(numOne, numTwo, sign) {
+  if (typeof numOne !== 'number' || typeof numTwo !== 'number') {
+    throw new Error('Inputs should be numbers!');
+  }
+
+  switch (sign) {
+    case '+':
+      return numOne + numTwo;
+    case '-':
+      return numOne - numTwo;
+    case '*':
+      return numOne * numTwo;
+    case '/':
+      if (numTwo === 0) {
+        throw new Error('Cannot divide by zero!');
+      }
+      return numOne / numTwo;
+    default:
+      throw new Error('Invalid operator!');
+  }
+}
+
+try {
+  const result = calc(5, 2, '*');
+  console.log('Result:', result);
+} catch (error) {
+  console.error('Error:', error.message);
+}
+```
+
+In the current implementation of your calc function, implementing bigint is not necessary unless you expect to handle very large integer values that exceed the safe range for standard JavaScript numbers (Number.MAX_SAFE_INTEGER).

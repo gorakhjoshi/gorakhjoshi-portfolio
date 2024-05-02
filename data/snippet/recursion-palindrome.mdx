@@ -1,0 +1,18 @@
+---
+title: Using recursion to determine whether a word is a palindrome
+description: A palindrome is a word that is spelled the same forward and backward. For example, rotor is a palindrome, but motor is not.
+logo: /static/images/algorithm/algorithm.png
+categories: ['Recursion']
+---
+
+```js
+function isPalindrome(str, start = 0, end = str.length - 1) {
+  if (start > end) return true;
+  if (str[start] !== str[end]) return false;
+  return isPalindrome(str, start + 1, end - 1);
+}
+
+console.log(isPalindrome('tattat')); // Output: true
+```
+
+Time Complexity O(n)/Space Complexity O(n)

@@ -1,0 +1,28 @@
+---
+title: Count Occurrences
+description: Write a function called countOccurrences() that takes in a string and a character and returns the number of occurrences of that character in the string.
+logo: /static/images/algorithm/algorithm.png
+categories: ['Basic']
+---
+
+```js
+const countOccurrences = (str, char) => {
+  // Edge case: If either the input string or character is empty, return 0 occurrences.
+  if (str.length === 0 || char.length === 0) {
+    return 0;
+  }
+
+  // Split the string by the character and count the number of resulting parts (segments).
+  // The number of segments minus one will give the count of occurrences of the character.
+  const occurrences = str.split(char).length - 1;
+
+  return occurrences;
+};
+
+// Test cases:
+console.log(countOccurrences('hello world', 'l')); // Output: 3
+console.log(countOccurrences('aaaa', 'a')); // Output: 4
+console.log(countOccurrences('abc', 'd')); // Output: 0 (character 'd' not found)
+console.log(countOccurrences('', 'a')); // Output: 0 (empty string)
+console.log(countOccurrences('hello', '')); // Output: 0 (empty character)
+```

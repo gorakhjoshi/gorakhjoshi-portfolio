@@ -1,0 +1,32 @@
+---
+title: Program to Display Fibonacci Sequence Using Recursion
+description: A Fibonacci sequence is the integer sequence of 0, 1, 1, 2, 3, 5, 8....
+logo: /static/images/algorithm/algorithm.png
+categories: ['Recursion']
+---
+
+```js
+function fib(n) {
+  const fibArr = [0, 1]; // Initialize with the first two Fibonacci numbers
+  if (n < 2) {
+    return fibArr.slice(0, n + 1); // Return [0] for fib(0) and [0, 1] for fib(1)
+  }
+
+  function fibCal(num) {
+    if (num < 2) {
+      return; // Base case reached, no need to do anything
+    }
+
+    const nextFib = fibArr[fibArr.length - 1] + fibArr[fibArr.length - 2];
+    fibArr.push(nextFib); // Calculate and append the next Fibonacci number
+    fibCal(num - 1); // Recursively calculate the next number
+  }
+
+  fibCal(n - 1); // Start calculation from the 3rd Fibonacci number (index 2)
+  return fibArr;
+}
+
+console.log(fib(100)); // Display Fibonacci sequence up to the 100th number
+```
+
+Time Complexity O(n)/Space Complexity O(n)

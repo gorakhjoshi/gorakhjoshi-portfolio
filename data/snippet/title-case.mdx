@@ -1,0 +1,33 @@
+---
+title: Title Case
+description: Write a function called titleCase that takes in a string and returns the string with the first letter of each word capitalized.
+logo: /static/images/algorithm/algorithm.png
+categories: ['Basic']
+---
+
+```js
+function titleCase(str) {
+  // Check if the string is empty or contains only whitespace
+  if (str.trim().length === 0) return '';
+
+  // Split the string into words by spaces
+  const words = str.split(' ');
+
+  // Capitalize the first letter of each word and join them back into a string
+  const titleCasedWords = words.map((word) => {
+    if (word.trim().length === 0) return ''; // Skip empty words
+    const firstLetter = word[0].toUpperCase();
+    const restOfWord = word.slice(1).toLowerCase();
+    return firstLetter + restOfWord;
+  });
+
+  // Join the title-cased words into a single string with spaces
+  return titleCasedWords.join(' ');
+}
+
+// Test cases
+console.log(titleCase('hello world')); // Output: "Hello World"
+console.log(titleCase('goodbye   cruel  world')); // Output: "Goodbye Cruel World"
+console.log(titleCase('  ')); // Output: ""
+console.log(titleCase('  greetings  from  Earth  ')); // Output: "Greetings From Earth"
+```

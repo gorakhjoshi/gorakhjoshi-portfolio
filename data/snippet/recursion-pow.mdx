@@ -1,0 +1,35 @@
+---
+title: Calculate Power Using Recursion
+description: The power of a number is the number multiplied to itself for the number of times it has been raised to
+logo: /static/images/algorithm/algorithm.png
+categories: ['Recursion']
+---
+
+```js
+function pow(base, exponent) {
+  // Base case: Any number to the power of 0 is 1
+  if (exponent === 0) {
+    return 1;
+  }
+
+  // Base case: Any number to the power of 1 is the number itself
+  if (exponent === 1) {
+    return base;
+  }
+
+  // Recursive case: Calculate power using recursion
+  if (exponent > 0) {
+    return base * pow(base, exponent - 1);
+  } else {
+    // Handling negative exponents (base^(-n) = 1 / base^n)
+    return 1 / (base * pow(base, -exponent - 1));
+  }
+}
+
+// Test cases
+console.log(pow(5, 3)); // Output: 125
+console.log(pow(2, 0)); // Output: 1
+console.log(pow(3, -2)); // Output: 0.1111111111111111 (which is 1 / (3^2))
+```
+
+Time Complexity O(n)/Space Complexity O(n)
