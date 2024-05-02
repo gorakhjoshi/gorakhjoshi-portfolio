@@ -5,171 +5,62 @@ logo: /static/images/algorithm/algorithm.png
 categories: ['Extra']
 ---
 
-## Evolution of JavaScript Array Methods (38)
+## Array Methods
 
-### ES1 (1997)
+1. **map**: Executes a provided function once for each array element and creates a new array with the results.
+2. **filter**: Creates a new array containing elements that pass the specified condition.
+3. **reduce**: Reduces the array to a single value by applying a function to each element.
+4. **reduceRight**: Similar to `reduce`, but processes the array from right to left.
+5. **push**: Adds one or more elements to the end of an array and returns the new length.
+6. **pop**: Removes the last element from an array and returns that element.
+7. **shift**: Removes the first element from an array and returns that removed element.
+8. **unshift**: Adds one or more elements to the beginning of an array and returns the new length.
+9. **splice**: Adds or removes elements from an array at a specified index.
+10. **slice**: Returns a shallow copy of a portion of an array as a new array.
+11. **concat**: Joins two or more arrays and returns a new array.
+12. **some**: Checks if at least one element in the array satisfies a provided condition.
+13. **every**: Checks if all elements in the array satisfy a provided condition.
+14. **fill**: Fills elements of an array with a static value from a start index to an end index.
+15. **reverse**: Reverses the order of elements in an array.
+16. **includes**: Checks if an array contains a specific element.
+17. **at**: Returns the element at a specified index in the array.
+18. **find**: Returns the value of the first element in the array that satisfies a provided condition.
+19. **forEach**: Executes a provided function once for each array element.
+20. **flat**: Creates a new array with all sub-array elements concatenated into it recursively up to a specified depth.
+21. **flatMap**: Maps each element using a mapping function and flattens the result into a new array.
+22. **indexOf**: Returns the first index at which a specified element can be found in the array.
+23. **findIndex**: Returns the index of the first element in the array that satisfies a provided condition.
+24. **lastIndexOf**: Returns the last index at which a specified element can be found in the array.
+25. **join**: Joins all elements of an array into a string.
+26. **sort**: Sorts the elements of an array in place.
+27. **toString**: Returns a string representing the array and its elements.
+28. **from**: Creates a new array from an array-like or iterable object.
+29. **entries**: Returns a new array iterator object containing key/value pairs for each index in the array.
+30. **isArray**: Checks if a value is an array.
 
-- `concat()`
-- `indexOf()`
-- `join()`
-- `lastIndexOf()`
-- `pop()` 🔄
-- `push()` 🔄
-- `reverse()` 🔄
-- `shift()` 🔄
-- `slice()`
-- `sort()` 🔄
-- `splice()` 🔄
-- `toLocaleString()`
-- `toString()`
-- `unshift()` 🔄
+https://medium.com/@silviyafrontenddev/30-javascript-array-methods-a-cheat-sheet-for-developers-98fc4dd33957
 
-### ES5 (2009)
+## String Methods
 
-- `every()`
-- `filter()`
-- `forEach()`
-- `map()`
-- `reduce()`
-- `reduceRight()`
-- `some()`
+1. **length**: Returns the number of characters in a string.
+2. **concat**: Combines two or more strings and returns a new string.
+3. **substring**: Extracts a portion of a string based on start and end indexes.
+4. **indexOf**: Returns the index of the first occurrence of a specified substring within a string.
+5. **replace**: Replaces specified substrings within a string with new values.
+6. **toUpperCase**: Converts all characters in a string to uppercase.
+7. **toLowerCase**: Converts all characters in a string to lowercase.
+8. **startsWith**: Checks if a string starts with a specific substring.
+9. **endsWith**: Checks if a string ends with a specific substring.
+10. **trim**: Removes whitespace from the beginning and end of a string.
+11. **split**: Divides a string into an array of substrings based on a specified separator.
+12. **charAt**: Retrieves the character at a specific index within a string.
+13. **charCodeAt**: Returns the Unicode value of a character at a specified index.
+14. **includes**: Checks if a string contains a specific substring.
+15. **match**: Determines if a string matches a particular pattern using regular expressions.
+16. **repeat**: Repeats a string a specified number of times.
+17. **lastIndexOf**: Finds the index of the last occurrence of a specified substring within a string.
+18. **slice**: Extracts a portion of a string based on start and end indexes.
+19. **isEmpty**: Checks if a string is empty.
+20. **isNaN**: Determines if a string represents a valid number.
 
-### ES2015
-
-- `copyWithin()` 🔄
-- `entries()`
-- `fill()` 🔄
-- `find()`
-- `findIndex()`
-- `keys()`
-- `values()`
-
-### ES2016
-
-- `includes()`
-
-### ES2019
-
-- `flat()`
-- `flatMap()`
-
-### ES2022
-
-- `at()`
-- `findLast()`
-- `findLastIndex()`
-- `toSorted()`
-- `toSpliced()`
-- `toReversed()`
-
-### ES2023 (New Additions)
-
-- `with()`
-
-## Evolution of JavaScript String Methods (57)
-
-Here's a revised breakdown of the String methods categorized by ECMAScript (ES) release dates, with emoji comments indicating deprecated methods:
-
-### ES1 (1997)
-
-- `anchor()`
-- `big()`
-- `blink()`
-- `bold()`
-- `charAt()`
-- `charCodeAt()`
-- `concat()`
-
-### ES3 (1999)
-
-- `endsWith()`
-- `fontcolor()` 🚫
-- `fontsize()` 🚫
-- `italics()` 🚫
-- `link()` 🚫
-- `small()` 🚫
-- `strike()` 🚫
-- `sub()` 🚫
-- `sup()` 🚫
-- `toLocaleLowerCase()` 🚫
-- `toLocaleUpperCase()` 🚫
-
-### ES5 (2009)
-
-- `trim()`
-- `trimEnd()`
-- `trimStart()`
-- `indexOf()`
-- `lastIndexOf()`
-- `search()`
-- `slice()`
-- `substring()`
-- `toLowerCase()`
-- `toUpperCase()`
-- `toLocaleLowerCase()`
-- `toLocaleUpperCase()`
-- `replace()`
-- `match()`
-- `matchAll()`
-- `search()`
-- `split()`
-- `substr()`
-- `concat()`
-- `includes()` 🚫
-
-### ES6 (2015)
-
-- `startsWith()`
-- `endsWith()`
-- `repeat()`
-- `padStart()`
-- `padEnd()`
-- `codePointAt()`
-- `normalize()`
-
-### ES10 (2019)
-
-- `trimStart()`
-- `trimEnd()`
-- `replace()`
-- `replaceAll()`
-
-From the lists provided, here are some widely used and popular methods for JavaScript arrays and strings:
-
-### Array Methods
-
-1. `concat()`: Combines arrays by concatenating them into a new array.
-2. `filter()`: Creates a new array with elements that pass a test defined by a callback function.
-3. `forEach()`: Calls a provided function once for each element in an array.
-4. `map()`: Creates a new array populated with the results of calling a provided function on every element in the calling array.
-5. `push()`: Adds one or more elements to the end of an array and returns the new length of the array.
-6. `pop()`: Removes the last element from an array and returns that element.
-7. `reduce()`: Reduces the array to a single value, executing a provided function for each value of the array (from left to right).
-8. `shift()`: Removes the first element from an array and returns that removed element.
-9. `unshift()`: Adds one or more elements to the beginning of an array and returns the new length of the array.
-10. `slice()`: Returns a shallow copy of a portion of an array into a new array object.
-11. `some()`: Tests whether at least one element in the array passes the test implemented by the provided function.
-12. `sort()`: Sorts the elements of an array in place and returns the array.
-13. `splice()`: Changes the contents of an array by removing or replacing existing elements and/or adding new elements.
-14. `indexOf()`: Returns the first index at which a given element can be found in the array, or -1 if it is not present.
-15. `includes()`: Determines whether an array includes a certain value among its entries, returning true or false as appropriate.
-
-### String Methods
-
-1. `charAt()`: Returns the character at the specified index (position) in a string.
-2. `concat()`: Combines the text of two or more strings and returns a new string.
-3. `includes()`: Checks if a string contains the specified substring.
-4. `indexOf()`: Returns the position of the first occurrence of a specified value in a string.
-5. `match()`: Searches a string for a match against a regular expression and returns the matches.
-6. `replace()`: Searches a string for a specified value or regular expression and returns a new string where the specified values are replaced.
-7. `slice()`: Extracts a section of a string and returns it as a new string.
-8. `split()`: Splits a string into an array of substrings based on a specified separator.
-9. `substring()`: Extracts the characters from a string, between two specified indices, and returns the new sub-string.
-10. `toLowerCase()`: Converts a string to lowercase letters.
-11. `toUpperCase()`: Converts a string to uppercase letters.
-12. `trim()`: Removes whitespace from both ends of a string.
-13. `startsWith()`: Checks whether a string begins with specified characters.
-14. `endsWith()`: Checks whether a string ends with specified characters.
-15. `repeat()`: Returns a new string with a specified number of copies of the string it was called on.
-
-These methods are commonly used in JavaScript development for manipulating arrays and strings effectively.
+https://zuxcode.medium.com/20-javascript-string-methods-3ce70d1fb52
