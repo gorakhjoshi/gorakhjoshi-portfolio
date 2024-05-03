@@ -1,0 +1,15 @@
+---
+title: Array Intersection
+description: Write a function called arrayIntersection that takes in two arrays and returns an array containing the intersection of the two input arrays (i.e., the common elements that appear in both arrays).
+logo: /static/images/algorithm/algorithm.png
+categories: ['Basic']
+---
+
+```js
+function arrInt(arrOne, arrTwo) {
+  const arrOneSet = new Set(arrOne);
+
+  return arrTwo.filter((el) => arrOneSet.has(el));
+}
+arrInt([1, 2, 3], [2, 3, 4]);
+```
