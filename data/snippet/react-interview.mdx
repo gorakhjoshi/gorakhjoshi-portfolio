@@ -1,0 +1,1236 @@
+---
+title: React Interview Questions
+description: List of common questions asked in interview
+logo: /static/images/algorithm/algorithm.png
+categories: ['Interview']
+---
+
+## What is JSX? 🌟
+
+JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically, it just provides the syntactic sugar for the `React.createElement(type, props, ...children)` function, giving us expressiveness of JavaScript along with HTML like template syntax.
+
+In the example below, the text inside `<h1>` tag is returned as a JavaScript function to the render function.
+
+```jsx
+export default function App() {
+  return <h1 className="greeting">{'Hello, this is a JSX Code!'}</h1>;
+}
+```
+
+## What is the difference between Element and Component? 🌟
+
+An _Element_ is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. _Elements_ can contain other _Elements_ in their props. Creating a React element is cheap. Once an element is created, it cannot be mutated.
+
+The JavaScript representation (Without JSX) of React Element would be as follows:
+
+```javascript
+const element = React.createElement('div', { id: 'login-btn' }, 'Login');
+```
+
+Whereas a **component** can be declared in several different ways. It can be a class with a `render()` method or it can be defined as a function. In either case, it takes props as an input and returns a JSX tree as the output.
+
+## How to create components in React? 🌟
+
+Components are the building blocks of creating User Interfaces (UI) in React. There are two possible ways to create a component.
+
+1. **Function Components:** This is the simplest way to create a component. Those are pure JavaScript functions that accept props object as the first parameter and return React elements to render the output:
+
+```jsx
+function Greeting({ message }) {
+  return <h1>{`Hello, ${message}`}</h1>;
+}
+```
+
+2. **Class Components:** You can also use ES6 class to define a component. The above function component can be written as a class component:
+
+```jsx
+class Greeting extends React.Component {
+  render() {
+    return <h1>{`Hello, ${this.props.message}`}</h1>;
+  }
+}
+```
+
+## When to use a Class Component over a Function Component? 🌟
+
+After the addition of Hooks (i.e., React 16.8 onwards) it is always recommended to use Function components over Class components in React. Because you could use state, lifecycle methods, and other features that were only available in class components present in function components too.
+
+## What are Pure Components? 🌟
+
+Pure components are the components which render the same output for the same state and props. In function components, you can achieve these pure components through memoized `React.memo()` API wrapping around the component.
+
+## What is state in React? 🌟
+
+_State_ of a component is an object that holds some information that may change over the lifetime of the component. The important point is whenever the state object changes, the component re-renders.
+
+```jsx
+import React, { useState } from 'react';
+
+function User() {
+  const [message, setMessage] = useState('Welcome to React world');
+
+  return (
+    <div>
+      <h1>{message}</h1>
+    </div>
+  );
+}
+```
+
+## What are props in React? 🌟
+
+_Props_ are inputs to components. They are single values or objects containing a set of values that are passed to components on creation similar to HTML-tag attributes. Here, the data is passed down from a parent component to a child component.
+
+```jsx
+const ChildComponent = ({ name, age }) => {
+  return (
+    <div>
+      <p>{name}</p>
+      <p>{age}</p>
+    </div>
+  );
+};
+```
+
+## What is the difference between state and props? 🌟
+
+In React, both `state` and `props` are plain JavaScript objects and used to manage the data of a component, but they are used in different ways and have different characteristics.
+
+## Why should we not update the state directly? 🧩
+
+If you try to update the state directly then it won't re-render the component. Instead, use `setState()` method.
+
+## What is the purpose of a callback function as an argument of `setState()`? 🚀
+
+The callback function is invoked when setState finished, and the component gets rendered. Since `setState()` is **asynchronous**, the callback function is used for any post-action.
+
+## What is the use of refs? 🧩
+
+The _ref_ is used to return a reference to the element. They _should be avoided_ in most cases, however, they can be useful when you need direct access to the DOM element or an instance of a component.
+
+## How to pass a parameter to an event handler or callback? 🧩
+
+You can use an _arrow function_ to wrap around an _event handler_ and pass parameters.
+
+```jsx
+<button onClick={() => this.handleClick(id)} />
+```
+
+This is equivalent to calling `.bind()`:
+
+```jsx
+<button onClick={this.handleClick.bind(this, id)} />
+```
+
+## What are synthetic events in React? 🧩
+
+`SyntheticEvent` is a cross-browser wrapper around the browser's native event. Its API is the same as the browser's native event, including `stopPropagation()` and `preventDefault()`.
+
+### What is "key" prop and what is the benefit of using it in arrays of elements? 🌟
+
+A `key` is a special attribute you **should** include when mapping over arrays to render data. _Key_ prop helps React identify which items have changed, are added, or are removed.
+
+## What are inline conditional expressions? 🌟
+
+You can use either _if statements_ or _ternary expressions_ which are available from JS to conditionally render expressions. Apart from these approaches, you can also embed any expressions in JSX by wrapping them in curly braces and then followed by JS logical operator `&&`.
+
+```jsx
+<h1>Hello!</h1>;
+{
+  messages.length > 0 && !isLogin ? (
+    <h2>You have {messages.length} unread messages.</h2>
+  ) : (
+    <h2>You don't have unread messages.</h2>
+  );
+}
+```
+
+## What is "key" prop and what is the benefit of using it in arrays of elements? 🌟
+
+A `key` is a special attribute you **should** include when mapping over arrays to render data. _Key_ prop helps React identify which items have changed, are added, or are removed.
+
+Keys should be unique among its siblings. Most often we use ID from our data as _key_:
+
+```jsx harmony
+const todoItems = todos.map((todo) => <li key={todo.id}>{todo.text}</li>);
+```
+
+When you don't have stable IDs for rendered items, you may use the item _index_ as a _key_ as a last resort:
+
+```jsx harmony
+const todoItems = todos.map((todo, index) => <li key={index}>{todo.text}</li>);
+```
+
+**Note:**
+
+1. Using _indexes_ for _keys_ is **not recommended** if the order of items may change. This can negatively impact performance and may cause issues with component state.
+2. If you extract list item as a separate component then apply _keys_ on the list component instead of `li` tag.
+3. There will be a warning message in the console if the `key` prop is not present on list items.
+4. The key attribute accepts either a string or number and internally converts it to a string type.
+
+## What is the use of refs? 🧩
+
+The _ref_ is used to return a reference to the element. They _should be avoided_ in most cases; however, they can be useful when you need direct access to the DOM element or an instance of a component.
+
+## How to create refs? 🌟
+
+There are two approaches:
+
+1. **Using `React.createRef()` (Modern Approach):**
+
+```jsx harmony
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return <div ref={this.myRef} />;
+  }
+}
+```
+
+2. **Using Callback Refs (Legacy Approach):**
+
+```jsx harmony
+class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.txtSearch = null;
+    this.state = { term: '' };
+    this.setInputSearchRef = (e) => {
+      this.txtSearch = e;
+    };
+  }
+  onInputChange(event) {
+    this.setState({ term: this.txtSearch.value });
+  }
+  render() {
+    return (
+      <input
+        value={this.state.term}
+        onChange={this.onInputChange.bind(this)}
+        ref={this.setInputSearchRef}
+      />
+    );
+  }
+}
+```
+
+You can also use _refs_ in function components using **closures**.
+
+## What are forward refs? 🧩
+
+_Ref forwarding_ is a feature that lets some components take a _ref_ they receive and pass it further down to a child.
+
+```jsx harmony
+const ButtonElement = React.forwardRef((props, ref) => (
+  <button ref={ref} className="CustomButton">
+    {props.children}
+  </button>
+));
+
+// Create a ref to the DOM button:
+const ref = React.createRef();
+<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>;
+```
+
+## Which is the preferred option between callback refs and `findDOMNode()`? 🚀
+
+It is preferred to use _callback refs_ over the `findDOMNode()` API because `findDOMNode()` prevents certain improvements in React in the future.
+
+The **legacy** approach of using `findDOMNode()`:
+
+```javascript
+class MyComponent extends Component {
+  componentDidMount() {
+    findDOMNode(this).scrollIntoView();
+  }
+
+  render() {
+    return <div />;
+  }
+}
+```
+
+The recommended approach is:
+
+```javascript
+class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.node = createRef();
+  }
+  componentDidMount() {
+    this.node.current.scrollIntoView();
+  }
+
+  render() {
+    return <div ref={this.node} />;
+  }
+}
+```
+
+## Why are String Refs legacy? 🚀
+
+String refs were **removed in React v16** due to several issues:
+
+1. They force React to keep track of the currently executing component, causing potential errors with duplicated React modules.
+2. They are not composable, making it impossible to apply multiple refs to a single element.
+3. They don't work well with static analysis tools like Flow.
+4. They don't play nicely with certain patterns like the "render callback" pattern.
+
+### What is Virtual DOM? 🌟
+
+The _Virtual DOM_ (VDOM) is an in-memory representation of the _Real DOM_. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called _reconciliation_.
+
+## How Virtual DOM works? 🧩
+
+The _Virtual DOM_ works in three simple steps:
+
+1. Whenever any underlying data changes, the entire UI is re-rendered in Virtual DOM representation.
+2. Then the difference between the previous DOM representation and the new one is calculated.
+3. Once the calculations are done, the real DOM will be updated with only the things that have actually changed.
+
+## What is the difference between Shadow DOM and Virtual DOM? 🚀
+
+The _Shadow DOM_ is a browser technology designed primarily for scoping variables and CSS in _web components_. The _Virtual DOM_ is a concept implemented by libraries in JavaScript on top of browser APIs.
+
+## What is React Fiber? 🧩
+
+Fiber is the new _reconciliation_ engine or reimplementation of the core algorithm in React v16. The goal of React Fiber is to increase its suitability for areas like animation, layout, gestures, and the ability to pause, abort, or reuse work.
+
+## What is the main goal of React Fiber? 🚀
+
+The goal of _React Fiber_ is to increase its suitability for areas like animation, layout, and gestures. Its headline feature is **incremental rendering**: the ability to split rendering work into chunks and spread it out over multiple frames.
+
+## What are controlled components? 🌟
+
+A component that controls the input elements within forms on subsequent user input is called a **Controlled Component**.
+
+## What are uncontrolled components? 🌟
+
+The **Uncontrolled Components** are the ones that store their own state internally, and you query the DOM using a ref to find its current value when you need it.
+
+### What is reconciliation? 🧩
+
+_Reconciliation_ is the process through which React updates the Browser DOM and makes React work faster. React uses a diffing algorithm to calculate the difference between the Virtual DOM and the Real DOM.
+
+## How to set state with a dynamic key name? 🧩
+
+If you are using ES6 or the Babel transpiler, you can accomplish this with _computed property names_.
+
+```javascript
+handleInputChange(event) {
+  this.setState({ [event.target.id]: event.target.value })
+}
+```
+
+## What would be the common mistake of a function being called every time the component renders? 🧩
+
+You need to make sure that the function is not being called while passing the function as a parameter.
+
+```jsx harmony
+render() {
+  // Wrong: handleClick is called instead of passed as a reference!
+  return <button onClick={this.handleClick()}>{
+
+'Click Me'}</button>
+}
+```
+
+Instead, pass the function itself without parentheses:
+
+```jsx harmony
+render() {
+  // Correct: handleClick is passed as a reference!
+  return <button onClick={this.handleClick}>{'Click Me'}</button>
+}
+```
+
+## Is lazy function supports named exports? 🧩
+
+No, currently `React.lazy` function supports default exports only.
+
+## Why React uses `className` over `class` attribute? 🌟
+
+The attribute `class` is a keyword in JavaScript, and JSX is an extension of JavaScript. That's the principle reason why React uses `className` instead of `class`.
+
+## What are fragments? 🌟
+
+Fragments are a common pattern in React used to return multiple elements from a component without adding extra nodes to the DOM. They provide a way to group a list of children elements. There are two syntaxes for using fragments: `<Fragment>` or the shorter syntax `<>...</>`.
+
+Example of using fragments inside a `Story` component:
+
+```jsx
+function Story({ title, description, date }) {
+  return (
+    <>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <p>{date}</p>
+    </>
+  );
+}
+```
+
+Rendering a list of fragments inside a loop with a `key` attribute:
+
+```jsx
+function StoryBook() {
+  return stories.map((story) => (
+    <Fragment key={story.id}>
+      <h2>{story.title}</h2>
+      <p>{story.description}</p>
+      <p>{story.date}</p>
+    </Fragment>
+  ));
+}
+```
+
+Usually, the shorter syntax (`<>...</>`) is preferred unless a `key` attribute is required.
+
+## Why are fragments better than container divs? 🌟
+
+Fragments offer several advantages over container divs:
+
+- Fragments are faster and use less memory by not creating an extra DOM node.
+- They help maintain the desired layout with CSS mechanisms like Flexbox and CSS Grid.
+- Fragments keep the DOM Inspector less cluttered by not adding unnecessary parent nodes.
+
+## What are portals in React? 🧩
+
+Portals provide a way to render children into a DOM node that exists outside the DOM hierarchy of the parent component. This is useful for scenarios like modal dialogs or tooltips where the content needs to be rendered outside of the current component's DOM tree.
+
+Example usage of `ReactDOM.createPortal`:
+
+```javascript
+ReactDOM.createPortal(child, container);
+```
+
+## What are stateless components? 🧩
+
+Stateless components (also known as functional components) in React are components that do not manage state. They are simple functions that take props as input and return what should be rendered. Stateless components are easy to write, understand, and test.
+
+Example of a stateless functional component:
+
+```jsx
+function Greeting(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+```
+
+## What are stateful components? 🧩
+
+Stateful components (also known as class components or components with hooks) are components that manage their own state. They use the `state` object to keep track of data that may change over time. Stateful components can handle user interactions, data fetching, and more.
+
+Example of a stateful functional component with hooks:
+
+```jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <>
+      <button onClick={handleIncrement}>Increment</button>
+      <span>Counter: {count}</span>
+    </>
+  );
+}
+```
+
+## How to apply validation on props in React? 🌟
+
+In React, you can apply validation on props using `propTypes`. `propTypes` allows you to define the type of each prop expected by a component and whether it is required or not.
+
+Example using class components:
+
+```jsx
+import React from 'react';
+import PropTypes from 'prop-types';
+
+class User extends React.Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
+  };
+
+  render() {
+    return (
+      <>
+        <h1>{`Welcome, ${this.props.name}`}</h1>
+        <h2>{`Age, ${this.props.age}`}</h2>
+      </>
+    );
+  }
+}
+```
+
+Example using functional components:
+
+```jsx
+import React from 'react';
+import PropTypes from 'prop-types';
+
+function User({ name, age }) {
+  return (
+    <>
+      <h1>{`Welcome, ${name}`}</h1>
+      <h2>{`Age, ${age}`}</h2>
+    </>
+  );
+}
+
+User.propTypes = {
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
+};
+```
+
+## What will happen if you use props in initial state? 🧩
+
+Using props directly in the initial state of a component's constructor can lead to unexpected behavior. When the component is first initialized, the state is set based on the initial props. However, subsequent updates to the props won't automatically update the state because the constructor is only called once.
+
+In the following example, the `inputValue` in the state will be set to the initial value of `this.props.inputValue` but won't update if `inputValue` prop changes later:
+
+```jsx harmony
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      records: [],
+      inputValue: this.props.inputValue, // Initial value from props
+    };
+  }
+
+  render() {
+    return <div>{this.state.inputValue}</div>;
+  }
+}
+```
+
+To ensure that the component reflects prop changes, you should use the props directly within the `render` method:
+
+```jsx harmony
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      records: [],
+    };
+  }
+
+  render() {
+    return <div>{this.props.inputValue}</div>; // Rendering inputValue from props
+  }
+}
+```
+
+## How do you conditionally render components? 🧩
+
+Conditional rendering in React allows you to render different components or content based on certain conditions. JSX itself supports conditional rendering using JavaScript expressions.
+
+Using logical `&&` operator for conditional rendering:
+
+```jsx harmony
+const MyComponent = ({ name, address }) => (
+  <div>
+    <h2>{name}</h2>
+    {address && <p>{address}</p>} {/* Render address only if it exists */}
+  </div>
+);
+```
+
+Using ternary operator for more complex conditions:
+
+```jsx harmony
+const MyComponent = ({ name, address }) => (
+  <div>
+    <h2>{name}</h2>
+    {address ? <p>{address}</p> : <p>{'Address is not available'}</p>}
+  </div>
+);
+```
+
+## Why do we need to be careful when spreading props on DOM elements? 🧩
+
+When spreading props onto DOM elements (`<div {...domProps}>`), it's important to be cautious because this can add unknown HTML attributes, which may cause unexpected behavior or fail HTML validation. To mitigate this, you can use prop destructuring with the `...rest` operator to only apply required props to the element.
+
+Example using prop destructuring:
+
+```jsx harmony
+const ComponentA = () => <ComponentB isDisplay={true} className={'componentStyle'} />;
+
+const ComponentB = ({ isDisplay, ...domProps }) => <div {...domProps}>{'ComponentB'}</div>;
+```
+
+This approach ensures that only valid props are spread onto the DOM element.
+
+## How do you use decorators in React? 🚀
+
+Decorators provide a clean and readable way to modify the functionality of a component. Although not part of the standard JavaScript (ES6/ES7), they can be used with transpilers like Babel.
+
+Example of using a decorator to set the document title for a component:
+
+```jsx harmony
+const setTitle = (title) => (WrappedComponent) => {
+  return class extends React.Component {
+    componentDidMount() {
+      document.title = title;
+    }
+
+    render() {
+      return <WrappedComponent {...this.props} />;
+    }
+  };
+};
+
+@setTitle('Profile')
+class Profile extends React.Component {
+  // Component code...
+}
+```
+
+The `Profile` component will have its document title set to 'Profile' when mounted.
+
+## How do you memoize a component? 🧩
+
+Memoization in React helps optimize rendering by caching the result of a component's render method based on its props. React provides `React.memo` as a higher-order component to memoize functional components.
+
+Example using `React.memo`:
+
+```jsx harmony
+const MemoComponent = React.memo(function MemoComponent(props) {
+  /* render using props */
+});
+
+// or export default directly with memoization
+export default React.memo(MyFunctionComponent);
+```
+
+`React.memo` checks the props of the component and re-renders only if the props have changed, optimizing performance.
+
+## What is a switching component? 🧩
+
+A **switching component** is a component designed to render one of many possible components based on a specific prop value or condition. This pattern is useful for conditional rendering where different components need to be displayed based on certain criteria.
+
+For example, consider a switching component that displays different pages based on a `page` prop value:
+
+```jsx
+import HomePage from './HomePage';
+import AboutPage from './AboutPage';
+import ServicesPage from './ServicesPage';
+import ContactPage from './ContactPage';
+
+const PAGES = {
+  home: HomePage,
+  about: AboutPage,
+  services: ServicesPage,
+  contact: ContactPage,
+};
+
+const Page = (props) => {
+  const Handler = PAGES[props.page] || ContactPage;
+
+  return <Handler {...props} />;
+};
+
+Page.propTypes = {
+  page: PropTypes.oneOf(Object.keys(PAGES)).isRequired,
+};
+```
+
+Here, the `Page` component dynamically renders the appropriate page component (`Handler`) based on the `page` prop value. This approach leverages an object (`PAGES`) to map prop values to specific components, enabling flexible rendering based on external data.
+
+## Why do we need to pass a function to setState()? 🧩
+
+In React, `setState()` is an asynchronous operation. When you call `setState()`, React batch updates state changes for performance reasons, and the state may not immediately reflect the updates you expect.
+
+To handle this properly, React recommends passing a function to `setState()` that receives the previous state and props as arguments. This functional approach ensures that you're working with the latest state and props values when updating state, especially in scenarios where multiple state updates may be queued.
+
+Consider this example to increment a counter correctly:
+
+```javascript
+// Incorrect way (may lead to unexpected results)
+this.setState({ count: this.state.count + 1 });
+this.setState({ count: this.state.count + 1 });
+this.setState({ count: this.state.count + 1 });
+// this.state.count === 1 (not 3)
+
+// Correct way using a function to update state based on previous state
+this.setState((prevState, props) => ({
+  count: prevState.count + props.increment,
+}));
+// this.state.count === 3 (as expected)
+```
+
+By using a function with `setState()`, you ensure that state updates are applied correctly based on the latest state and props values.
+
+## What are React Mixins? 🚀
+
+React **Mixins** were a way to share reusable functionality between components. However, mixins have been deprecated due to several issues, including conflicts between mixin implementations and difficulty in debugging.
+
+One popular mixin was `PureRenderMixin`, used to optimize performance by preventing unnecessary re-renders when props and state were shallowly equal to the previous props and state.
+
+Here's an example of using `PureRenderMixin`:
+
+```javascript
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+
+const Button = React.createClass({
+  mixins: [PureRenderMixin],
+
+  // Component code...
+});
+```
+
+However, with the evolution of React patterns, mixins are no longer recommended. Instead, React encourages the use of higher-order components (HOCs) or render props for achieving similar patterns in a more predictable and encapsulated way.
+
+## Why is `isMounted()` an anti-pattern and what is the proper solution? 🧩
+
+`isMounted()` is considered an anti-pattern in React because it introduces unreliable state checks into component code. The primary use of `isMounted()` was to prevent `setState()` calls on unmounted components, which could lead to memory leaks and potential bugs.
+
+Example usage of `isMounted()`:
+
+```javascript
+if (this.isMounted()) {
+  this.setState({ ... });
+}
+```
+
+Instead of relying on `isMounted()`, React encourages using proper lifecycle methods to manage component state and subscriptions. For example, you can cancel subscriptions or clear timeouts in `componentWillUnmount()` to ensure that the component cleans up after itself when it unmounts.
+
+```javascript
+componentWillUnmount() {
+  // Cleanup operations (e.g., clear timeouts, unsubscribe)
+}
+```
+
+By utilizing lifecycle methods correctly, you can avoid the need for `isMounted()` checks and ensure a more predictable component behavior.
+
+### What are the Pointer Events supported in React? 🧩
+
+Pointer Events provide a unified way to handle all input events across various devices, such as mouse, touch surfaces, or pens. These events are supported in React DOM and can be used for handling user interactions. Here's a list of available pointer event types in React:
+
+1. `onPointerDown`
+2. `onPointerMove`
+3. `onPointerUp`
+4. `onPointerCancel`
+5. `onGotPointerCapture`
+6. `onLostPointerCapture`
+7. `onPointerEnter`
+8. `onPointerLeave`
+9. `onPointerOver`
+10. `onPointerOut`
+
+These events enable you to build components that respond to different types of input interactions from users, making your applications more versatile across devices.
+
+## Why should component names start with a capital letter? 🌟
+
+In React, component names must start with a capital letter when they are used in JSX. This convention helps React differentiate between user-defined components and regular HTML/SVG elements.
+
+For example, if you define a component named `MyComponent`, you should use it in JSX like this:
+
+```jsx
+<MyComponent />
+```
+
+React will recognize `MyComponent` as a component class rather than an HTML tag due to the capitalization of the name.
+
+However, there are some exceptions where lowercase component names are valid, such as when using property accessors (e.g., `<obj.component />`). Additionally, when importing a component defined with a lowercase name, you should capitalize it:
+
+```jsx
+import MyComponent from './MyComponent';
+```
+
+This convention ensures clarity and consistency in your React codebase.
+
+## Are custom DOM attributes supported in React v16? 🧩
+
+Yes, starting from React v16, custom DOM attributes are supported. Previously, React used to ignore unknown DOM attributes, but in React v16 and later, any unknown attributes provided in JSX will be added to the rendered DOM elements.
+
+For example:
+
+```jsx
+<div myCustomAttribute={'something'} />
+```
+
+In React v16, this would render as:
+
+```html
+<div myCustomAttribute="something" />
+```
+
+This change allows developers to integrate with third-party libraries, experiment with new DOM APIs, and use browser-specific attributes more freely within React applications.
+
+## What is the difference between `super()` and `super(props)` in React using ES6 classes? 🧩
+
+In React ES6 class components, `super()` and `super(props)` are used in the constructor to call the constructor of the parent class (i.e., `React.Component`). The difference lies in whether you need to access `this.props` inside the constructor.
+
+- **Using `super(props)`:**
+
+  ```javascript
+  class MyComponent extends React.Component {
+    constructor(props) {
+      super(props);
+      console.log(this.props); // Access to props
+    }
+  }
+  ```
+
+  Here, `super(props)` initializes `this.props` before the constructor code runs, allowing you to access `this.props` inside the constructor.
+
+- **Using `super()`:**
+
+  ```javascript
+  class MyComponent extends React.Component {
+    constructor(props) {
+      super();
+      console.log(this.props); // undefined
+    }
+  }
+  ```
+
+  Using `super()` without passing `props` will still work outside the constructor, but `this.props` will be `undefined` inside the constructor.
+
+Outside the constructor, both forms of `super()` will behave the same in terms of accessing `this.props`.
+
+These are important considerations when initializing component state or setting up event listeners in the constructor.
+
+### How to loop inside JSX? 🧩
+
+To iterate over an array and render JSX elements for each item, use `Array.prototype.map` directly within JSX. This allows you to dynamically generate components based on array data.
+
+Example:
+
+```jsx
+<tbody>
+  {items.map((item) => (
+    <SomeComponent key={item.id} name={item.name} />
+  ))}
+</tbody>
+```
+
+In JSX, you cannot use traditional `for` loops directly, as JSX requires expressions enclosed in curly braces `{}` to evaluate JavaScript expressions.
+
+## How to conditionally apply class attributes? 🌟
+
+To conditionally apply CSS classes based on component props or state, you can use JavaScript expressions within JSX. Concatenation or template literals are commonly used to conditionally include class names.
+
+Example using concatenation:
+
+```jsx
+<div className={'btn-panel ' + (this.props.visible ? 'show' : 'hidden')}>Button Panel</div>
+```
+
+Example using template literals:
+
+```jsx
+<div className={`btn-panel ${this.props.visible ? 'show' : 'hidden'}`}>Button Panel</div>
+```
+
+This approach allows you to dynamically apply classes based on component logic, such as toggling visibility or applying different styles based on state.
+
+### What is the difference between React and ReactDOM? 🌟
+
+The separation of `react` and `react-dom` into separate packages was a strategic decision by the React team to allow for greater flexibility and broader platform support.
+
+- **`react` Package:**
+
+  - Contains fundamental React APIs like `React.createElement()`, `React.Component`, and `React.Children`.
+  - Provides core functionality for defining components, creating elements, and managing component lifecycles.
+  - These APIs are essential for building React components and managing the virtual DOM.
+
+- **`react-dom` Package:**
+  - Includes APIs specifically related to rendering React components in the DOM.
+  - Provides `ReactDOM.render()` for mounting React components into the DOM.
+  - Supports server-side rendering with `ReactDOMServer.renderToString()` and `ReactDOMServer.renderToStaticMarkup()`.
+
+By splitting these functionalities into separate packages (`react` for core React logic and `react-dom` for DOM-specific rendering), the React team enabled the creation of alternative renderers like `react-native` (for mobile) and `react-three` (for 3D graphics). This modular architecture promotes code reuse and supports React's vision of being a universal framework for different platforms.
+
+## Why is ReactDOM separated from React? 🧩
+
+The separation of `ReactDOM` from the core `React` library reflects React's philosophy of being a framework that can target diverse environments beyond just web browsers. Here are key reasons for this separation:
+
+- **Platform Agnostic Components:**
+
+  - By isolating DOM-specific features in `ReactDOM`, React components can be used across different platforms like web, mobile (React Native), and even VR/AR environments (React 360).
+
+- **Code Modularity and Extensibility:**
+
+  - Separation allows developers to build custom renderers for specific platforms (e.g., `react-dom`, `react-native`, `react-three`), which are tailored to the unique characteristics of each environment.
+
+- **Reduced Bundle Size:**
+  - Developers can optimize bundle sizes by importing only the necessary modules (`react` for core logic, `react-dom` for web rendering) based on the target platform.
+
+This separation empowers developers to write once and deploy across multiple platforms, ensuring a consistent development experience while leveraging the specific capabilities of each target environment.
+
+## How to use React label element? 🌟
+
+When using the `<label>` element in JSX to associate it with a form control, you should use the `htmlFor` attribute instead of `for` due to `for` being a reserved keyword in JavaScript. This ensures proper binding and accessibility.
+
+Incorrect usage:
+
+```jsx harmony
+<label for={'user'}>{'User'}</label>
+<input type={'text'} id={'user'} />
+```
+
+Correct usage:
+
+```jsx harmony
+<label htmlFor={'user'}>{'User'}</label>
+<input type={'text'} id={'user'} />
+```
+
+By using `htmlFor`, React ensures that the label correctly associates with the specified input element, maintaining accessibility standards.
+
+### How to combine multiple inline style objects? 🧩
+
+In regular React, you can combine multiple inline style objects using the spread (`...`) operator within JSX:
+
+```jsx harmony
+<button style={{ ...styles.panel.button, ...styles.panel.submitButton }}>{'Submit'}</button>
+```
+
+This technique merges multiple style objects (`styles.panel.button` and `styles.panel.submitButton`) into a single style object for the `<button>` element.
+
+If you're working with React Native, use the array notation to combine styles:
+
+```jsx harmony
+<button style={[styles.panel.button, styles.panel.submitButton]}>{'Submit'}</button>
+```
+
+The array notation concatenates styles, providing flexibility for applying multiple styles to components.
+
+### How to re-render the view when the browser is resized? 🚀
+
+To update the view dynamically when the browser is resized, you can use React hooks (`useState` and `useEffect`) to manage the component's state and listen for the `resize` event.
+
+Example using hooks:
+
+```jsx harmony
+import React, { useState, useEffect } from 'react';
+
+function WindowDimensions() {
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array to run effect only once
+
+  return (
+    <span>
+      {dimensions.width} x {dimensions.height}
+    </span>
+  );
+}
+```
+
+This example creates a component that displays the window's dimensions and updates them dynamically when the window is resized. The `useEffect` hook adds and removes the `resize` event listener, ensuring efficient resource management.
+
+## What is the difference between `setState()` and `replaceState()` methods?
+
+When you use `setState()`, the current and previous states are merged. On the other hand, `replaceState()` throws out the current state and replaces it with only what you provide. Typically, `setState()` is preferred unless you specifically need to remove all previous keys for some reason. You can also set state to `false`/`null` in `setState()` instead of using `replaceState()`.
+
+## How to listen to state changes?
+
+To listen to state changes, you can utilize the `componentDidUpdate` lifecycle method, which is called after state updates. Within this method, you can compare the provided `prevProps` and `prevState` with the current `props` and `state` to determine if something meaningful has changed.
+
+```javascript
+componentDidUpdate(prevProps, prevState) {
+  // Compare prevProps and prevState with current props and state
+  // Determine if any significant changes have occurred
+}
+```
+
+## What is the recommended approach of removing an array element in React state?
+
+The recommended approach for removing an array element in React state is to use the `Array.prototype.filter()` method. This method creates a new array that includes elements based on a provided condition, effectively excluding the element you want to remove.
+
+```javascript
+removeItem(index) {
+  this.setState({
+    data: this.state.data.filter((item, i) => i !== index)
+  });
+}
+```
+
+## Is it possible to use React without rendering HTML?
+
+Yes, it is possible to use React without rendering HTML by returning different types of values from the `render()` method based on your requirements. This includes returning `false`, `true`, `null`, an empty array (`[]`), an empty string (`""`), or using `<React.Fragment>` or `<>` in newer versions of React.
+
+## How to pretty print JSON with React?
+
+To pretty print JSON with React while retaining formatting, you can use the `<pre>` tag along with `JSON.stringify()` inside your component's `render()` method.
+
+```javascript
+const data = { name: 'John', age: 42 };
+
+class User extends React.Component {
+  render() {
+    return <pre>{JSON.stringify(data, null, 2)}</pre>;
+}
+```
+
+## Why can't you update props in React?
+
+In React, props are designed to be immutable and top-down. This means that a parent component can pass any prop values to its child components, but the child components cannot modify the props received from their parent. This approach ensures predictable data flow and helps maintain the integrity of data throughout the component hierarchy.
+
+## How to focus an input element on page load?
+
+You can focus an input element on page load by using a ref and the `componentDidMount()` lifecycle method in class components, or the `useEffect()` hook in functional components (for React versions 16.8 and above).
+
+```javascript
+class App extends React.Component {
+  componentDidMount() {
+    this.nameInput.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input defaultValue={"Won't focus"} />
+        <input ref={(input) => (this.nameInput = input)} defaultValue={'Will focus'} />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+```javascript
+import React, { useEffect, useRef } from 'react';
+
+const App = () => {
+  const inputElRef = useRef(null);
+
+  useEffect(() => {
+    inputElRef.current.focus();
+  }, []);
+
+  return (
+    <div>
+      <input defaultValue={"Won't focus"} />
+      <input ref={inputElRef} defaultValue={'Will focus'} />
+    </div>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+## What are the possible ways of updating objects in state?
+
+There are two common ways of updating objects in React state:
+
+1. **Using `setState()` with an object to merge with state**:
+
+   - Using `Object.assign()` or the spread operator to create a copy of the object and update specific properties.
+
+   ```javascript
+   const user = Object.assign({}, this.state.user, { age: 42 });
+   this.setState({ user });
+   ```
+
+   ```javascript
+   const user = { ...this.state.user, age: 42 };
+   this.setState({ user });
+   ```
+
+2. **Using `setState()` with a function**:
+
+   - Pass a function to `setState()` that receives the previous state as an argument and returns an updated state object.
+
+   ```javascript
+   this.setState((prevState) => ({
+     user: {
+       ...prevState.user,
+       age: 42,
+     },
+   }));
+   ```
+
+## How can we find the version of React at runtime in the browser?
+
+To find the version of React at runtime in the browser, you can access the `React.version` property.
+
+```javascript
+const REACT_VERSION = React.version;
+
+ReactDOM.render(<div>{`React version: ${REACT_VERSION}`}</div>, document.getElementById('app'));
+```
+
+## How to update a component every second?
+
+You can update a component every second by using `setInterval()` inside the `componentDidMount()` lifecycle method to trigger the state update, and remember to clear the interval in the `componentWillUnmount()` lifecycle method to prevent memory leaks.
+
+```javascript
+componentDidMount() {
+  this.interval = setInterval(() => this.setState({ time: Date.now() }), 1000);
+}
+
+componentWillUnmount() {
+  clearInterval(this.interval);
+}
+```
+
+## How do you apply vendor prefixes to inline styles in React?
+
+React does not apply vendor prefixes automatically. You need to manually add vendor prefixes to inline styles when necessary.
+
+```jsx
+<div
+  style={{
+    transform: 'rotate(90deg)',
+    WebkitTransform: 'rotate(90deg)', // For Webkit browsers like Safari
+    msTransform: 'rotate(90deg)', // For Internet Explorer
+  }}
+/>
+```
+
+## How to import and export components using React and ES6?
+
+To import and export components using React and ES6, you can use the `export default` syntax.
+
+```javascript
+import React from 'react';
+import User from 'user';
+
+export default class MyProfile extends React.Component {
+  render() {
+    return <User type="customer">//...</User>;
+  }
+}
+```
+
+## Why is a component constructor called only once?
+
+React's reconciliation algorithm assumes that if a custom component appears in the same place on subsequent renders, it's the same component as before. Therefore, it reuses the previous instance of the component rather than creating a new one, which results in the constructor being called only once.
+
+## How to define constants in React?
+
+You can use ES7 static class fields to define constants in React components.
+
+```javascript
+class MyComponent extends React.Component {
+  static DEFAULT_PAGINATION = 10;
+}
+```
+
+## How to programmatically trigger click event in React?
+
+You can programmatically trigger a click event in React by using a ref to acquire a reference to the underlying HTML element and calling the `click()` method on that element.
+
+1. Create a ref in the render method:
+
+   ```jsx
+   <input ref={(input) => (this.inputElement = input)} />
+   ```
+
+2. Trigger the click event in your event handler:
+
+   ```javascript
+   this.inputElement.click();
+   ```
+
+## Is it possible to use async/await in plain React?
+
+To use `async`/`await` in React, you need to set up Babel with the `transform-async-to-generator` plugin. This allows you to use modern asynchronous syntax in your React components.
+
+## What are the common folder structures for React?
+
+There are two common practices for structuring React projects: grouping by features/routes or grouping by file type.
+
+**Grouping by features/routes:**
+
+```
+
+common/
+├─ Avatar.js
+├─ Avatar.css
+├─ APIUtils.js
+└─ APIUtils.test.js
+feed/
+├─ index.js
+├─ Feed.js
+├─ Feed.css
+├─ FeedStory.js
+├─ FeedStory.test.js
+└─ FeedAPI.js
+profile/
+├─ index.js
+├─ Profile.js
+├─ ProfileHeader.js
+├─ ProfileHeader.css
+└─ ProfileAPI.js
+
+```
+
+**Grouping by file type:**
+
+```
+
+api/
+├─ APIUtils.js
+├─ APIUtils.test.js
+├─ ProfileAPI.js
+└─ UserAPI.js
+components/
+├─ Avatar.js
+├─ Avatar.css
+├─ Feed.js
+├─ Feed.css
+├─ FeedStory.js
+├─ FeedStory.test.js
+├─ Profile.js
+├─ ProfileHeader.js
+└─ ProfileHeader.css
+
+```
+
+## What is the benefit of styles modules?
+
+The benefit of using styles modules is to avoid hardcoding style values directly within components. By extracting commonly used styles into separate modules, you can promote reusability and maintainability across your project. Styles modules can export constants like colors and spacing, which can then be imported and used consistently throughout your application.
+
+## What are the popular React-specific linters?
+
+Two popular React-specific linters are `eslint-plugin-react` and `eslint-plugin-jsx-a11y`. These plugins provide rules and best practices tailored specifically for React development.
+
+## How to make AJAX call and in which component lifecycle methods should I make an AJAX call?
+
+You can make AJAX calls using libraries like Axios, jQuery AJAX, or the built-in `fetch` API. It's recommended to make AJAX calls in the `componentDidMount()` lifecycle method, which is executed after the component has been rendered to the DOM. This ensures that data fetching does not block the initial rendering of your component.
+
+## What are render props?
+
+Render props is a technique for sharing code between React components using a prop whose value is a function. This allows components to take in a function as a prop and invoke that function with necessary data to render dynamic content.
+
+```jsx
+<DataProvider render={(data) => <h1>{`Hello ${data.target}`}</h1>} />
+```
+
+Libraries like React Router and DownShift utilize render props to enable flexible and composable component behaviors.
+
+Let me know if you have more questions or need further clarification on any of these topics!
