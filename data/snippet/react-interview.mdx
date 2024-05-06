@@ -544,15 +544,70 @@ To avoid this mistake and optimize performance:
 
 By addressing this common mistake, you can ensure that functions are not needlessly re-created on each render, leading to better performance and more efficient React components. Use hooks like `useCallback` to optimize function creation and consider the dependencies that affect the function's behavior.
 
-## Is lazy function supports named exports? 🧩
+## 21. Is lazy function supports named exports? 🧩
 
-No, currently `React.lazy` function supports default exports only.
+No, the `React.lazy` function in React does not directly support named exports. It is designed to work with default exports (`export default ...`) when dynamically importing components.
 
-## Why React uses `className` over `class` attribute? 🌟
+Example:
+
+```jsx
+// MyComponent.js
+const MyComponent = () => {
+  return <div>Hello Lazy Component!</div>;
+};
+
+export default MyComponent;
+```
+
+```jsx
+// App.js
+import React, { Suspense } from 'react';
+
+const LazyComponent = React.lazy(() => import('./MyComponent'));
+
+const App = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+};
+
+export default App;
+```
+
+In this example, `React.lazy` imports `MyComponent` as a default export (`export default MyComponent;`), and it's loaded lazily using `<LazyComponent />`.
+
+For named exports (`export const ...`), you would typically import and use them directly rather than using `React.lazy` for lazy loading. Example:
+
+```jsx
+// NamedComponent.js
+export const NamedComponent1 = () => {
+  return <div>Named Component 1</div>;
+};
+
+// App.js
+import React from 'react';
+import { NamedComponent1 } from './NamedComponent';
+
+const App = () => {
+  return (
+    <div>
+      <NamedComponent1 />
+    </div>
+  );
+};
+
+export default App;
+```
+
+Here, `NamedComponent1` is imported directly from its module (`import { NamedComponent1 } from './NamedComponent';`) and used within the `App` component without lazy loading.
+
+## 22. Why React uses `className` over `class` attribute? 🌟
 
 The attribute `class` is a keyword in JavaScript, and JSX is an extension of JavaScript. That's the principle reason why React uses `className` instead of `class`.
 
-## What are fragments? 🌟
+## 23. What are fragments? 🌟
 
 Fragments are a common pattern in React used to return multiple elements from a component without adding extra nodes to the DOM. They provide a way to group a list of children elements. There are two syntaxes for using fragments: `<Fragment>` or the shorter syntax `<>...</>`.
 
@@ -586,7 +641,7 @@ function StoryBook() {
 
 Usually, the shorter syntax (`<>...</>`) is preferred unless a `key` attribute is required.
 
-## Why are fragments better than container divs? 🌟
+## 24. Why are fragments better than container divs? 🌟
 
 Fragments offer several advantages over container divs:
 
@@ -594,7 +649,7 @@ Fragments offer several advantages over container divs:
 - They help maintain the desired layout with CSS mechanisms like Flexbox and CSS Grid.
 - Fragments keep the DOM Inspector less cluttered by not adding unnecessary parent nodes.
 
-## What are portals in React? 🧩
+## 25. What are portals in React? 🧩
 
 Portals provide a way to render children into a DOM node that exists outside the DOM hierarchy of the parent component. This is useful for scenarios like modal dialogs or tooltips where the content needs to be rendered outside of the current component's DOM tree.
 
@@ -604,7 +659,7 @@ Example usage of `ReactDOM.createPortal`:
 ReactDOM.createPortal(child, container);
 ```
 
-## What are stateless components? 🧩
+## 26. What are stateless components? 🧩
 
 Stateless components (also known as functional components) in React are components that do not manage state. They are simple functions that take props as input and return what should be rendered. Stateless components are easy to write, understand, and test.
 
@@ -616,7 +671,7 @@ function Greeting(props) {
 }
 ```
 
-## What are stateful components? 🧩
+## 27. What are stateful components? 🧩
 
 Stateful components (also known as class components or components with hooks) are components that manage their own state. They use the `state` object to keep track of data that may change over time. Stateful components can handle user interactions, data fetching, and more.
 
@@ -641,7 +696,7 @@ function Counter() {
 }
 ```
 
-## How to apply validation on props in React? 🌟
+## 28. How to apply validation on props in React? 🌟
 
 In React, you can apply validation on props using `propTypes`. `propTypes` allows you to define the type of each prop expected by a component and whether it is required or not.
 
@@ -689,48 +744,41 @@ User.propTypes = {
 };
 ```
 
-## What will happen if you use props in initial state? 🧩
+## 29. What will happen if you use props in initial state? 🧩
 
-Using props directly in the initial state of a component's constructor can lead to unexpected behavior. When the component is first initialized, the state is set based on the initial props. However, subsequent updates to the props won't automatically update the state because the constructor is only called once.
+In React components, using props in the initial state directly is not recommended. This is because React initializes the component state only once, when the component is created, based on the initial state provided. After that, any changes to the props won't be reflected in the state.
 
-In the following example, the `inputValue` in the state will be set to the initial value of `this.props.inputValue` but won't update if `inputValue` prop changes later:
+Instead, you should use props directly where needed in your component, and if you need to update the state based on props changes, you can use the `useEffect` hook. This hook allows you to execute code in response to changes in props or other values.
 
-```jsx harmony
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
+Here's a concise example:
 
-    this.state = {
-      records: [],
-      inputValue: this.props.inputValue, // Initial value from props
-    };
-  }
+```jsx
+import React, { useState, useEffect } from 'react';
 
-  render() {
-    return <div>{this.state.inputValue}</div>;
-  }
+function MyComponent(props) {
+  // Initialize state using props directly (not recommended):
+  const [state, setState] = useState({
+    data: props.initialData,
+  });
+
+  // Use useEffect to update state when props change:
+  useEffect(() => {
+    setState({ data: props.initialData });
+  }, [props.initialData]);
+
+  return (
+    <div>
+      <p>Data: {state.data}</p>
+    </div>
+  );
 }
+
+export default MyComponent;
 ```
 
-To ensure that the component reflects prop changes, you should use the props directly within the `render` method:
+In this example, instead of initializing the state directly with `props.initialData`, we use `useEffect` to update the state whenever `props.initialData` changes. This way, the state is kept in sync with the props.
 
-```jsx harmony
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      records: [],
-    };
-  }
-
-  render() {
-    return <div>{this.props.inputValue}</div>; // Rendering inputValue from props
-  }
-}
-```
-
-## How do you conditionally render components? 🧩
+## 30. How do you conditionally render components? 🧩
 
 Conditional rendering in React allows you to render different components or content based on certain conditions. JSX itself supports conditional rendering using JavaScript expressions.
 
@@ -756,21 +804,31 @@ const MyComponent = ({ name, address }) => (
 );
 ```
 
-## Why do we need to be careful when spreading props on DOM elements? 🧩
+## 31. Why do we need to be careful when spreading props on DOM elements? 🧩
 
-When spreading props onto DOM elements (`<div {...domProps}>`), it's important to be cautious because this can add unknown HTML attributes, which may cause unexpected behavior or fail HTML validation. To mitigate this, you can use prop destructuring with the `...rest` operator to only apply required props to the element.
+We need to be careful when spreading props (`...props`) onto DOM elements in React for a couple of reasons:
 
-Example using prop destructuring:
+1. **Unintended DOM Attribute Propagation**: When you use `...props` to spread props onto a DOM element like `<div {...props} />`, you are essentially passing all props (including custom props) as attributes to the HTML element. This can lead to unexpected behavior if these props are not intended to be HTML attributes. For example, if you pass down a custom prop like `customProp="value"` and then spread `...props` onto a `<div>`, React will attempt to add `customProp="value"` as a DOM attribute, which is invalid HTML and can cause warnings or errors.
 
-```jsx harmony
-const ComponentA = () => <ComponentB isDisplay={true} className={'componentStyle'} />;
+2. **Potential Security Risks**: Spreading props directly onto DOM elements can also pose security risks if the props contain sensitive data or are not properly sanitized. For instance, if a malicious user manages to inject a malicious script into a prop value, spreading props onto the DOM element without validation could lead to a cross-site scripting (XSS) vulnerability.
 
-const ComponentB = ({ isDisplay, ...domProps }) => <div {...domProps}>{'ComponentB'}</div>;
-```
+To mitigate these issues, it's important to be selective and deliberate when spreading props onto DOM elements:
 
-This approach ensures that only valid props are spread onto the DOM element.
+- **Filter and Pass Relevant Props**: Instead of spreading all props (`...props`), explicitly pass down only the props that are intended to be used as DOM attributes. For example:
 
-## How do you use decorators in React? 🚀
+  ```jsx
+  function MyComponent({ className, style, ...otherProps }) {
+    return <div className={className} style={style} {...otherProps} />;
+  }
+  ```
+
+  Here, `className` and `style` are explicitly handled, while `otherProps` (the remaining props) are spread onto the `<div>`.
+
+- **Sanitize and Validate Props**: Ensure that props containing user-generated content are properly sanitized and validated before being used as attributes on DOM elements. Use appropriate libraries or methods to handle potentially unsafe content to prevent XSS attacks.
+
+By being mindful of how props are spread onto DOM elements and following best practices for prop handling, we can write more secure and predictable React components.
+
+## 32. How do you use decorators in React? 🚀
 
 Decorators provide a clean and readable way to modify the functionality of a component. Although not part of the standard JavaScript (ES6/ES7), they can be used with transpilers like Babel.
 
@@ -797,7 +855,7 @@ class Profile extends React.Component {
 
 The `Profile` component will have its document title set to 'Profile' when mounted.
 
-## How do you memoize a component? 🧩
+## 33. How do you memoize a component? 🧩
 
 Memoization in React helps optimize rendering by caching the result of a component's render method based on its props. React provides `React.memo` as a higher-order component to memoize functional components.
 
@@ -814,7 +872,7 @@ export default React.memo(MyFunctionComponent);
 
 `React.memo` checks the props of the component and re-renders only if the props have changed, optimizing performance.
 
-## What is a switching component? 🧩
+## 34. What is a switching component? 🧩
 
 A **switching component** is a component designed to render one of many possible components based on a specific prop value or condition. This pattern is useful for conditional rendering where different components need to be displayed based on certain criteria.
 
@@ -846,51 +904,7 @@ Page.propTypes = {
 
 Here, the `Page` component dynamically renders the appropriate page component (`Handler`) based on the `page` prop value. This approach leverages an object (`PAGES`) to map prop values to specific components, enabling flexible rendering based on external data.
 
-## Why do we need to pass a function to setState()? 🧩
-
-In React, `setState()` is an asynchronous operation. When you call `setState()`, React batch updates state changes for performance reasons, and the state may not immediately reflect the updates you expect.
-
-To handle this properly, React recommends passing a function to `setState()` that receives the previous state and props as arguments. This functional approach ensures that you're working with the latest state and props values when updating state, especially in scenarios where multiple state updates may be queued.
-
-Consider this example to increment a counter correctly:
-
-```javascript
-// Incorrect way (may lead to unexpected results)
-this.setState({ count: this.state.count + 1 });
-this.setState({ count: this.state.count + 1 });
-this.setState({ count: this.state.count + 1 });
-// this.state.count === 1 (not 3)
-
-// Correct way using a function to update state based on previous state
-this.setState((prevState, props) => ({
-  count: prevState.count + props.increment,
-}));
-// this.state.count === 3 (as expected)
-```
-
-By using a function with `setState()`, you ensure that state updates are applied correctly based on the latest state and props values.
-
-## What are React Mixins? 🚀
-
-React **Mixins** were a way to share reusable functionality between components. However, mixins have been deprecated due to several issues, including conflicts between mixin implementations and difficulty in debugging.
-
-One popular mixin was `PureRenderMixin`, used to optimize performance by preventing unnecessary re-renders when props and state were shallowly equal to the previous props and state.
-
-Here's an example of using `PureRenderMixin`:
-
-```javascript
-import PureRenderMixin from 'react-addons-pure-render-mixin';
-
-const Button = React.createClass({
-  mixins: [PureRenderMixin],
-
-  // Component code...
-});
-```
-
-However, with the evolution of React patterns, mixins are no longer recommended. Instead, React encourages the use of higher-order components (HOCs) or render props for achieving similar patterns in a more predictable and encapsulated way.
-
-## Why is `isMounted()` an anti-pattern and what is the proper solution? 🧩
+## 35. Why is `isMounted()` an anti-pattern and what is the proper solution? 🧩
 
 `isMounted()` is considered an anti-pattern in React because it introduces unreliable state checks into component code. The primary use of `isMounted()` was to prevent `setState()` calls on unmounted components, which could lead to memory leaks and potential bugs.
 
@@ -912,7 +926,7 @@ componentWillUnmount() {
 
 By utilizing lifecycle methods correctly, you can avoid the need for `isMounted()` checks and ensure a more predictable component behavior.
 
-### What are the Pointer Events supported in React? 🧩
+## 36. What are the Pointer Events supported in React? 🧩
 
 Pointer Events provide a unified way to handle all input events across various devices, such as mouse, touch surfaces, or pens. These events are supported in React DOM and can be used for handling user interactions. Here's a list of available pointer event types in React:
 
@@ -929,7 +943,7 @@ Pointer Events provide a unified way to handle all input events across various d
 
 These events enable you to build components that respond to different types of input interactions from users, making your applications more versatile across devices.
 
-## Why should component names start with a capital letter? 🌟
+## 37. Why should component names start with a capital letter? 🌟
 
 In React, component names must start with a capital letter when they are used in JSX. This convention helps React differentiate between user-defined components and regular HTML/SVG elements.
 
@@ -949,7 +963,7 @@ import MyComponent from './MyComponent';
 
 This convention ensures clarity and consistency in your React codebase.
 
-## Are custom DOM attributes supported in React v16? 🧩
+## 38. Are custom DOM attributes supported in React v16? 🧩
 
 Yes, starting from React v16, custom DOM attributes are supported. Previously, React used to ignore unknown DOM attributes, but in React v16 and later, any unknown attributes provided in JSX will be added to the rendered DOM elements.
 
@@ -967,7 +981,7 @@ In React v16, this would render as:
 
 This change allows developers to integrate with third-party libraries, experiment with new DOM APIs, and use browser-specific attributes more freely within React applications.
 
-## What is the difference between `super()` and `super(props)` in React using ES6 classes? 🧩
+## 39. What is the difference between `super()` and `super(props)` in React using ES6 classes? 🧩
 
 In React ES6 class components, `super()` and `super(props)` are used in the constructor to call the constructor of the parent class (i.e., `React.Component`). The difference lies in whether you need to access `this.props` inside the constructor.
 
@@ -1001,7 +1015,7 @@ Outside the constructor, both forms of `super()` will behave the same in terms o
 
 These are important considerations when initializing component state or setting up event listeners in the constructor.
 
-### How to loop inside JSX? 🧩
+## 40. How to loop inside JSX? 🧩
 
 To iterate over an array and render JSX elements for each item, use `Array.prototype.map` directly within JSX. This allows you to dynamically generate components based on array data.
 
@@ -1017,7 +1031,7 @@ Example:
 
 In JSX, you cannot use traditional `for` loops directly, as JSX requires expressions enclosed in curly braces `{}` to evaluate JavaScript expressions.
 
-## How to conditionally apply class attributes? 🌟
+## 41. How to conditionally apply class attributes? 🌟
 
 To conditionally apply CSS classes based on component props or state, you can use JavaScript expressions within JSX. Concatenation or template literals are commonly used to conditionally include class names.
 
@@ -1035,7 +1049,7 @@ Example using template literals:
 
 This approach allows you to dynamically apply classes based on component logic, such as toggling visibility or applying different styles based on state.
 
-### What is the difference between React and ReactDOM? 🌟
+## 42. What is the difference between React and ReactDOM? 🌟
 
 The separation of `react` and `react-dom` into separate packages was a strategic decision by the React team to allow for greater flexibility and broader platform support.
 
@@ -1048,11 +1062,10 @@ The separation of `react` and `react-dom` into separate packages was a strategic
 - **`react-dom` Package:**
   - Includes APIs specifically related to rendering React components in the DOM.
   - Provides `ReactDOM.render()` for mounting React components into the DOM.
-  - Supports server-side rendering with `ReactDOMServer.renderToString()` and `ReactDOMServer.renderToStaticMarkup()`.
 
 By splitting these functionalities into separate packages (`react` for core React logic and `react-dom` for DOM-specific rendering), the React team enabled the creation of alternative renderers like `react-native` (for mobile) and `react-three` (for 3D graphics). This modular architecture promotes code reuse and supports React's vision of being a universal framework for different platforms.
 
-## Why is ReactDOM separated from React? 🧩
+## 43. Why is ReactDOM separated from React? 🧩
 
 The separation of `ReactDOM` from the core `React` library reflects React's philosophy of being a framework that can target diverse environments beyond just web browsers. Here are key reasons for this separation:
 
@@ -1069,7 +1082,7 @@ The separation of `ReactDOM` from the core `React` library reflects React's phil
 
 This separation empowers developers to write once and deploy across multiple platforms, ensuring a consistent development experience while leveraging the specific capabilities of each target environment.
 
-## How to use React label element? 🌟
+## 44. How to use React label element? 🌟
 
 When using the `<label>` element in JSX to associate it with a form control, you should use the `htmlFor` attribute instead of `for` due to `for` being a reserved keyword in JavaScript. This ensures proper binding and accessibility.
 
@@ -1089,7 +1102,7 @@ Correct usage:
 
 By using `htmlFor`, React ensures that the label correctly associates with the specified input element, maintaining accessibility standards.
 
-### How to combine multiple inline style objects? 🧩
+## 45. How to combine multiple inline style objects? 🧩
 
 In regular React, you can combine multiple inline style objects using the spread (`...`) operator within JSX:
 
@@ -1099,15 +1112,7 @@ In regular React, you can combine multiple inline style objects using the spread
 
 This technique merges multiple style objects (`styles.panel.button` and `styles.panel.submitButton`) into a single style object for the `<button>` element.
 
-If you're working with React Native, use the array notation to combine styles:
-
-```jsx harmony
-<button style={[styles.panel.button, styles.panel.submitButton]}>{'Submit'}</button>
-```
-
-The array notation concatenates styles, providing flexibility for applying multiple styles to components.
-
-### How to re-render the view when the browser is resized? 🚀
+## 46. How to re-render the view when the browser is resized? 🚀
 
 To update the view dynamically when the browser is resized, you can use React hooks (`useState` and `useEffect`) to manage the component's state and listen for the `resize` event.
 
@@ -1146,11 +1151,11 @@ function WindowDimensions() {
 
 This example creates a component that displays the window's dimensions and updates them dynamically when the window is resized. The `useEffect` hook adds and removes the `resize` event listener, ensuring efficient resource management.
 
-## What is the difference between `setState()` and `replaceState()` methods?
+## 47. What is the difference between `setState()` and `replaceState()` methods?
 
 When you use `setState()`, the current and previous states are merged. On the other hand, `replaceState()` throws out the current state and replaces it with only what you provide. Typically, `setState()` is preferred unless you specifically need to remove all previous keys for some reason. You can also set state to `false`/`null` in `setState()` instead of using `replaceState()`.
 
-## How to listen to state changes?
+## 48. How to listen to state changes?
 
 To listen to state changes, you can utilize the `componentDidUpdate` lifecycle method, which is called after state updates. Within this method, you can compare the provided `prevProps` and `prevState` with the current `props` and `state` to determine if something meaningful has changed.
 
@@ -1161,7 +1166,7 @@ componentDidUpdate(prevProps, prevState) {
 }
 ```
 
-## What is the recommended approach of removing an array element in React state?
+## 49. What is the recommended approach of removing an array element in React state?
 
 The recommended approach for removing an array element in React state is to use the `Array.prototype.filter()` method. This method creates a new array that includes elements based on a provided condition, effectively excluding the element you want to remove.
 
@@ -1173,11 +1178,11 @@ removeItem(index) {
 }
 ```
 
-## Is it possible to use React without rendering HTML?
+## 50. Is it possible to use React without rendering HTML?
 
 Yes, it is possible to use React without rendering HTML by returning different types of values from the `render()` method based on your requirements. This includes returning `false`, `true`, `null`, an empty array (`[]`), an empty string (`""`), or using `<React.Fragment>` or `<>` in newer versions of React.
 
-## How to pretty print JSON with React?
+## 51. How to pretty print JSON with React?
 
 To pretty print JSON with React while retaining formatting, you can use the `<pre>` tag along with `JSON.stringify()` inside your component's `render()` method.
 
@@ -1190,11 +1195,11 @@ class User extends React.Component {
 }
 ```
 
-## Why can't you update props in React?
+## 51. Why can't you update props in React?
 
 In React, props are designed to be immutable and top-down. This means that a parent component can pass any prop values to its child components, but the child components cannot modify the props received from their parent. This approach ensures predictable data flow and helps maintain the integrity of data throughout the component hierarchy.
 
-## How to focus an input element on page load?
+## 52. How to focus an input element on page load?
 
 You can focus an input element on page load by using a ref and the `componentDidMount()` lifecycle method in class components, or the `useEffect()` hook in functional components (for React versions 16.8 and above).
 
@@ -1238,7 +1243,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
-## What are the possible ways of updating objects in state?
+## 53. What are the possible ways of updating objects in state?
 
 There are two common ways of updating objects in React state:
 
@@ -1269,7 +1274,7 @@ There are two common ways of updating objects in React state:
    }));
    ```
 
-## How can we find the version of React at runtime in the browser?
+## 54. How can we find the version of React at runtime in the browser?
 
 To find the version of React at runtime in the browser, you can access the `React.version` property.
 
@@ -1279,7 +1284,7 @@ const REACT_VERSION = React.version;
 ReactDOM.render(<div>{`React version: ${REACT_VERSION}`}</div>, document.getElementById('app'));
 ```
 
-## How to update a component every second?
+## 55. How to update a component every second?
 
 You can update a component every second by using `setInterval()` inside the `componentDidMount()` lifecycle method to trigger the state update, and remember to clear the interval in the `componentWillUnmount()` lifecycle method to prevent memory leaks.
 
@@ -1293,7 +1298,7 @@ componentWillUnmount() {
 }
 ```
 
-## How do you apply vendor prefixes to inline styles in React?
+## 56. How do you apply vendor prefixes to inline styles in React?
 
 React does not apply vendor prefixes automatically. You need to manually add vendor prefixes to inline styles when necessary.
 
@@ -1307,7 +1312,7 @@ React does not apply vendor prefixes automatically. You need to manually add ven
 />
 ```
 
-## How to import and export components using React and ES6?
+## 57. How to import and export components using React and ES6?
 
 To import and export components using React and ES6, you can use the `export default` syntax.
 
