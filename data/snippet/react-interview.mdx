@@ -5,7 +5,7 @@ logo: /static/images/algorithm/algorithm.png
 categories: ['Interview']
 ---
 
-## What is JSX? 🌟
+## 1. What is JSX? 🌟
 
 JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically, it just provides the syntactic sugar for the `React.createElement(type, props, ...children)` function, giving us expressiveness of JavaScript along with HTML like template syntax.
 
@@ -17,19 +17,41 @@ export default function App() {
 }
 ```
 
-## What is the difference between Element and Component? 🌟
+## 2. What is the difference between Element and Component? 🌟
 
-An _Element_ is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. _Elements_ can contain other _Elements_ in their props. Creating a React element is cheap. Once an element is created, it cannot be mutated.
+In React, the terms "Element" and "Component" are both fundamental concepts but refer to slightly different things.
 
-The JavaScript representation (Without JSX) of React Element would be as follows:
+**Element**:
 
-```javascript
-const element = React.createElement('div', { id: 'login-btn' }, 'Login');
+1. An element in React is a plain JavaScript object representing a virtual representation of a DOM node or component. It describes what you want to see on the screen.
+2. Elements are lightweight and are typically the objects you return from components when rendering UI.
+3. Elements are created using JSX syntax or `React.createElement()` calls.
+
+For example, a simple JSX element like `<div>Hello, world!</div>` gets compiled down to a `React.createElement('div', null, 'Hello, world!')` call, which creates a React element representing a `<div>` with the text content "Hello, world!".
+
+**Component**:
+
+1. A component is a JavaScript class or function that optionally accepts input (called props) and returns a React element tree.
+2. Components are the building blocks of a React application. They encapsulate logic and rendering behavior.
+3. Components can be either class components (ES6 classes) or functional components (JavaScript functions). With React Hooks, functional components can also have state and lifecycle methods.
+4. Components can compose other components, allowing you to build complex UIs from simpler reusable pieces.
+
+For example, a simple functional component looks like this:
+
+```jsx
+function Greeting(props) {
+  return <div>Hello, {props.name}!</div>;
+}
 ```
 
-Whereas a **component** can be declared in several different ways. It can be a class with a `render()` method or it can be defined as a function. In either case, it takes props as an input and returns a JSX tree as the output.
+Here, `Greeting` is a component that takes `name` as a prop and renders a `<div>` element with a greeting message.
 
-## How to create components in React? 🌟
+In summary:
+
+- An **element** is a plain JavaScript object that describes what you want to render.
+- A **component** is a function or class that produces React elements and manages them. Components can be reused and composed together to build complex UIs.
+
+## 3. How to create components in React? 🌟
 
 Components are the building blocks of creating User Interfaces (UI) in React. There are two possible ways to create a component.
 
@@ -51,101 +73,133 @@ class Greeting extends React.Component {
 }
 ```
 
-## When to use a Class Component over a Function Component? 🌟
+## 4. When to use a Class Component over a Function Component? 🌟
 
-After the addition of Hooks (i.e., React 16.8 onwards) it is always recommended to use Function components over Class components in React. Because you could use state, lifecycle methods, and other features that were only available in class components present in function components too.
+It is recommended to use Functional component if you are starting from scratch. Functional and class components have distinct use cases, and understanding their differences is crucial for optimal usage. Class components may still be preferable, especially in older codebases not fully embracing Hooks yet.
 
-## What are Pure Components? 🌟
+**Functional Components in React vs. Class Components**
 
-Pure components are the components which render the same output for the same state and props. In function components, you can achieve these pure components through memoized `React.memo()` API wrapping around the component.
+**Simplicity:**  
+Functional components are JavaScript functions, making them easier to write, understand, and test. They are concise and don't use `this`, resulting in cleaner code.
 
-## What is state in React? 🌟
+**Hooks:**  
+Introduced in React 16.8, Hooks enable state and other features in functional components, previously limited to class components. This complexity can be achieved without classes.
 
-_State_ of a component is an object that holds some information that may change over the lifetime of the component. The important point is whenever the state object changes, the component re-renders.
+**Performance:**  
+Functional components are lightweight and perform better than class components due to reduced overhead, enhancing application performance.
+
+**Improved Readability:**  
+Functional components, especially with Hooks, promote readable and maintainable code by encouraging the use of pure functions.
+
+**Lifecycle Method Simplification:**  
+The `useEffect` Hook simplifies lifecycle management in functional components by consolidating lifecycle logic into a single API.
+
+## 5. What is the difference between state and props? 🌟
+
+In React, the main difference between state and props is that:
+
+- **State** is managed within a component and can be updated using `setState()`. It represents the internal state of the component and can change over time due to user actions or network responses.
+
+- **Props** (short for properties) are passed to a component from its parent and are immutable within the component. They are used to provide component configuration based on its parent's data or environment.
+
+In summary, state is internal and mutable, controlled by the component itself, while props are external and immutable, controlled by the component's parent.
+
+## 6. Why should we not update the state directly? 🧩
+
+Updating state directly can cause React to miss the state change and not re-render the component, or use an outdated or incorrect state value. To avoid these problems, you should use setState() or useState() methods, and follow the best practices of creating a new object or array when updating state, and using a function when updating state based on the previous state.
+
+## 7. What is the purpose of a callback function as an argument of `setState()`? 🚀
+
+When you call setState() in React, the state update does not happen immediately synchronously. React batches state updates for performance reasons. This means that after calling setState(), React schedules an update and continues with its own internal processes without waiting for the state to be actually updated.
+
+By providing a callback function to setState(), you ensure that the callback is executed only after React has finished applying the state update. This allows you to work with the most up-to-date state values inside the callback function.
 
 ```jsx
 import React, { useState } from 'react';
 
-function User() {
-  const [message, setMessage] = useState('Welcome to React world');
+const MyComponent = () => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    setCount(count + 1, () => {
+      console.log('Count updated:', count); // Callback executed after state update
+    });
+  };
 
   return (
     <div>
-      <h1>{message}</h1>
-    </div>
-  );
-}
-```
-
-## What are props in React? 🌟
-
-_Props_ are inputs to components. They are single values or objects containing a set of values that are passed to components on creation similar to HTML-tag attributes. Here, the data is passed down from a parent component to a child component.
-
-```jsx
-const ChildComponent = ({ name, age }) => {
-  return (
-    <div>
-      <p>{name}</p>
-      <p>{age}</p>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>Increment</button>
     </div>
   );
 };
+
+export default MyComponent;
 ```
 
-## What is the difference between state and props? 🌟
+In this example, the callback provided to `setCount()` is invoked after `count` has been updated, allowing you to perform actions based on the updated state.
 
-In React, both `state` and `props` are plain JavaScript objects and used to manage the data of a component, but they are used in different ways and have different characteristics.
+## 8. What is the use of refs? 🧩
 
-## Why should we not update the state directly? 🧩
+Refs in React are a powerful tool when used judiciously. They offer direct access to DOM elements and provide a way to persist values without causing rerenders. However, it’s crucial to use them in harmony with React’s declarative nature.
 
-If you try to update the state directly then it won't re-render the component. Instead, use `setState()` method.
+https://codedamn.com/news/reactjs/what-are-refs-in-react-js-and-when-should-you-use-them
 
-## What is the purpose of a callback function as an argument of `setState()`? 🚀
+## 9. How to pass a parameter to an event handler or callback? 🧩
 
-The callback function is invoked when setState finished, and the component gets rendered. Since `setState()` is **asynchronous**, the callback function is used for any post-action.
+In a functional component in React, when you want to pass parameters to an event handler or callback function, you typically need to use a technique to create a function that captures those parameters and then passes them along when the event occurs. This is because directly calling a function with parameters inside JSX can cause the function to be invoked immediately on render, which is not the desired behavior for event handlers.
 
-## What is the use of refs? 🧩
-
-The _ref_ is used to return a reference to the element. They _should be avoided_ in most cases, however, they can be useful when you need direct access to the DOM element or an instance of a component.
-
-## How to pass a parameter to an event handler or callback? 🧩
-
-You can use an _arrow function_ to wrap around an _event handler_ and pass parameters.
+Here's how you can pass parameters to an event handler in a functional component:
 
 ```jsx
-<button onClick={() => this.handleClick(id)} />
-```
+import React from 'react';
 
-This is equivalent to calling `.bind()`:
+const MyComponent = () => {
+  // Define a function that takes additional parameters
+  const handleClick = (param) => {
+    console.log(`Button clicked with parameter: ${param}`);
+    // Do something with the parameter
+  };
 
-```jsx
-<button onClick={this.handleClick.bind(this, id)} />
-```
-
-## What are synthetic events in React? 🧩
-
-`SyntheticEvent` is a cross-browser wrapper around the browser's native event. Its API is the same as the browser's native event, including `stopPropagation()` and `preventDefault()`.
-
-### What is "key" prop and what is the benefit of using it in arrays of elements? 🌟
-
-A `key` is a special attribute you **should** include when mapping over arrays to render data. _Key_ prop helps React identify which items have changed, are added, or are removed.
-
-## What are inline conditional expressions? 🌟
-
-You can use either _if statements_ or _ternary expressions_ which are available from JS to conditionally render expressions. Apart from these approaches, you can also embed any expressions in JSX by wrapping them in curly braces and then followed by JS logical operator `&&`.
-
-```jsx
-<h1>Hello!</h1>;
-{
-  messages.length > 0 && !isLogin ? (
-    <h2>You have {messages.length} unread messages.</h2>
-  ) : (
-    <h2>You don't have unread messages.</h2>
+  return (
+    <div>
+      {/* Use an arrow function to pass parameters */}
+      <button onClick={() => handleClick('Hello')}>Click me</button>
+    </div>
   );
-}
+};
+
+export default MyComponent;
 ```
 
-## What is "key" prop and what is the benefit of using it in arrays of elements? 🌟
+## 10. What are synthetic events in React? 🧩
+
+In React, a synthetic event is an abstraction layer that React provides to handle events in a consistent and cross-browser-compatible manner. Synthetic events are not native DOM events; instead, they are JavaScript objects that wrap native events. React does this to ensure that event handling is consistent across different browsers and to provide additional features like event pooling for performance optimization. React uses a mechanism called "event delegation" to improve performance.
+
+When you use React to handle events, such as onClick, onChange, or onSubmit, you typically pass a function as the event handler. React will then automatically create a synthetic event object and pass it to your event handler function.
+
+Here's an example of how you can use synthetic events in React:
+
+```jsx
+import React from 'react';
+
+class MyComponent extends React.Component {
+  handleClick = (event) => {
+    // Access properties from the synthetic event
+    console.log('Button clicked');
+    console.log('Event type:', event.type);
+    console.log('Mouse coordinates:', event.clientX, event.clientY);
+  };
+
+  render() {
+    return <button onClick={this.handleClick}>Click me</button>;
+  }
+}
+
+export default MyComponent;
+```
+
+## 11. What is "key" prop and what is the benefit of using it in arrays of elements? 🌟
 
 A `key` is a special attribute you **should** include when mapping over arrays to render data. _Key_ prop helps React identify which items have changed, are added, or are removed.
 
@@ -168,185 +222,327 @@ const todoItems = todos.map((todo, index) => <li key={index}>{todo.text}</li>);
 3. There will be a warning message in the console if the `key` prop is not present on list items.
 4. The key attribute accepts either a string or number and internally converts it to a string type.
 
-## What is the use of refs? 🧩
+## 12. How to create refs? 🌟
 
-The _ref_ is used to return a reference to the element. They _should be avoided_ in most cases; however, they can be useful when you need direct access to the DOM element or an instance of a component.
+In React, you can create refs using the `useRef` hook for functional components or by using the `createRef` method for class components.
 
-## How to create refs? 🌟
+For functional components with hooks:
 
-There are two approaches:
+```jsx
+import React, { useRef } from 'react';
 
-1. **Using `React.createRef()` (Modern Approach):**
+function MyComponent() {
+  const myRef = useRef(null);
 
-```jsx harmony
-class MyComponent extends React.Component {
+  // Use myRef in your component
+  return <div ref={myRef}>Hello, Ref!</div>;
+}
+```
+
+For class components:
+
+```jsx
+import React, { Component } from 'react';
+
+class MyComponent extends Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
   }
+
   render() {
-    return <div ref={this.myRef} />;
+    // Use this.myRef in your component
+    return <div ref={this.myRef}>Hello, Ref!</div>;
   }
 }
 ```
 
-2. **Using Callback Refs (Legacy Approach):**
+In both cases, the `ref` attribute is used to attach the ref to a DOM element or a React component instance, allowing you to interact with the underlying DOM or component programmatically.
 
-```jsx harmony
-class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.txtSearch = null;
-    this.state = { term: '' };
-    this.setInputSearchRef = (e) => {
-      this.txtSearch = e;
-    };
-  }
-  onInputChange(event) {
-    this.setState({ term: this.txtSearch.value });
-  }
-  render() {
-    return (
-      <input
-        value={this.state.term}
-        onChange={this.onInputChange.bind(this)}
-        ref={this.setInputSearchRef}
-      />
-    );
-  }
-}
+## 13. What are forward refs? 🧩
+
+Forward refs in React provide a way to pass a ref from a parent component down to a child component, allowing the parent to interact with the child's DOM node or React component instance directly.
+
+To use forward refs, you typically create a ref in the parent component and then pass that ref down to a child component. The child component can "forward" this ref to a specific DOM element or component within its own render function.
+
+Here's a modern example of how to use forward refs:
+
+```jsx
+// ChildComponent.js
+import React from 'react';
+
+// Child component that forwards the ref to a specific DOM element
+const ChildComponent = React.forwardRef((props, ref) => {
+  return <input ref={ref} />;
+});
+
+export default ChildComponent;
 ```
 
-You can also use _refs_ in function components using **closures**.
+```jsx
+// ParentComponent.js
+import React, { useRef } from 'react';
+import ChildComponent from './ChildComponent';
 
-## What are forward refs? 🧩
+const ParentComponent = () => {
+  const inputRef = useRef(null);
 
-_Ref forwarding_ is a feature that lets some components take a _ref_ they receive and pass it further down to a child.
+  // Access the input element's focus method from the parent component
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
-```jsx harmony
-const ButtonElement = React.forwardRef((props, ref) => (
-  <button ref={ref} className="CustomButton">
-    {props.children}
-  </button>
-));
+  return (
+    <div>
+      {/* Forward the ref to the ChildComponent */}
+      <ChildComponent ref={inputRef} />
+      <button onClick={focusInput}>Focus Input</button>
+    </div>
+  );
+};
 
-// Create a ref to the DOM button:
-const ref = React.createRef();
-<ButtonElement ref={ref}>{'Forward Ref'}</ButtonElement>;
+export default ParentComponent;
 ```
 
-## Which is the preferred option between callback refs and `findDOMNode()`? 🚀
+In this example:
 
-It is preferred to use _callback refs_ over the `findDOMNode()` API because `findDOMNode()` prevents certain improvements in React in the future.
+- `ChildComponent` uses `React.forwardRef` to create a new component that can accept a ref and forward it to an underlying DOM element (`<input>` in this case).
+- `ParentComponent` renders `ChildComponent` and creates a `useRef` hook (`inputRef`) to hold a reference to the input element inside `ChildComponent`.
+- When the "Focus Input" button is clicked, the `focusInput` function in `ParentComponent` is triggered, which uses `inputRef.current` to access and call the `focus` method of the input element inside `ChildComponent`.
 
-The **legacy** approach of using `findDOMNode()`:
+Using forward refs allows you to maintain encapsulation and still have control over the child's DOM or component instance from the parent component when needed.
 
-```javascript
-class MyComponent extends Component {
-  componentDidMount() {
-    findDOMNode(this).scrollIntoView();
-  }
+## 14. What is Virtual DOM? 🌟
 
-  render() {
-    return <div />;
-  }
-}
-```
+The Virtual DOM in React is a lightweight copy of the actual DOM (Document Object Model) representation. React uses this Virtual DOM to optimize updates to the real DOM that is rendered in the browser.
 
-The recommended approach is:
+Here's how it works:
 
-```javascript
-class MyComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.node = createRef();
-  }
-  componentDidMount() {
-    this.node.current.scrollIntoView();
-  }
+1. **Virtual DOM Structure**: When you render a React component, React creates a virtual representation of the DOM in memory. This representation includes all the elements, attributes, and their hierarchies as JavaScript objects.
 
-  render() {
-    return <div ref={this.node} />;
-  }
-}
-```
+2. **Efficient Reconciliation**: Whenever there is a change in the component's state or props, React creates a new virtual DOM representation of the component.
 
-## Why are String Refs legacy? 🚀
+3. **Diffing Algorithm**: React then compares this new virtual DOM with the previous one using a process called "diffing." It efficiently identifies what parts of the actual DOM have changed.
 
-String refs were **removed in React v16** due to several issues:
+4. **Minimal DOM Updates**: By knowing which parts of the DOM have changed, React calculates the most efficient way to update the actual DOM to match the new virtual DOM. Instead of re-rendering the entire DOM tree, React only updates the necessary parts.
 
-1. They force React to keep track of the currently executing component, causing potential errors with duplicated React modules.
-2. They are not composable, making it impossible to apply multiple refs to a single element.
-3. They don't work well with static analysis tools like Flow.
-4. They don't play nicely with certain patterns like the "render callback" pattern.
+5. **Batched Updates**: React may batch multiple updates together and apply them in a single DOM operation for performance reasons. This batching is possible because all updates are first applied to the virtual DOM.
 
-### What is Virtual DOM? 🌟
+6. **Render to Browser**: Finally, React updates the real DOM to reflect the changes made in the virtual DOM. This updating process is optimized and minimizes direct interaction with the browser DOM, which can be costly in terms of performance.
 
-The _Virtual DOM_ (VDOM) is an in-memory representation of the _Real DOM_. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called _reconciliation_.
+The Virtual DOM helps React achieve high performance by reducing the number of direct DOM manipulations and making updates more efficient. This approach is a key factor in React's popularity and is one of the reasons React applications can handle dynamic data and user interactions smoothly.
 
-## How Virtual DOM works? 🧩
-
-The _Virtual DOM_ works in three simple steps:
-
-1. Whenever any underlying data changes, the entire UI is re-rendered in Virtual DOM representation.
-2. Then the difference between the previous DOM representation and the new one is calculated.
-3. Once the calculations are done, the real DOM will be updated with only the things that have actually changed.
-
-## What is the difference between Shadow DOM and Virtual DOM? 🚀
+## 15. What is the difference between Shadow DOM and Virtual DOM? 🚀
 
 The _Shadow DOM_ is a browser technology designed primarily for scoping variables and CSS in _web components_. The _Virtual DOM_ is a concept implemented by libraries in JavaScript on top of browser APIs.
 
-## What is React Fiber? 🧩
+## 16. What is React Fiber? 🧩
 
-Fiber is the new _reconciliation_ engine or reimplementation of the core algorithm in React v16. The goal of React Fiber is to increase its suitability for areas like animation, layout, gestures, and the ability to pause, abort, or reuse work.
+React Fiber is an internal reimplementation of the React core algorithm. It is designed to enable better scheduling, prioritization, and interruption of rendering updates. Fiber allows React to break down rendering work into smaller units (or fibers) that can be paused, aborted, or resumed, which ultimately improves performance and responsiveness, especially for complex and interactive user interfaces. This new architecture introduced in React 16 allows React to handle concurrent updates more efficiently and supports features like suspense for data fetching and lazy loading.
 
-## What is the main goal of React Fiber? 🚀
+## 17. What are controlled and cncontrolled components? 🌟
 
-The goal of _React Fiber_ is to increase its suitability for areas like animation, layout, and gestures. Its headline feature is **incremental rendering**: the ability to split rendering work into chunks and spread it out over multiple frames.
+In React, controlled and uncontrolled elements refer to how form elements (like `<input>`, `<textarea>`, and `<select>`) manage their state and handle user input:
 
-## What are controlled components? 🌟
+1. **Controlled Components**:
 
-A component that controls the input elements within forms on subsequent user input is called a **Controlled Component**.
+   - Controlled components are those where React controls the state of the form elements.
+   - The component's state is kept in sync with the input elements by using React state and handling onChange events.
+   - Changes to the input elements are handled through state updates, and the current value of the input is always controlled by React.
+   - Example:
 
-## What are uncontrolled components? 🌟
+     ```jsx
+     const [value, setValue] = useState('');
 
-The **Uncontrolled Components** are the ones that store their own state internally, and you query the DOM using a ref to find its current value when you need it.
+     const handleChange = (event) => {
+       setValue(event.target.value);
+     };
 
-### What is reconciliation? 🧩
+     return <input type="text" value={value} onChange={handleChange} />;
+     ```
 
-_Reconciliation_ is the process through which React updates the Browser DOM and makes React work faster. React uses a diffing algorithm to calculate the difference between the Virtual DOM and the Real DOM.
+2. **Uncontrolled Components**:
 
-## How to set state with a dynamic key name? 🧩
+   - Uncontrolled components allow the DOM to maintain the state of the form elements.
+   - The state of the input elements is managed by the DOM itself, not by React state.
+   - You can still access the current value using refs after rendering to interact with the DOM directly.
+   - Example:
 
-If you are using ES6 or the Babel transpiler, you can accomplish this with _computed property names_.
+     ```jsx
+     const inputRef = useRef(null);
 
-```javascript
-handleInputChange(event) {
-  this.setState({ [event.target.id]: event.target.value })
-}
+     const handleClick = () => {
+       const value = inputRef.current.value;
+       console.log(value);
+     };
+
+     return (
+       <>
+         <input type="text" ref={inputRef} />
+         <button onClick={handleClick}>Get Value</button>
+       </>
+     );
+     ```
+
+In summary, controlled components have React managing the state of form elements through component state and event handlers, while uncontrolled components delegate state management to the DOM and provide access to DOM nodes using refs for direct manipulation when needed. Controlled components are often preferred in React applications because they provide a single source of truth for form element values and make it easier to implement complex UI behaviors.
+
+### 18. What is reconciliation? 🧩
+
+Reconciliation in React refers to the process of updating the DOM to match the most recent React element tree. When changes occur in a React component (due to state or props updates), React compares the new element tree with the previous one to determine what changes need to be applied to the actual DOM.
+
+Here's a concise breakdown of reconciliation in React:
+
+1. **Element Tree Comparison**:
+
+   - React maintains a virtual representation of the DOM called the Virtual DOM.
+   - When a component updates, React creates a new element tree based on the updated state or props.
+
+2. **Diffing Algorithm**:
+
+   - React performs a process known as "diffing" to efficiently compare the new element tree with the previous one.
+   - It identifies which parts of the virtual DOM have changed.
+
+3. **Minimal Updates**:
+
+   - After identifying the differences, React calculates the minimal set of changes needed to update the actual DOM to reflect the new element tree.
+   - This minimizes unnecessary updates and improves performance by only updating what has changed.
+
+4. **Reconciliation Process**:
+   - React applies these changes to the real DOM through a process called reconciliation.
+   - The goal is to synchronize the DOM with the current state of the React component tree efficiently.
+
+In summary, reconciliation is the process by which React updates the browser's DOM to reflect changes in the React component tree. It optimizes performance by selectively updating only the necessary parts of the DOM based on the differences between the old and new component states. This process is a key part of React's efficient rendering and ensures that the UI remains in sync with the application's state.
+
+## 19. How to set state with a dynamic key name? 🧩
+
+To set state with a dynamic key name in React, you can use the ES6 computed property name syntax inside an object. This allows you to dynamically compute the key name based on a variable or an expression. Here's how you can do it:
+
+```jsx
+import React, { useState } from 'react';
+
+const MyComponent = () => {
+  const [state, setState] = useState({});
+
+  const handleInputChange = (key, value) => {
+    // Create a new state object using the spread operator to copy existing state
+    setState((prevState) => ({
+      ...prevState,
+      [key]: value, // Use computed property name to set state with dynamic key
+    }));
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={state.firstName || ''}
+        onChange={(e) => handleInputChange('firstName', e.target.value)}
+        placeholder="First Name"
+      />
+      <input
+        type="text"
+        value={state.lastName || ''}
+        onChange={(e) => handleInputChange('lastName', e.target.value)}
+        placeholder="Last Name"
+      />
+      {/* You can add more input fields similarly */}
+    </div>
+  );
+};
+
+export default MyComponent;
 ```
 
-## What would be the common mistake of a function being called every time the component renders? 🧩
+In the example above:
 
-You need to make sure that the function is not being called while passing the function as a parameter.
+- We have a functional component `MyComponent` that uses the `useState` hook to maintain a state object (`state`) with dynamic keys.
+- The `handleInputChange` function takes two parameters: `key` (the dynamic key name) and `value` (the value to set for that key).
+- Inside `handleInputChange`, we use the spread operator (`...prevState`) to create a new object that copies the existing state.
+- We then use the computed property name syntax (`[key]: value`) to dynamically set the state with the specified key and value.
+- In the JSX, each `<input>` element is associated with a specific key (`'firstName'`, `'lastName'`, etc.), and the `onChange` event handler calls `handleInputChange` with the appropriate key and the input's current value (`e.target.value`).
 
-```jsx harmony
-render() {
-  // Wrong: handleClick is called instead of passed as a reference!
-  return <button onClick={this.handleClick()}>{
+This pattern allows you to set state with dynamic keys based on user input or any other dynamic source, making your React component more flexible and reusable.
 
-'Click Me'}</button>
-}
+## 20. What would be the common mistake of a function being called every time the component renders? 🧩
+
+A common mistake that leads to a function being called every time a component renders in React is directly invoking the function inside the component body, especially for event handlers or other callbacks. This behavior can result in unnecessary function executions on each render, which can impact performance negatively.
+
+Here's an example to illustrate this mistake:
+
+```jsx
+import React from 'react';
+
+const MyComponent = () => {
+  const handleClick = () => {
+    console.log('Button clicked!');
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
+};
+
+export default MyComponent;
 ```
 
-Instead, pass the function itself without parentheses:
+In the above code:
 
-```jsx harmony
-render() {
-  // Correct: handleClick is passed as a reference!
-  return <button onClick={this.handleClick}>{'Click Me'}</button>
-}
-```
+- The `handleClick` function is defined inside the `MyComponent` functional component.
+- Each time `MyComponent` renders (due to state or prop changes), a new instance of `handleClick` is created.
+- This means that every time the `<button>` is rendered (which is part of `MyComponent`), it receives a new `onClick` event handler, even if the function logic remains the same.
+
+To avoid this mistake and optimize performance:
+
+1. **Use `useCallback` Hook**:
+
+   - If the function depends on props or state and needs to be memoized, use the `useCallback` hook to memoize the function and prevent unnecessary re-creation on each render.
+
+   ```jsx
+   import React, { useCallback } from 'react';
+
+   const MyComponent = () => {
+     const handleClick = useCallback(() => {
+       console.log('Button clicked!');
+     }, []); // Empty dependency array means the function won't change
+
+     return (
+       <div>
+         <button onClick={handleClick}>Click me</button>
+       </div>
+     );
+   };
+
+   export default MyComponent;
+   ```
+
+2. **Use Inline Arrow Functions Sparingly**:
+
+   - Avoid using inline arrow functions directly inside JSX for event handlers, especially if they are complex or depend on props/state.
+
+   ```jsx
+   import React from 'react';
+
+   const MyComponent = () => {
+     const handleClick = () => {
+       console.log('Button clicked!');
+     };
+
+     return (
+       <div>
+         {/* Using inline arrow function sparingly */}
+         <button onClick={() => handleClick()}>Click me</button>
+       </div>
+     );
+   };
+
+   export default MyComponent;
+   ```
+
+By addressing this common mistake, you can ensure that functions are not needlessly re-created on each render, leading to better performance and more efficient React components. Use hooks like `useCallback` to optimize function creation and consider the dependencies that affect the function's behavior.
 
 ## Is lazy function supports named exports? 🧩
 
