@@ -1151,7 +1151,7 @@ function WindowDimensions() {
 
 This example creates a component that displays the window's dimensions and updates them dynamically when the window is resized. The `useEffect` hook adds and removes the `resize` event listener, ensuring efficient resource management.
 
-## 47. What is the difference between `setState()` and `replaceState()` methods?
+## 47. What is the difference between `setState()` and `replaceState()` methods? 🚀
 
 When you use `setState()`, the current and previous states are merged. On the other hand, `replaceState()` throws out the current state and replaces it with only what you provide. Typically, `setState()` is preferred unless you specifically need to remove all previous keys for some reason. You can also set state to `false`/`null` in `setState()` instead of using `replaceState()`.
 
@@ -1166,7 +1166,7 @@ componentDidUpdate(prevProps, prevState) {
 }
 ```
 
-## 49. What is the recommended approach of removing an array element in React state?
+## 49. What is the recommended approach of removing an array element in React state? 🌟
 
 The recommended approach for removing an array element in React state is to use the `Array.prototype.filter()` method. This method creates a new array that includes elements based on a provided condition, effectively excluding the element you want to remove.
 
@@ -1178,11 +1178,11 @@ removeItem(index) {
 }
 ```
 
-## 50. Is it possible to use React without rendering HTML?
+## 50. Is it possible to use React without rendering HTML? 🧩
 
 Yes, it is possible to use React without rendering HTML by returning different types of values from the `render()` method based on your requirements. This includes returning `false`, `true`, `null`, an empty array (`[]`), an empty string (`""`), or using `<React.Fragment>` or `<>` in newer versions of React.
 
-## 51. How to pretty print JSON with React?
+## 51. How to pretty print JSON with React? 🧩
 
 To pretty print JSON with React while retaining formatting, you can use the `<pre>` tag along with `JSON.stringify()` inside your component's `render()` method.
 
@@ -1195,11 +1195,11 @@ class User extends React.Component {
 }
 ```
 
-## 51. Why can't you update props in React?
+## 51. Why can't you update props in React? 🧩
 
 In React, props are designed to be immutable and top-down. This means that a parent component can pass any prop values to its child components, but the child components cannot modify the props received from their parent. This approach ensures predictable data flow and helps maintain the integrity of data throughout the component hierarchy.
 
-## 52. How to focus an input element on page load?
+## 52. How to focus an input element on page load? 🧩
 
 You can focus an input element on page load by using a ref and the `componentDidMount()` lifecycle method in class components, or the `useEffect()` hook in functional components (for React versions 16.8 and above).
 
@@ -1243,7 +1243,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
-## 53. What are the possible ways of updating objects in state?
+## 53. What are the possible ways of updating objects in state? 🧩
 
 There are two common ways of updating objects in React state:
 
@@ -1274,7 +1274,7 @@ There are two common ways of updating objects in React state:
    }));
    ```
 
-## 54. How can we find the version of React at runtime in the browser?
+## 54. How can we find the version of React at runtime in the browser? 🌟
 
 To find the version of React at runtime in the browser, you can access the `React.version` property.
 
@@ -1284,7 +1284,7 @@ const REACT_VERSION = React.version;
 ReactDOM.render(<div>{`React version: ${REACT_VERSION}`}</div>, document.getElementById('app'));
 ```
 
-## 55. How to update a component every second?
+## 55. How to update a component every second? 🧩
 
 You can update a component every second by using `setInterval()` inside the `componentDidMount()` lifecycle method to trigger the state update, and remember to clear the interval in the `componentWillUnmount()` lifecycle method to prevent memory leaks.
 
@@ -1298,7 +1298,7 @@ componentWillUnmount() {
 }
 ```
 
-## 56. How do you apply vendor prefixes to inline styles in React?
+## 56. How do you apply vendor prefixes to inline styles in React? 🧩
 
 React does not apply vendor prefixes automatically. You need to manually add vendor prefixes to inline styles when necessary.
 
@@ -1312,7 +1312,7 @@ React does not apply vendor prefixes automatically. You need to manually add ven
 />
 ```
 
-## 57. How to import and export components using React and ES6?
+## 57. How to import and export components using React and ES6? 🌟
 
 To import and export components using React and ES6, you can use the `export default` syntax.
 
@@ -1327,7 +1327,7 @@ export default class MyProfile extends React.Component {
 }
 ```
 
-## 58. How to programmatically trigger click event in React?
+## 58. How to programmatically trigger click event in React? 🧩
 
 In React, you can programmatically trigger a click event on a DOM element using refs. Here’s a step-by-step guide on how to do this:
 
@@ -1395,7 +1395,7 @@ In this example:
 
 Make sure that the ref is properly attached to the button element (`<button ref={buttonRef}...`) and that the click event is handled (`onClick={handleClick}`). This approach allows you to simulate a button click programmatically within a React component.
 
-## 59. What are the common folder structures for React?
+## 59. What are the common folder structures for React? 🧩
 
 There are two common practices for structuring React projects: grouping by features/routes or grouping by file type.
 
@@ -1446,7 +1446,7 @@ components/
 
 ```
 
-## 60. What are render props?
+## 60. What are render props? 🧩
 
 Render props is a technique for sharing code between React components using a prop whose value is a function. This allows components to take in a function as a prop and invoke that function with necessary data to render dynamic content.
 
