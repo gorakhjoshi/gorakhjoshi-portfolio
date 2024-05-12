@@ -1455,3 +1455,109 @@ Render props is a technique for sharing code between React components using a pr
 ```
 
 Libraries like React Router and DownShift utilize render props to enable flexible and composable component behaviors.
+
+## 61. Explain about types of side effects in React component.
+
+There are two types of side effects in React component. They are:
+
+**Effects without Cleanup**: This side effect will be used in useEffect which does not restrict the browser from screen update. It also improves the responsiveness of an application. A few common examples are network requests, Logging, manual DOM mutations, etc.
+
+**Effects with Cleanup**: Some of the Hook effects will require the cleanup after updating of DOM is done. For example, if you want to set up an external data source subscription, it requires cleaning up the memory else there might be a problem of memory leak. It is a known fact that React will carry out the cleanup of memory when the unmounting of components happens. But the effects will run for each render() method rather than for any specific method. Thus we can say that, before execution of the effects succeeding time the React will also cleanup effects from the preceding render.
+
+## 61. What are error boundaries?
+
+An error boundary is a React component designed to catch JavaScript errors in its child component tree during rendering, lifecycle methods, or in the constructor, and handle them gracefully without causing the entire application to crash.
+
+Any component that defines either or both of the lifecycle methods `static getDerivedStateFromError(error)` or `componentDidCatch(error, errorInfo)` is considered an error boundary.
+
+An error boundary can detect errors in the following places:
+
+1. **Render Phase**: Errors that occur during the rendering of a component.
+2. **Inside a Lifecycle Method**: Errors that happen within lifecycle methods such as `componentDidMount`, `componentDidUpdate`, etc.
+3. **Inside the Constructor**: Errors that occur during component initialization.
+
+Without using error boundaries, errors occurring in components can lead to the unmounting of the component and potentially render a blank page, disrupting the user experience.
+
+In your provided example, the `CounterComponent` throws an error if the `counterValue` reaches 2 inside the `render` method. Without an error boundary, this error would lead to the unmounting of `CounterComponent`.
+
+To implement an error boundary:
+
+```jsx
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state to indicate an error has occurred
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // Log the error to an error tracking service
+    logErrorToMyService(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Fallback UI when there's an error
+      return <h4>Something went wrong</h4>;
+    }
+    // Render children components normally
+    return this.props.children;
+  }
+}
+```
+
+Now, you can use the `ErrorBoundary` component to wrap around `CounterComponent` to catch and handle any errors that occur within `CounterComponent`:
+
+```jsx
+<ErrorBoundary>
+  <CounterComponent />
+</ErrorBoundary>
+```
+
+With this setup, if an error occurs within `CounterComponent`—for example, if `counterValue` becomes 2—the error will be caught by the `ErrorBoundary`, preventing the entire application from crashing. The `ErrorBoundary` can then display a fallback UI (e.g., "Something went wrong") to inform the user of the error, providing a smoother and more resilient user experience.
+
+## 61. What are Custom Hooks?
+
+Custom Hooks in JavaScript are functions that start with 'use' and allow you to reuse stateful logic across React components. They were introduced in React v16.8 as part of the hook feature.
+
+Here's a simple example of a custom hook:
+
+```javascript
+import { useState } from 'react';
+
+// Custom hook for handling a boolean toggle
+function useToggle(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  const toggle = () => {
+    setValue(!value);
+  };
+
+  return [value, toggle];
+}
+
+// Example usage of the custom hook
+function App() {
+  const [isOn, toggleIsOn] = useToggle(false);
+
+  return (
+    <div>
+      <button onClick={toggleIsOn}>{isOn ? 'ON' : 'OFF'}</button>
+    </div>
+  );
+}
+```
+
+In this example:
+
+- `useToggle` is a custom hook that encapsulates the logic for a simple boolean toggle.
+- It uses the `useState` hook internally to manage the toggle state.
+- The `useToggle` hook returns an array containing the current boolean value (`value`) and a function (`toggle`) to toggle the boolean value.
+- In the `App` component, `useToggle` is used to manage the state (`isOn`) and toggle function (`toggleIsOn`).
+- Clicking the button toggles the `isOn` state between `true` and `false`, updating the button label accordingly.
+
+Custom hooks allow you to extract and reuse complex logic across different components, promoting code reusability and reducing repetition. They are a powerful addition to React functional components.
