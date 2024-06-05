@@ -17,6 +17,16 @@ export default function App() {
 }
 ```
 
+with React.createElement
+
+```jsx
+import React from 'react';
+
+export default function App() {
+  return React.createElement('h1', { className: 'greeting' }, 'Hello, this is a JSX Code!');
+}
+```
+
 ## 2. What is the difference between Element and Component? 🌟
 
 In React, the terms "Element" and "Component" are both fundamental concepts but refer to slightly different things.
@@ -1312,22 +1322,7 @@ React does not apply vendor prefixes automatically. You need to manually add ven
 />
 ```
 
-## 57. How to import and export components using React and ES6? 🌟
-
-To import and export components using React and ES6, you can use the `export default` syntax.
-
-```javascript
-import React from 'react';
-import User from 'user';
-
-export default class MyProfile extends React.Component {
-  render() {
-    return <User type="customer">//...</User>;
-  }
-}
-```
-
-## 58. How to programmatically trigger click event in React? 🧩
+## 57. How to programmatically trigger click event in React? 🧩
 
 In React, you can programmatically trigger a click event on a DOM element using refs. Here’s a step-by-step guide on how to do this:
 
@@ -1395,7 +1390,7 @@ In this example:
 
 Make sure that the ref is properly attached to the button element (`<button ref={buttonRef}...`) and that the click event is handled (`onClick={handleClick}`). This approach allows you to simulate a button click programmatically within a React component.
 
-## 59. What are the common folder structures for React? 🧩
+## 58. What are the common folder structures for React? 🧩
 
 There are two common practices for structuring React projects: grouping by features/routes or grouping by file type.
 
@@ -1446,25 +1441,105 @@ components/
 
 ```
 
-## 60. What are render props? 🧩
+## 59. What are render props? 🧩
 
 Render props is a technique for sharing code between React components using a prop whose value is a function. This allows components to take in a function as a prop and invoke that function with necessary data to render dynamic content.
 
 ```jsx
-<DataProvider render={(data) => <h1>{`Hello ${data.target}`}</h1>} />
+import React, { useState } from 'react';
+
+const MouseTracker = ({ render }) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (event) => {
+    setPosition({
+      x: event.clientX,
+      y: event.clientY,
+    });
+  };
+
+  return (
+    <div style={{ height: '100vh' }} onMouseMove={handleMouseMove}>
+      {render(position)}
+    </div>
+  );
+};
+
+export default function App() {
+  return (
+    <MouseTracker
+      render={({ x, y }) => (
+        <h1>
+          The mouse position is ({x}, {y})
+        </h1>
+      )}
+    />
+  );
+}
 ```
 
 Libraries like React Router and DownShift utilize render props to enable flexible and composable component behaviors.
 
-## 61. Explain about types of side effects in React component.
+## 60. Explain about types of side effects in React component.
 
 There are two types of side effects in React component. They are:
 
 **Effects without Cleanup**: This side effect will be used in useEffect which does not restrict the browser from screen update. It also improves the responsiveness of an application. A few common examples are network requests, Logging, manual DOM mutations, etc.
 
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const DataFetchingComponent = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Define the async function inside useEffect
+    const fetchData = async () => {
+      const response = await fetch('https://api.example.com/data');
+      const result = await response.json();
+      setData(result);
+    };
+
+    fetchData();
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  return <div>{data ? <pre>{JSON.stringify(data, null, 2)}</pre> : 'Loading...'}</div>;
+};
+
+export default DataFetchingComponent;
+```
+
 **Effects with Cleanup**: Some of the Hook effects will require the cleanup after updating of DOM is done. For example, if you want to set up an external data source subscription, it requires cleaning up the memory else there might be a problem of memory leak. It is a known fact that React will carry out the cleanup of memory when the unmounting of components happens. But the effects will run for each render() method rather than for any specific method. Thus we can say that, before execution of the effects succeeding time the React will also cleanup effects from the preceding render.
 
-## 61. What are error boundaries?
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const SubscriptionComponent = () => {
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const websocket = new WebSocket('wss://example.com/socket');
+
+    websocket.onmessage = (event) => {
+      setMessage(event.data);
+    };
+
+    return () => {
+      websocket.close(); // Clean up the subscription on component unmount
+    };
+  }, []); // Empty dependency array ensures the effect runs only once
+
+  return (
+    <div>
+      <p>Latest message: {message}</p>
+    </div>
+  );
+};
+
+export default SubscriptionComponent;
+```
+
+## 60. What are error boundaries?
 
 An error boundary is a React component designed to catch JavaScript errors in its child component tree during rendering, lifecycle methods, or in the constructor, and handle them gracefully without causing the entire application to crash.
 
@@ -1520,7 +1595,9 @@ Now, you can use the `ErrorBoundary` component to wrap around `CounterComponent`
 
 With this setup, if an error occurs within `CounterComponent`—for example, if `counterValue` becomes 2—the error will be caught by the `ErrorBoundary`, preventing the entire application from crashing. The `ErrorBoundary` can then display a fallback UI (e.g., "Something went wrong") to inform the user of the error, providing a smoother and more resilient user experience.
 
-## 61. What are Custom Hooks?
+You can create ErrorBoundary with React class component only. Currently, React functional component doesn't support ErrorBoundary
+
+## 62. What are Custom Hooks?
 
 Custom Hooks in JavaScript are functions that start with 'use' and allow you to reuse stateful logic across React components. They were introduced in React v16.8 as part of the hook feature.
 
@@ -1551,13 +1628,5 @@ function App() {
   );
 }
 ```
-
-In this example:
-
-- `useToggle` is a custom hook that encapsulates the logic for a simple boolean toggle.
-- It uses the `useState` hook internally to manage the toggle state.
-- The `useToggle` hook returns an array containing the current boolean value (`value`) and a function (`toggle`) to toggle the boolean value.
-- In the `App` component, `useToggle` is used to manage the state (`isOn`) and toggle function (`toggleIsOn`).
-- Clicking the button toggles the `isOn` state between `true` and `false`, updating the button label accordingly.
 
 Custom hooks allow you to extract and reuse complex logic across different components, promoting code reusability and reducing repetition. They are a powerful addition to React functional components.

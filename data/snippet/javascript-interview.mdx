@@ -1,0 +1,679 @@
+---
+title: JavaScript Interview Questions
+description: List of common questions asked in interview
+logo: /static/images/algorithm/algorithm.png
+categories: ['Interview']
+---
+
+## 🌟 Basic
+
+### 1. Is JavaScript single-threaded?
+
+Yes, JavaScript is single-threaded, meaning it has a single call stack and executes code sequentially, one operation at a time. This can lead to blocking behavior if a task takes too long to execute.
+
+### 2. Explain the main component of the JavaScript Engine and how it works.
+
+The main components of the JavaScript engine are:
+
+- **Call Stack:** Keeps track of the execution context.
+- **Heap:** Allocates memory for objects.
+- **Event Loop:** Manages asynchronous code execution.
+- **Web APIs:** Browser-provided features (e.g., DOM, setTimeout).
+  The engine executes synchronous code on the call stack, handles asynchronous tasks via the event loop, and uses the heap for memory management.
+
+### 4. Difference between var, let, and const?
+
+- **var:** Function-scoped, hoisted, can be re-declared and updated.
+- **let:** Block-scoped, not hoisted, cannot be re-declared but can be updated.
+- **const:** Block-scoped, not hoisted, cannot be re-declared or updated (but objects and arrays can be mutated).
+
+### 5. Different data types in JavaScript?
+
+- **Primitive Types:** String, Number, Boolean, Undefined, Null, Symbol, BigInt.
+- **Non-Primitive Types:** Object (including Array, Function, etc.).
+
+### 6. What is a callback function and callback hell?
+
+- **Callback Function:** A function passed as an argument to another function and executed after some operation is completed.
+- **Callback Hell:** A situation where multiple nested callbacks make code hard to read and maintain.
+
+### 7. What is a Promise and Promise chaining?
+
+- **Promise:** An object representing the eventual completion (or failure) of an asynchronous operation and its resulting value.
+- **Promise Chaining:** Linking multiple promises to handle asynchronous operations in sequence, improving readability and maintainability.
+
+### 8. What is async/await?
+
+`async/await` is syntactic sugar over promises, allowing asynchronous code to be written in a synchronous style. `async` functions return a promise, and `await` pauses the function execution until the promise settles.
+
+### 9. What is the difference between == and === operators?
+
+- `==`: Abstract equality operator, performs type coercion if types differ.
+- `===`: Strict equality operator, no type coercion, checks both value and type.
+
+### 10. Different ways to create an Object in JavaScript?
+
+- Object literal: `const obj = {};`
+- `new Object()`
+- Object.create()
+- Constructor function
+- ES6 class
+
+### 11. What is the rest and spread operator?
+
+- **Rest Operator (`...`)**: Collects all remaining elements into an array.
+  ```javascript
+  function sum(...args) {
+    return args.reduce((a, b) => a + b);
+  }
+  ```
+- **Spread Operator (`...`)**: Expands an iterable into individual elements.
+  ```javascript
+  const arr = [1, 2, 3];
+  const newArr = [...arr, 4, 5];
+  ```
+
+### 12. What is a higher-order function?
+
+A higher-order function is a function that either takes one or more functions as arguments or returns a function.
+
+### 13. What are JavaScript Template Literals?
+
+Template literals allow embedding expressions in strings, enclosed by backticks (`). They support multi-line strings and interpolation.
+
+```javascript
+const name = 'John';
+const greeting = `Hello, ${name}!`;
+```
+
+### 14. Explain the difference between null and undefined.
+
+- **null**: Represents the intentional absence of any object value.
+- **undefined**: Represents an uninitialized variable or a non-existent property.
+
+### 15. What is an Immediately Invoked Function Expression (IIFE)?
+
+An IIFE is a function that is executed immediately after it is defined. It helps in creating a new scope and avoiding polluting the global scope.
+
+```javascript
+(function () {
+  console.log('IIFE executed');
+})();
+```
+
+### 16. What are the truthy and falsy values in JavaScript?
+
+- **Falsy values**: `false`, `0`, `""`, `null`, `undefined`, `NaN`.
+- **Truthy values**: All values other than falsy values are considered truthy.
+
+### 17. What is the difference between synchronous and asynchronous code in JavaScript?
+
+- **Synchronous code**: Executes sequentially, blocking the execution of subsequent code until the current task is completed.
+- **Asynchronous code**: Executes non-sequentially, allowing subsequent code to run while waiting for the completion of asynchronous tasks.
+
+### 18. What is the purpose of the `typeof` operator?
+
+The `typeof` operator returns a string indicating the type of the operand. For example:
+
+```javascript
+typeof 42; // "number"
+typeof 'hello'; // "string"
+typeof true; // "boolean"
+typeof undefined; // "undefined"
+typeof null; // "object"
+typeof {}; // "object"
+typeof function () {}; // "function"
+```
+
+### 19. What is destructuring in JavaScript?
+
+Destructuring is a syntax that allows unpacking values from arrays or properties from objects into distinct variables:
+
+```javascript
+const [a, b] = [1, 2]; // a = 1, b = 2
+const { name, age } = { name: 'Bob', age: 25 }; // name = 'Bob', age = 25
+```
+
+### 20. What are default parameters in JavaScript?
+
+Default parameters allow function parameters to have default values if no value or undefined is passed:
+
+```javascript
+function greet(name = 'Guest') {
+  return `Hello, ${name}!`;
+}
+greet(); // "Hello, Guest!"
+greet('Alice'); // "Hello, Alice!"
+```
+
+### 21. What are array methods like map, filter, and reduce?
+
+- `map`: Creates a new array with the results of calling a provided function on every element:
+  ```javascript
+  const arr = [1, 2, 3];
+  const doubled = arr.map((x) => x * 2); // [2, 4, 6]
+  ```
+- `filter`: Creates a new array with all elements that pass the test implemented by the provided function:
+  ```javascript
+  const arr = [1, 2, 3, 4];
+  const evens = arr.filter((x) => x % 2 === 0); // [2, 4]
+  ```
+- `reduce`: Executes a reducer function on each element, resulting in a single output value:
+  ```javascript
+  const arr = [1, 2, 3, 4];
+  const sum = arr.reduce((acc, x) => acc + x, 0); // 10
+  ```
+
+### 22. What is the spread operator and how is it used?
+
+The spread operator (`...`) expands an iterable (like an array) into individual elements:
+
+```javascript
+const arr = [1, 2, 3];
+const newArr = [...arr, 4, 5]; // [1, 2, 3, 4, 5]
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 }; // {a: 1, b: 2, c: 3}
+```
+
+### 23. How do you handle errors in JavaScript?
+
+Errors in JavaScript can be handled using `try...catch` blocks:
+
+```javascript
+try {
+  // Code that may throw an error
+  throw new Error('Something went wrong');
+} catch (error) {
+  // Handle the error
+  console.error(error.message); // "Something went wrong"
+} finally {
+  // Code to execute regardless of the try/catch outcome
+  console.log('Cleanup');
+}
+```
+
+## 🧩 Intermediate
+
+### 24. What is a Closure? What are the use cases of Closures?
+
+A closure is a function that retains access to its lexical scope, even when the function is executed outside that scope. Use cases include:
+
+- Data encapsulation
+- Function factories
+- Maintaining state in asynchronous functions
+
+### 25. Explain the concept of hoisting in JavaScript.
+
+Hoisting is JavaScript's default behavior of moving declarations to the top of the current scope. Only the declarations are hoisted, not the initializations.
+
+### 26. What is a Temporal Dead Zone?
+
+The Temporal Dead Zone (TDZ) is the period between entering a block scope and the point where a variable declared with `let` or `const` is initialized. Accessing the variable in the TDZ results in a ReferenceError.
+
+### 27. What is a prototype chain? What is the Object.create() method?
+
+- **Prototype Chain:** A mechanism by which objects inherit properties and methods from other objects. Each object has a prototype object, forming a chain until it reaches `null`.
+- **Object.create()**: Creates a new object with the specified prototype object and properties.
+  ```javascript
+  const proto = {
+    greet: function () {
+      return 'Hello';
+    },
+  };
+  const obj = Object.create(proto);
+  ```
+
+### 28. What is the difference between Call, Apply, and Bind methods?
+
+- **Call:** Invokes a function with a given `this` value and arguments provided individually.
+  ```javascript
+  func.call(thisArg, arg1, arg2);
+  ```
+- **Apply:** Invokes a function with a given `this` value and arguments provided as an array.
+  ```javascript
+  func.apply(thisArg, [arg1, arg2]);
+  ```
+- **Bind:** Creates a new function that, when called, has its `this` value set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+  ```javascript
+  const boundFunc = func.bind(thisArg, arg1);
+  ```
+
+### 29. What are lambda or arrow functions?
+
+Arrow functions are a shorter syntax for writing function expressions and do not have their own `this`, `arguments`, `super`, or `new.target`.
+
+```javascript
+const add = (a, b) => a + b;
+```
+
+### 30. What is a currying function?
+
+Currying is the process of transforming a function with multiple arguments into a sequence of functions, each taking a single argument.
+
+```javascript
+function curry(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
+    } else {
+      return function (...nextArgs) {
+        return curried.apply(this, args.concat(nextArgs));
+      };
+    }
+  };
+}
+```
+
+### 31. What are the features of ES6?
+
+- Arrow functions
+- Classes
+- Template literals
+- Destructuring assignment
+- Default parameters
+- Rest and spread operators
+- `let` and `const`
+- Promises
+- Modules
+- Enhanced object literals
+
+### 32. What is the difference between shallow copy and deep copy?
+
+- **Shallow Copy**: Copies the top-level properties of an object, but nested objects are shared by both the original and the copy.
+
+  ```javascript
+  const shallowCopy = { ...original };
+  ```
+
+- **Deep Copy**: Copies all levels of the object, including nested objects, ensuring complete duplication.
+  ```javascript
+  const deepCopy = JSON.parse(JSON.stringify(original));
+  ```
+
+### 33. What is debouncing in JavaScript?
+
+Debouncing ensures that a function is not called too frequently. It delays the execution of the function until after a specified wait time has elapsed since the last call.
+
+```javascript
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+```
+
+### 34. What is throttling in JavaScript?
+
+Throttling ensures that a function is called at most once in a specified time period, regardless of how often it is triggered.
+
+```javascript
+function throttle(func, limit) {
+  let inThrottle;
+  return function (...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+```
+
+### 35. What is the difference between localStorage and sessionStorage?
+
+- **localStorage**: Data persists even after the browser is closed and reopened.
+- **sessionStorage**: Data persists only for the duration of the page session.
+
+### 36. What is the difference between `Object.keys()`, `Object.values()`, and `Object.entries()`?
+
+- **Object.keys()**: Returns an array of the object's own property names.
+- **Object.values()**: Returns an array of the object's own property values.
+- **Object.entries()**: Returns an array of the object's own key-value pairs.
+
+### 37. What is the difference between `map` and `forEach`?
+
+- `map`: Returns a new array with the results of calling a provided function on every element. It does not modify the original array.
+  ```javascript
+  const arr = [1, 2, 3];
+  const doubled = arr.map((x) => x * 2); // [2, 4, 6]
+  ```
+- `forEach`: Executes a provided function once for each array element. It does not return a new array.
+  ```javascript
+  const arr = [1, 2, 3];
+  arr.forEach((x) => console.log(x)); // 1 2 3
+  ```
+
+### 38. What is the purpose of `Object.assign()`?
+
+`Object.assign()` copies all enumerable own properties from one or more source objects to a target object, and returns the target object:
+
+```javascript
+const target = { a: 1 };
+const source = { b: 2, c: 3 };
+const result = Object.assign(target, source); // {a: 1, b: 2, c: 3}
+```
+
+### 39. What is the difference between `slice` and `splice` methods?
+
+- `slice`: Returns a shallow copy of a portion of an array into a new array object. Does not modify the original array.
+  ```javascript
+  const arr = [1, 2, 3, 4];
+  const sliced = arr.slice(1, 3); // [2, 3]
+  ```
+- `splice`: Changes the contents of an array by removing or replacing existing elements and/or adding new elements. Modifies the original array.
+  ```javascript
+  const arr = [1, 2, 3, 4];
+  const spliced = arr.splice(1, 2); // [2, 3]
+  console.log(arr); // [1, 4]
+  ```
+
+### 40. What is the difference between function declaration and function expression?
+
+- **Function Declaration:** Defines a function with the specified parameters. It is hoisted, meaning it can be called before it is defined in the code.
+  ```javascript
+  function add(a, b) {
+    return a + b;
+  }
+  ```
+- **Function Expression:** Defines a function inside an expression. It is not hoisted.
+  ```javascript
+  const add = function (a, b) {
+    return a + b;
+  };
+  ```
+
+### 41. What is the `new` keyword in JavaScript?
+
+The `new` keyword creates an instance of a user-defined object type or of one of the built-in object types:
+
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+const john = new Person('John', 30);
+```
+
+### 42. What is the difference between synchronous and asynchronous code?
+
+- **Synchronous Code:** Executes sequentially, blocking the execution of subsequent code until the current task is completed.
+- **Asynchronous Code:** Executes non-sequentially, allowing subsequent code to run while waiting for the completion of asynchronous tasks.
+
+  ```javascript
+  // Synchronous
+  console.log('Start');
+  console.log('End');
+
+  // Asynchronous
+  console.log('Start');
+  setTimeout(() => console.log('Middle'), 1000);
+  console.log('End');
+  ```
+
+### 43. What is an async function and how does it differ from regular functions?
+
+An async function is a function that returns a promise. It allows asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need for explicit promise chains:
+
+```javascript
+async function fetchData() {
+  const response = await fetch('url');
+  const data = await response.json();
+  return data;
+}
+```
+
+## 🚀 Expert
+
+### 44. What is an execution context, execution stack, variable object, and scope chain?
+
+- **Execution Context:** Environment where JavaScript code is executed. Contains the variable object, scope chain, and `this` value.
+- **Execution Stack:** Also known as the call stack, it keeps track of the execution contexts.
+- **Variable Object:** Contains function arguments, local variables, and function declarations.
+- **Scope Chain:** Links scopes in nested functions, allowing access to variables from outer scopes.
+
+### 45. What is the priority of execution of callback, promise, setTimeout, and process.nextTick()?
+
+1. `process.nextTick()`
+2. Microtasks (e.g., Promises)
+3. Macrotasks (e.g., setTimeout, setInterval)
+4. I/O callbacks
+
+### 46. What is a factory function and generator function?
+
+- **Factory Function:** A function that returns a new object.
+  ```javascript
+  function createPerson(name) {
+    return { name };
+  }
+  ```
+- **Generator Function:** A function that can pause execution and yield multiple values over time.
+  ```javascript
+  function* generator() {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+  ```
+
+### 47. Different ways to clone (shallow and deep copy of object) an object?
+
+- **Shallow Copy:**
+  ```javascript
+  const shallowCopy = { ...original };
+  ```
+- **Deep Copy:**
+  ```javascript
+  const deepCopy = JSON.parse(JSON.stringify(original));
+  ```
+
+### 48. How to make an object immutable? (seal and freeze methods)?
+
+- **Object.seal()**: Prevents adding or removing properties but allows modifying existing properties.
+  ```javascript
+  Object.seal(obj);
+  ```
+- **Object.freeze()**: Prevents adding, removing, or modifying properties.
+  ```javascript
+  Object.freeze(obj);
+  ```
+
+### 49. What is an event and event flow, event bubbling, and event capturing?
+
+- **Event:** An action or occurrence detected by the program.
+- **Event Flow:** The order in which events are received and handled.
+- **Event Bubbling:** Events propagate from the target element up to the root.
+- **Event Capturing:** Events propagate from the root down to the target element.
+
+### 50. What is event delegation?
+
+Event delegation involves adding a single event listener to a parent element to manage events for multiple child elements, utilizing event bubbling for efficiency.
+
+### 51. What are server-sent events?
+
+Server-Sent Events (SSE) allow a server to push real-time updates to the client via a single HTTP connection.
+
+```javascript
+const eventSource = new EventSource('url');
+eventSource.onmessage = function (event) {
+  console.log(event.data);
+};
+```
+
+### 52. What is a web worker or service worker in JavaScript?
+
+- **Web Worker:** Runs JavaScript in the background
+
+parallel to the main thread, allowing for concurrent execution without blocking the UI.
+
+```javascript
+const worker = new Worker('worker.js');
+worker.postMessage('Hello');
+worker.onmessage = function (event) {
+  console.log(event.data);
+};
+```
+
+- **Service Worker:** Acts as a proxy between the web application and the network, enabling features like offline capabilities and push notifications.
+
+### 53. How to compare 2 JSON objects in JavaScript?
+
+```javascript
+function deepEqual(obj1, obj2) {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
+```
+
+### 54. What are the different types of scopes in JavaScript?
+
+- **Global Scope**: Variables declared outside any function or block.
+- **Function Scope**: Variables declared within a function.
+- **Block Scope**: Variables declared with `let` or `const` within a block (e.g., inside loops, if statements).
+
+### 55. Explain the concept of "this" keyword in JavaScript.
+
+The `this` keyword refers to the context in which a function is called. Its value can vary depending on how and where the function is invoked:
+
+- In global scope or simple function calls, `this` refers to the global object.
+- In methods, `this` refers to the object the method is called on.
+- In event handlers, `this` refers to the element that received the event.
+- With `call`, `apply`, or `bind`, `this` can be explicitly defined.
+
+### 56. What are weak references in JavaScript?
+
+Weak references are objects that do not prevent their referents from being reclaimed by garbage collection. `WeakMap` and `WeakSet` are examples, allowing garbage collection if there are no other strong references to the objects.
+
+### 57. What is memoization?
+
+Memoization is an optimization technique that caches the results of function calls to avoid repeated calculations for the same inputs.
+
+```javascript
+function memoize(fn) {
+  const cache = new Map();
+  return function (...args) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+}
+```
+
+### 58. Explain the concept of tail call optimization.
+
+Tail call optimization is a feature where the last function call in a function can be optimized by the JavaScript engine to avoid creating a new stack frame, thus improving performance and preventing stack overflow in recursive functions.
+
+### 59. What are JavaScript Symbols and their use cases?
+
+Symbols are a new primitive type introduced in ES6, used to create unique identifiers for object properties:
+
+```javascript
+const sym1 = Symbol('description');
+const sym2 = Symbol('description');
+console.log(sym1 === sym2); // false
+```
+
+Use cases:
+
+- Creating unique property keys
+- Implementing private properties and methods
+- Defining well-known symbols (e.g., `Symbol.iterator` for iteration protocols)
+
+### 60. How does JavaScript handle concurrency?
+
+JavaScript handles concurrency using an event loop and callback queue, allowing asynchronous operations to be processed without blocking the main thread. This includes mechanisms like promises, async/await, and Web APIs like `setTimeout`.
+
+### 61. What are WeakMap and WeakSet in JavaScript?
+
+- **WeakMap:** A collection of key/value pairs where keys are objects and values can be arbitrary values. Keys are weakly referenced, meaning they can be garbage-collected if there are no other references to them.
+  ```javascript
+  const weakMap = new WeakMap();
+  const obj = {};
+  weakMap.set(obj, 'value');
+  ```
+- **WeakSet:** A collection of objects where each object is weakly referenced.
+  ```javascript
+  const weakSet = new WeakSet();
+  const obj = {};
+  weakSet.add(obj);
+  ```
+
+### 62. What is the Proxy object in JavaScript and how is it used?
+
+A `Proxy` object allows you to create a custom behavior for fundamental operations (e.g., property lookup, assignment, enumeration, function invocation):
+
+```javascript
+const target = {};
+const handler = {
+  get: function (obj, prop) {
+    return prop in obj ? obj[prop] : 42;
+  },
+};
+const proxy = new Proxy(target, handler);
+console.log(proxy.someProperty); // 42
+```
+
+### 63. How does the `Reflect` object work in JavaScript?
+
+The `Reflect` object provides methods for interceptable JavaScript operations, similar to those of `Proxy` handlers. It makes it easier to handle operations such as `get`, `set`, and `deleteProperty`:
+
+```javascript
+const obj = { a: 1 };
+Reflect.set(obj, 'b', 2); // { a: 1, b: 2 }
+console.log(Reflect.get(obj, 'b')); // 2
+Reflect.deleteProperty(obj, 'a'); // true
+console.log(obj); // { b: 2 }
+```
+
+### 64. What are Tagged Template Literals in JavaScript?
+
+Tagged template literals allow you to parse template literals with a function:
+
+```javascript
+function tag(strings, ...values) {
+  return strings[0] + values.map((v, i) => `${v}${strings[i + 1]}`).join('');
+}
+const name = 'Alice';
+const age = 25;
+const result = tag`Name: ${name}, Age: ${age}`; // "Name: Alice, Age: 25"
+```
+
+### 65. What is the Event Loop in JavaScript?
+
+The event loop is a mechanism that handles asynchronous callbacks in JavaScript. It processes the message queue and executes callback functions when the call stack is empty:
+
+```javascript
+console.log('Start');
+setTimeout(() => console.log('Callback'), 0);
+console.log('End');
+
+// Output:
+// Start
+// End
+// Callback
+```
+
+### 66. How does garbage collection work in JavaScript?
+
+JavaScript uses automatic garbage collection with algorithms like mark-and-sweep to reclaim memory occupied by objects that are no longer reachable:
+
+- **Mark-and-Sweep:** The garbage collector marks all objects, then removes the ones that are no longer reachable from the root (global object).
+
+### 67. What are mixins in JavaScript?
+
+Mixins are a way to add properties and methods from one object to another, allowing for the sharing of functionalities across different objects:
+
+```javascript
+const mixin = {
+  greet() {
+    console.log('Hello');
+  },
+};
+const obj = {};
+Object.assign(obj, mixin);
+obj.greet(); // "Hello"
+```
