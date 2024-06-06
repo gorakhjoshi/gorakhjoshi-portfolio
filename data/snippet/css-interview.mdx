@@ -1,0 +1,400 @@
+---
+title: CSS Interview Questions
+description: List of common questions asked in interview
+logo: /static/images/algorithm/algorithm.png
+categories: ['Interview']
+---
+
+## 🌟 Basic
+
+### 1. What is CSS and why is it used?
+
+- CSS (Cascading Style Sheets) is used to control the layout and presentation of web pages.
+
+### 2. How do you apply CSS to an HTML document?
+
+- Through inline styles, internal stylesheets, and external stylesheets.
+
+### 3. What is the difference between class and ID selectors in CSS?
+
+- Class selectors are reusable and prefixed with a period (`.`), while ID selectors are unique within a page and prefixed with a hash (`#`).
+
+### 4. What is the purpose of the `box-sizing` property?
+
+- It defines how the width and height of an element are calculated, either including or excluding padding and borders.
+
+### 5. Explain the concept of the CSS Box Model.
+
+- The Box Model consists of content, padding, border, and margin.
+
+### 6. What are pseudo-classes in CSS?
+
+- Pseudo-classes are keywords added to selectors that specify a special state of the selected elements (e.g., `:hover`, `:focus`).
+
+### 7. How do you center a block element horizontally?
+
+- By setting `margin: 0 auto;` on the element and ensuring it has a defined width.
+
+### 8. What are inline styles and how do you use them?
+
+- Inline styles are CSS declarations written directly in the `style` attribute of an HTML element.
+
+### 9. How do you add comments in CSS?
+
+- Comments in CSS are added using `/* comment */`.
+
+### 10. What are the different types of CSS selectors?
+
+- Type selectors, class selectors, ID selectors, attribute selectors, pseudo-class selectors, and pseudo-element selectors.
+
+### 11. What is the difference between `margin` and `padding`?
+
+- `Margin` is the space outside an element's border, while `padding` is the space inside the border, around the content.
+
+### 12. What is the `display` property and what are some of its values?
+
+- The `display` property specifies the display behavior of an element. Common values include `block`, `inline`, `inline-block`, `none`, `flex`, and `grid`.
+
+### 13. How do you link an external CSS file to an HTML document?
+
+- Using the `<link>` element: `<link rel="stylesheet" href="styles.css">`.
+
+### 14. What is a CSS reset and why is it used?
+
+- A CSS reset is used to remove default browser styling, ensuring consistency across different browsers.
+
+### 15. What is the difference between `visibility: hidden` and `display: none`?
+
+- `visibility: hidden` hides the element but it still takes up space in the layout. `display: none` removes the element from the layout completely.
+
+### 16. What is a CSS selector?
+
+- A pattern used to select the elements you want to style.
+
+### 17. How do you set the background color of an element?
+
+- Using the `background-color` property: `background-color: #ffffff;`.
+
+### 18. What does the `:nth-child(n)` selector do?
+
+- It selects the nth child of its parent. The value of `n` can be a number, a keyword (like `odd` or `even`), or a formula.
+
+### 19. What is the use of the `!important` declaration in CSS?
+
+- It overrides any other styles, including inline styles, to apply the specified style.
+
+### 20. How do you make a list horizontal?
+
+- By setting the `display` property of the list items to `inline` or using Flexbox.
+
+### 21. What is the difference between `block` and `inline` elements?
+
+- `Block` elements take up the full width available and start on a new line, whereas `inline` elements take up only as much width as necessary and do not start on a new line.
+
+### 22. How do you style an element with multiple classes in CSS?
+
+## 🧩 Intermediate
+
+### 23. What are CSS preprocessors and name a few commonly used ones?
+
+- CSS preprocessors extend CSS with variables, nested rules, and functions. Common examples include Sass, Less, and Stylus.
+
+### 24. Explain the difference between `absolute`, `relative`, `fixed`, and `sticky` positioning.
+
+- `relative`: Positioned relative to its normal position.
+- `absolute`: Positioned relative to the nearest positioned ancestor.
+- `fixed`: Positioned relative to the viewport.
+- `sticky`: Toggles between `relative` and `fixed` based on the scroll position.
+
+### 25. What is the `z-index` property and how does it work?
+
+- `z-index` controls the stacking order of elements. Higher values are placed in front of lower values.
+
+### 26. What are CSS Grid and Flexbox? Compare them.
+
+- CSS Grid is a layout system for creating two-dimensional grid-based layouts, whereas Flexbox is a one-dimensional layout system. Grid is better for complex layouts, while Flexbox is optimal for simpler and single-direction layouts.
+
+### 27. How can you create a responsive web design using CSS?
+
+- By using media queries, flexible grid layouts, and responsive units like percentages, `vw`, and `vh`.
+
+### 28. What are CSS animations and transitions?
+
+- Transitions allow changes in CSS property values to occur smoothly over a specified duration, while animations allow more complex and keyframe-based state changes.
+
+### 29. What is the `float` property used for, and what are its possible values?
+
+- The `float` property is used to position an element to the left or right of its container, with possible values `left`, `right`, `none`, and `inherit`.
+
+### 30. Explain the concept of CSS Sprites and their benefits.
+
+- CSS Sprites combine multiple images into a single image file to reduce the number of HTTP requests and improve page load performance.
+
+### 31. What are pseudo-elements in CSS and provide examples?
+
+- Pseudo-elements are used to style specified parts of an element, such as `::before`, `::after`, `::first-letter`, and `::first-line`.
+
+### 32. How do you create a responsive image gallery using CSS Grid?
+
+- By defining a grid container with responsive column and row definitions, and using media queries to adjust the layout for different screen sizes.
+
+### 33. What are media queries and how do they work?
+
+- Media queries are used to apply different styles based on the characteristics of the device, such as width, height, and orientation. Syntax: `@media (max-width: 600px) { /* styles */ }`.
+
+### 34. What is the `flex` property in Flexbox and how do you use it?
+
+- The `flex` property is a shorthand for `flex-grow`, `flex-shrink`, and `flex-basis`, used to define the flexible item's ability to grow, shrink, and the initial size.
+
+### 35. What are CSS transitions and how do you create them?
+
+- CSS transitions allow you to change property values smoothly over a given duration. Example:
+  ```css
+  .box {
+    transition: background-color 0.5s ease;
+  }
+  .box:hover {
+    background-color: blue;
+  }
+  ```
+
+### 36. What are the differences between `inline-block` and `inline` elements?
+
+- `inline-block` elements are like `inline` elements but allow setting width and height.
+
+### 37. How do you create a CSS triangle?
+
+- By using the `border` property on an element with zero width and height. Example:
+  ```css
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid red;
+  }
+  ```
+
+### 38. Explain the CSS `clip-path` property.
+
+- The `clip-path` property allows you to clip an element to a basic shape or to an SVG source.
+
+### 39. What is the `object-fit` property and when would you use it?
+
+- The `object-fit` property specifies how an `<img>` or `<video>` should be resized to fit its container. Common values are `fill`, `contain`, `cover`, `none`, and `scale-down`.
+
+### 40. What is the `calc()` function in CSS?
+
+- The `calc()` function allows you to perform calculations to determine CSS property values. Example: `width: calc(100% - 50px);`.
+
+### 41. How do you use the `::before` and `::after` pseudo-elements?
+
+- These pseudo-elements are used to insert content before or after an element's content. Example:
+  ```css
+  .element::before {
+    content: 'Prefix';
+  }
+  .element::after {
+    content: 'Suffix';
+  }
+  ```
+
+### 42. What is the `filter` property in CSS?
+
+- The `filter` property applies graphical effects like blur or color shift to an element. Example: `filter: blur(5px);`.
+
+## 🚀 Expert
+
+### 43. Explain the concept of specificity and how it affects CSS rules.
+
+- Specificity determines which CSS rule is applied when multiple rules match the same element. It is calculated based on the number of type selectors, class selectors, and ID selectors.
+
+### 44. What is the `contain` property in CSS and how is it used?
+
+- The `contain` property allows you to limit the scope of the browser's styling, layout, and paint work to a specific element and its contents.
+
+### 45. Describe the concept of CSS Variables and how they are used.
+
+- CSS Variables (or Custom Properties) allow you to store values in a reusable manner using the `--variable-name` syntax. They are defined within a scope and accessed using the `var()` function.
+
+### 46. How do you optimize CSS for better performance?
+
+- By minimizing CSS, reducing the number of HTTP requests, using shorthand properties, and avoiding complex selectors.
+
+### 47. Explain the difference between `em`, `rem`, `vw`, and `vh` units.
+
+- `em`: Relative to the font-size of the element.
+- `rem`: Relative to the font-size of the root element.
+- `vw`: Relative to 1% of the viewport's width.
+- `vh`: Relative to 1% of the viewport's height.
+
+### 48. What are CSS Modules and how do they help in styling?
+
+- CSS Modules are a CSS file in which all class and animation names are scoped locally by default. They help avoid global scope issues and improve maintainability.
+
+### 49. Explain how you would implement a CSS-only accordion.
+
+- Using hidden checkboxes and sibling selectors to toggle visibility and styling of the accordion content based on the checked state.
+
+### 50. How can you create a custom CSS grid framework?
+
+- By defining a flexible grid container using CSS Grid or Flexbox properties and creating reusable classes for rows, columns, and breakpoints.
+
+### 51. Explain the concept of a CSS Grid template and its key properties.
+
+- A CSS Grid template defines the structure of a grid container, using properties like `grid-template-columns`, `grid-template-rows`, `grid-template-areas`, and `grid-gap`.
+
+### 52. What are CSS custom properties (variables) and how do you use them?
+
+- Custom properties are user-defined variables in CSS, declared using `--variable-name` and accessed with `var(--variable-name)`. Example: `:root { --main-color: #333; }`.
+
+### 53. Describe the `@keyframes` rule and how it is used in CSS animations.
+
+- The `@keyframes` rule defines the keyframes for an animation. It specifies the style changes at various points in the animation sequence. Example:
+  ```css
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100px);
+    }
+  }
+  ```
+
+### 54. How do you implement dark mode using CSS?
+
+- By using media queries to detect the user's system preference (`prefers-color-scheme: dark`) and applying appropriate styles. Example:
+  ```css
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #333;
+      color: #fff;
+    }
+  }
+  ```
+
+### 55. What is CSS Grid Layout and how does it differ from Flexbox?
+
+- CSS Grid Layout is a two-dimensional layout system for web pages. It allows for both rows and columns, while Flexbox is a one-dimensional system dealing with a row or a column at a time.
+
+### 56. How do you create complex layouts using CSS Grid and Flexbox together?
+
+- By using CSS Grid to define the overall layout structure and Flexbox to manage the internal layout of individual grid items.
+
+### 57. Explain the concept of responsive typography and how you achieve it in CSS.
+
+- Responsive typography ensures that font sizes adapt to different screen sizes. This can be achieved using relative units like `em` or `rem`, or viewport-based units like `vw` and `vh`.
+
+### 58. What are CSS functions like `calc()`, `min()`, `max()`, and `clamp()`, and how do they work?
+
+- These CSS functions perform dynamic calculations and allow for more responsive and adaptable layouts.
+  - `calc()`: Calculates values, e.g., `width: calc(100% - 50px);`.
+  - `min()`: Takes the minimum value, e.g., `width: min(100%, 600px);`.
+  - `max()`: Takes the maximum value, e.g., `width: max(300px, 50%);`.
+  - `clamp()`: Constrains a value between an upper and lower limit, e.g., `font-size: clamp(1rem, 2vw, 2rem);`.
+
+### 59. What are CSS Houdini APIs and why are they important?
+
+- CSS Houdini APIs are a set of low-level APIs that allow developers to extend CSS by creating their own custom styles and layouts. They provide greater control over the rendering process.
+
+### 60. Explain how to create a sticky footer with CSS.
+
+- By ensuring the footer stays at the bottom of the viewport when content is not enough to fill the page:
+  ```css
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  main {
+    flex: 1;
+  }
+  ```
+
+### 61. What is the `will-change` property and how does it improve performance?
+
+- The `will-change` property informs the browser about which properties are expected to change, allowing it to optimize rendering in advance. Example: `will-change: transform;`.
+
+### 62. How do you create a CSS-only tooltip?
+
+- Using the `:hover` pseudo-class and `::after` pseudo-element:
+  ```css
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  .tooltip::after {
+    content: 'Tooltip text';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .tooltip:hover::after {
+    opacity: 1;
+  }
+  ```
+
+### 63. How do you implement a CSS-only dropdown menu?
+
+- Using the `:hover` pseudo-class and sibling selectors:
+  ```css
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  ```
+
+### 64. What are CSS Subgrid and how does it work?
+
+- Subgrid allows grid items to inherit and share the parent grid’s definitions. It enables consistent alignment within nested grid structures.
+
+### 65. How do you create a custom scrollbar using CSS?
+
+- By styling the pseudo-elements `::-webkit-scrollbar`, `::-webkit-scrollbar-thumb`, etc.:
+  ```css
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  ```
+
+### 66. Explain how to use CSS Grid to create a complex layout with nested grids.
+
+- By defining grid containers within grid items:
+  ```css
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+  }
+  .nested-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  ```
