@@ -118,9 +118,21 @@ categories: ['Interview']
 
 - By using media queries, flexible grid layouts, and responsive units like percentages, `vw`, and `vh`.
 
-### 28. What are CSS animations and transitions?
+### 28. What are CSS animations and transitions? ### Describe the `@keyframes` rule and how it is used in CSS animations.
 
 - Transitions allow changes in CSS property values to occur smoothly over a specified duration, while animations allow more complex and keyframe-based state changes.
+
+- The `@keyframes` rule defines the keyframes for an animation. It specifies the style changes at various points in the animation sequence. Example:
+  ```css
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100px);
+    }
+  }
+  ```
 
 ### 29. What is the `float` property used for, and what are its possible values?
 
@@ -183,9 +195,13 @@ categories: ['Interview']
 
 - The `object-fit` property specifies how an `<img>` or `<video>` should be resized to fit its container. Common values are `fill`, `contain`, `cover`, `none`, and `scale-down`.
 
-### 40. What is the `calc()` function in CSS?
+### 40. What are CSS functions like `calc()`, `min()`, `max()`, and `clamp()`, and how do they work?
 
-- The `calc()` function allows you to perform calculations to determine CSS property values. Example: `width: calc(100% - 50px);`.
+- These CSS functions perform dynamic calculations and allow for more responsive and adaptable layouts.
+  - `calc()`: Calculates values, e.g., `width: calc(100% - 50px);`.
+  - `min()`: Takes the minimum value, e.g., `width: min(100%, 600px);`.
+  - `max()`: Takes the maximum value, e.g., `width: max(300px, 50%);`.
+  - `clamp()`: Constrains a value between an upper and lower limit, e.g., `font-size: clamp(1rem, 2vw, 2rem);`.
 
 ### 41. How do you use the `::before` and `::after` pseudo-elements?
 
@@ -203,171 +219,57 @@ categories: ['Interview']
 
 - The `filter` property applies graphical effects like blur or color shift to an element. Example: `filter: blur(5px);`.
 
-## 🚀 Expert
-
 ### 43. Explain the concept of specificity and how it affects CSS rules.
 
 - Specificity determines which CSS rule is applied when multiple rules match the same element. It is calculated based on the number of type selectors, class selectors, and ID selectors.
 
-### 44. What is the `contain` property in CSS and how is it used?
-
-- The `contain` property allows you to limit the scope of the browser's styling, layout, and paint work to a specific element and its contents.
-
-### 45. Describe the concept of CSS Variables and how they are used.
+### 44. Describe the concept of CSS Variables and how they are used.
 
 - CSS Variables (or Custom Properties) allow you to store values in a reusable manner using the `--variable-name` syntax. They are defined within a scope and accessed using the `var()` function.
 
-### 46. How do you optimize CSS for better performance?
+### 45. Explain the concept of a CSS Grid template and its key properties.
+
+- A CSS Grid template defines the structure of a grid container, using properties like `grid-template-columns`, `grid-template-rows`, `grid-template-areas`, and `grid-gap`.
+
+### 46. Explain the concept of responsive typography and how you achieve it in CSS.
+
+- Responsive typography ensures that font sizes adapt to different screen sizes. This can be achieved using relative units like `em` or `rem`, or viewport-based units like `vw` and `vh`.
+
+## 🚀 Expert
+
+### 47. What is the `contain` property in CSS and how is it used?
+
+- The `contain` property allows you to limit the scope of the browser's styling, layout, and paint work to a specific element and its contents.
+
+### 48. How do you optimize CSS for better performance?
 
 - By minimizing CSS, reducing the number of HTTP requests, using shorthand properties, and avoiding complex selectors.
 
-### 47. Explain the difference between `em`, `rem`, `vw`, and `vh` units.
-
-- `em`: Relative to the font-size of the element.
-- `rem`: Relative to the font-size of the root element.
-- `vw`: Relative to 1% of the viewport's width.
-- `vh`: Relative to 1% of the viewport's height.
-
-### 48. What are CSS Modules and how do they help in styling?
+### 49. What are CSS Modules and how do they help in styling?
 
 - CSS Modules are a CSS file in which all class and animation names are scoped locally by default. They help avoid global scope issues and improve maintainability.
-
-### 49. Explain how you would implement a CSS-only accordion.
-
-- Using hidden checkboxes and sibling selectors to toggle visibility and styling of the accordion content based on the checked state.
 
 ### 50. How can you create a custom CSS grid framework?
 
 - By defining a flexible grid container using CSS Grid or Flexbox properties and creating reusable classes for rows, columns, and breakpoints.
 
-### 51. Explain the concept of a CSS Grid template and its key properties.
-
-- A CSS Grid template defines the structure of a grid container, using properties like `grid-template-columns`, `grid-template-rows`, `grid-template-areas`, and `grid-gap`.
-
-### 52. What are CSS custom properties (variables) and how do you use them?
-
-- Custom properties are user-defined variables in CSS, declared using `--variable-name` and accessed with `var(--variable-name)`. Example: `:root { --main-color: #333; }`.
-
-### 53. Describe the `@keyframes` rule and how it is used in CSS animations.
-
-- The `@keyframes` rule defines the keyframes for an animation. It specifies the style changes at various points in the animation sequence. Example:
-  ```css
-  @keyframes slide {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(100px);
-    }
-  }
-  ```
-
-### 54. How do you implement dark mode using CSS?
-
-- By using media queries to detect the user's system preference (`prefers-color-scheme: dark`) and applying appropriate styles. Example:
-  ```css
-  @media (prefers-color-scheme: dark) {
-    body {
-      background-color: #333;
-      color: #fff;
-    }
-  }
-  ```
-
-### 55. What is CSS Grid Layout and how does it differ from Flexbox?
-
-- CSS Grid Layout is a two-dimensional layout system for web pages. It allows for both rows and columns, while Flexbox is a one-dimensional system dealing with a row or a column at a time.
-
-### 56. How do you create complex layouts using CSS Grid and Flexbox together?
+### 51. How do you create complex layouts using CSS Grid and Flexbox together?
 
 - By using CSS Grid to define the overall layout structure and Flexbox to manage the internal layout of individual grid items.
 
-### 57. Explain the concept of responsive typography and how you achieve it in CSS.
-
-- Responsive typography ensures that font sizes adapt to different screen sizes. This can be achieved using relative units like `em` or `rem`, or viewport-based units like `vw` and `vh`.
-
-### 58. What are CSS functions like `calc()`, `min()`, `max()`, and `clamp()`, and how do they work?
-
-- These CSS functions perform dynamic calculations and allow for more responsive and adaptable layouts.
-  - `calc()`: Calculates values, e.g., `width: calc(100% - 50px);`.
-  - `min()`: Takes the minimum value, e.g., `width: min(100%, 600px);`.
-  - `max()`: Takes the maximum value, e.g., `width: max(300px, 50%);`.
-  - `clamp()`: Constrains a value between an upper and lower limit, e.g., `font-size: clamp(1rem, 2vw, 2rem);`.
-
-### 59. What are CSS Houdini APIs and why are they important?
+### 52. What are CSS Houdini APIs and why are they important?
 
 - CSS Houdini APIs are a set of low-level APIs that allow developers to extend CSS by creating their own custom styles and layouts. They provide greater control over the rendering process.
 
-### 60. Explain how to create a sticky footer with CSS.
-
-- By ensuring the footer stays at the bottom of the viewport when content is not enough to fill the page:
-  ```css
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-  main {
-    flex: 1;
-  }
-  ```
-
-### 61. What is the `will-change` property and how does it improve performance?
+### 53. What is the `will-change` property and how does it improve performance?
 
 - The `will-change` property informs the browser about which properties are expected to change, allowing it to optimize rendering in advance. Example: `will-change: transform;`.
 
-### 62. How do you create a CSS-only tooltip?
-
-- Using the `:hover` pseudo-class and `::after` pseudo-element:
-  ```css
-  .tooltip {
-    position: relative;
-    display: inline-block;
-  }
-  .tooltip::after {
-    content: 'Tooltip text';
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: black;
-    color: white;
-    padding: 5px;
-    border-radius: 3px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  .tooltip:hover::after {
-    opacity: 1;
-  }
-  ```
-
-### 63. How do you implement a CSS-only dropdown menu?
-
-- Using the `:hover` pseudo-class and sibling selectors:
-  ```css
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  ```
-
-### 64. What are CSS Subgrid and how does it work?
+### 54. What are CSS Subgrid and how does it work?
 
 - Subgrid allows grid items to inherit and share the parent grid’s definitions. It enables consistent alignment within nested grid structures.
 
-### 65. How do you create a custom scrollbar using CSS?
+### 55. How do you create a custom scrollbar using CSS?
 
 - By styling the pseudo-elements `::-webkit-scrollbar`, `::-webkit-scrollbar-thumb`, etc.:
   ```css
@@ -380,21 +282,5 @@ categories: ['Interview']
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
-  ```
-
-### 66. Explain how to use CSS Grid to create a complex layout with nested grids.
-
-- By defining grid containers within grid items:
-  ```css
-  .container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 10px;
-  }
-  .nested-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
   }
   ```
