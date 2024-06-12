@@ -1,0 +1,519 @@
+---
+title: JavaScript String Methods
+description: These methods cover a wide range of operations you can perform on strings
+logo: /static/images/algorithm/algorithm.png
+categories: ['Extra']
+---
+
+1. **anchor()**
+
+   - **Definition:** Creates an HTML anchor (`<a>`) element that is used to link to another page or section within the same page.
+   - **Example:**
+     ```javascript
+     let str = 'Link';
+     let result = str.anchor('myAnchor');
+     console.log(result); // <a name="myAnchor">Link</a>
+     ```
+
+2. **at()**
+
+   - **Definition:** Returns the character at the specified index.
+   - **Example:**
+     ```javascript
+     let str = 'Hello';
+     let char = str.at(1);
+     console.log(char); // e
+     ```
+
+3. **big()**
+
+   - **Definition:** Creates a `<big>` HTML element, which displays the string in a larger font.
+   - **Example:**
+     ```javascript
+     let str = 'Hello';
+     let result = str.big();
+     console.log(result); // <big>Hello</big>
+     ```
+
+4. **blink()**
+
+   - **Definition:** Creates a `<blink>` HTML element, which causes the text to blink. (Note: This method is deprecated and not recommended for use.)
+   - **Example:**
+     ```javascript
+     let str = 'Hello';
+     let result = str.blink();
+     console.log(result); // <blink>Hello</blink>
+     ```
+
+5. **bold()**
+
+   - **Definition:** Creates a `<b>` HTML element, which displays the string in bold.
+   - **Example:**
+     ```javascript
+     let str = 'Hello';
+     let result = str.bold();
+     console.log(result); // <b>Hello</b>
+     ```
+
+6. **charAt()**
+
+   - **Definition:** Returns the character at the specified index.
+   - **Example:**
+     ```javascript
+     let str = 'Hello';
+     let char = str.charAt(1);
+     console.log(char); // e
+     ```
+
+7. **charCodeAt()**
+
+   - **Definition:** Returns the Unicode of the character at the specified index.
+   - **Example:**
+     ```javascript
+     let str = 'Hello';
+     let code = str.charCodeAt(1);
+     console.log(code); // 101
+     ```
+
+8. **codePointAt()**
+
+   - **Definition:** Returns the Unicode code point value of the character at the specified index.
+   - **Example:**
+     ```javascript
+     let str = 'Hello';
+     let code = str.codePointAt(1);
+     console.log(code); // 101
+     ```
+
+9. **concat()**
+
+   - **Definition:** Concatenates the string arguments to the calling string and returns a new string.
+   - **Example:**
+     ```javascript
+     let str1 = 'Hello';
+     let str2 = 'World';
+     let result = str1.concat(' ', str2);
+     console.log(result); // Hello World
+     ```
+
+10. **endsWith()**
+
+    - **Definition:** Determines whether a string ends with the characters of a specified string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.endsWith('lo');
+      console.log(result); // true
+      ```
+
+11. **fixed()**
+
+    - **Definition:** Creates a `<tt>` HTML element, which displays the string in a fixed-width font.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.fixed();
+      console.log(result); // <tt>Hello</tt>
+      ```
+
+12. **fontcolor()**
+
+    - **Definition:** Creates a `<font>` HTML element and sets the color of the string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.fontcolor('red');
+      console.log(result); // <font color="red">Hello</font>
+      ```
+
+13. **fontsize()**
+
+    - **Definition:** Creates a `<font>` HTML element and sets the size of the string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.fontsize(7);
+      console.log(result); // <font size="7">Hello</font>
+      ```
+
+14. **includes()**
+
+    - **Definition:** Determines whether a string contains the characters of a specified string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let result = str.includes('World');
+      console.log(result); // true
+      ```
+
+15. **indexOf()**
+
+    - **Definition:** Returns the index within the calling string of the first occurrence of the specified value.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let index = str.indexOf('World');
+      console.log(index); // 6
+      ```
+
+16. **isWellFormed()**
+
+    - **Definition:** Determines whether the string is well-formed according to the Unicode standard.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.isWellFormed();
+      console.log(result); // true
+      ```
+
+17. **italics()**
+
+    - **Definition:** Creates an `<i>` HTML element, which displays the string in italics.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.italics();
+      console.log(result); // <i>Hello</i>
+      ```
+
+18. **lastIndexOf()**
+
+    - **Definition:** Returns the index within the calling string of the last occurrence of the specified value.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World Hello';
+      let index = str.lastIndexOf('Hello');
+      console.log(index); // 12
+      ```
+
+19. **length**
+
+    - **Definition:** Returns the length of the string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      console.log(str.length); // 5
+      ```
+
+20. **link()**
+
+    - **Definition:** Creates an `<a>` HTML element that specifies a hyperlink.
+    - **Example:**
+      ```javascript
+      let str = 'Google';
+      let result = str.link('https://www.google.com');
+      console.log(result); // <a href="https://www.google.com">Google</a>
+      ```
+
+21. **localeCompare()**
+
+    - **Definition:** Compares two strings in the current locale.
+    - **Example:**
+      ```javascript
+      let str1 = 'a';
+      let str2 = 'b';
+      let result = str1.localeCompare(str2);
+      console.log(result); // -1
+      ```
+
+22. **match()**
+
+    - **Definition:** Retrieves the result of matching a string against a regular expression.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let result = str.match(/World/);
+      console.log(result); // ["World"]
+      ```
+
+23. **matchAll()**
+
+    - **Definition:** Returns an iterator of all results matching a string against a regular expression, including capturing groups.
+    - **Example:**
+      ```javascript
+      let str = 'test1 test2';
+      let regex = /test(\d)/g;
+      let matches = str.matchAll(regex);
+      for (let match of matches) {
+        console.log(match);
+      }
+      // ["test1", "1"]
+      // ["test2", "2"]
+      ```
+
+24. **normalize()**
+
+    - **Definition:** Returns the Unicode Normalization Form of the string.
+    - **Example:**
+      ```javascript
+      let str = 'e\u0301'; // é
+      let normalizedStr = str.normalize();
+      console.log(normalizedStr); // é
+      ```
+
+25. **padEnd()**
+
+    - **Definition:** Pads the current string with a given string (repeated, if needed) so that the resulting string reaches a given length.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.padEnd(10, '.');
+      console.log(result); // Hello.....
+      ```
+
+26. **padStart()**
+
+    - **Definition:** Pads the current string with another string (repeated, if needed) so that the resulting string reaches a given length.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.padStart(10, '.');
+      console.log(result); // .....Hello
+      ```
+
+27. **repeat()**
+
+    - **Definition:** Constructs and returns a new string which contains the specified number of copies of the string on which it was called, concatenated together.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.repeat(3);
+      console.log(result); // HelloHelloHello
+      ```
+
+28. **replace()**
+
+    - **Definition:** Returns a new string with some or all matches of a pattern replaced by a replacement.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let result = str.replace('World', 'Everyone');
+      console.log(result); // Hello Everyone
+      ```
+
+29. **replaceAll()**
+
+    - **Definition:** Returns a new string with all matches of a pattern replaced by a replacement.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World World';
+      let result = str.replaceAll('World', 'Everyone');
+      console.log(result); // Hello Everyone Everyone
+      ```
+
+30. **search()**
+
+    - **Definition:** Executes a search for a match between a regular expression and this String object.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let index = str.search('World');
+      console.log(index); // 6
+      ```
+
+31. **slice()**
+
+    - **Definition:** Extracts a section of a string and returns it as a new string, without modifying the original string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let result = str.slice(0, 5);
+      console.log(result); // Hello
+      ```
+
+32. **small()**
+
+    - **Definition:** Creates a `<small>` HTML element, which displays the string in a smaller font.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.small();
+      console.log(result); // <small>Hello</small>
+      ```
+
+33. **split()**
+
+    - **Definition:** Splits a String object into an array of strings by separating the string into substrings, using a specified separator string to determine where to make each split.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let arr = str.split(' ');
+      console.log(arr); // ["Hello", "World"]
+      ```
+
+34. **startsWith()**
+
+    - **Definition:** Determines whether a string begins with the characters of a specified string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let result = str.startsWith('Hello');
+      console.log(result); // true
+      ```
+
+35. **strike()**
+
+    - **Definition:** Creates a `<strike>` HTML element, which displays the string with a strikethrough.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.strike();
+      console.log(result); // <strike>Hello</strike>
+      ```
+
+36. **sub()**
+
+    - **Definition:** Creates a `<sub>` HTML element, which displays the string as subscript text.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.sub();
+      console.log(result); // <sub>Hello</sub>
+      ```
+
+37. **substr()**
+
+    - **Definition:** Returns a portion of the string, starting at the specified index and extending for a given number of characters afterwards.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let result = str.substr(0, 5);
+      console.log(result); // Hello
+      ```
+
+38. **substring()**
+
+    - **Definition:** Returns the part of the string between the start and end indexes, or to the end of the string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello World';
+      let result = str.substring(0, 5);
+      console.log(result); // Hello
+      ```
+
+39. **sup()**
+
+    - **Definition:** Creates a `<sup>` HTML element, which displays the string as superscript text.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.sup();
+      console.log(result); // <sup>Hello</sup>
+      ```
+
+40. **toLocaleLowerCase()**
+
+    - **Definition:** The characters within a string are converted to lower case while respecting the current locale.
+    - **Example:**
+      ```javascript
+      let str = 'HELLO';
+      let result = str.toLocaleLowerCase();
+      console.log(result); // hello
+      ```
+
+41. **toLocaleUpperCase()**
+
+    - **Definition:** The characters within a string are converted to upper case while respecting the current locale.
+    - **Example:**
+      ```javascript
+      let str = 'hello';
+      let result = str.toLocaleUpperCase();
+      console.log(result); // HELLO
+      ```
+
+42. **toLowerCase()**
+
+    - **Definition:** The characters within a string are converted to lower case.
+    - **Example:**
+      ```javascript
+      let str = 'HELLO';
+      let result = str.toLowerCase();
+      console.log(result); // hello
+      ```
+
+43. **toString()**
+
+    - **Definition:** Returns a string representing the specified object.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      console.log(str.toString()); // Hello
+      ```
+
+44. **toUpperCase()**
+
+    - **Definition:** The characters within a string are converted to upper case.
+    - **Example:**
+      ```javascript
+      let str = 'hello';
+      let result = str.toUpperCase();
+      console.log(result); // HELLO
+      ```
+
+45. **toWellFormed()**
+
+    - **Definition:** Returns the string as a well-formed Unicode string.
+    - **Example:**
+      ```javascript
+      let str = 'Hello';
+      let result = str.toWellFormed();
+      console.log(result); // Hello
+      ```
+
+46. **trim()**
+
+    - **Definition:** Removes whitespace from both ends of a string.
+    - **Example:**
+      ```javascript
+      let str = '  Hello World  ';
+      let result = str.trim();
+      console.log(result); // Hello World
+      ```
+
+47. **trimEnd()**
+
+    - **Definition:** Removes whitespace from the end of a string.
+    - **Example:**
+      ```javascript
+      let str = '  Hello World  ';
+      let result = str.trimEnd();
+      console.log(result); // "  Hello World"
+      ```
+
+48. **trimLeft() / trimStart()**
+
+    - **Definition:** Removes whitespace from the beginning of a string.
+    - **Example:**
+      ```javascript
+      let str = '  Hello World  ';
+      let result = str.trimStart(); // or trimLeft()
+      console.log(result); // "Hello World  "
+      ```
+
+49. **trimRight() / trimEnd()**
+
+    - **Definition:** Removes whitespace from the end of a string.
+    - **Example:**
+      ```javascript
+      let str = '  Hello World  ';
+      let result = str.trimEnd(); // or trimRight()
+      console.log(result); // "  Hello World"
+      ```
+
+50. **trimStart() / trimLeft()**
+
+    - **Definition:** Removes whitespace from the beginning of a string.
+    - **Example:**
+      ```javascript
+      let str = '  Hello World  ';
+      let result = str.trimStart(); // or trimLeft()
+      console.log(result); // "Hello World  "
+      ```
+
+51. **valueOf()**
+    - **Definition:** Returns the primitive value of a String object.
+    - **Example:**
+      ```javascript
+      let str = new String('Hello');
+      console.log(str.valueOf()); // Hello
+      ```

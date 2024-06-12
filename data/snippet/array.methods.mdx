@@ -1,72 +1,416 @@
 ---
-title: Array/String Methods
-description: These methods cover a wide range of operations you can perform on arrays and strings
+title: JavaScript Array Methods
+description: These methods cover a wide range of operations you can perform on arrays
 logo: /static/images/algorithm/algorithm.png
 categories: ['Extra']
 ---
 
-## Array Methods
+### `at`
 
-1. **at**: Returns the element at a specified index in the array.
-2. **concat**: Joins two or more arrays and returns a new array.
-3. **copyWithin**: Copy a portion of an array to another location within the same array without changing its size.
-4. **entries**: Returns a new array iterator object containing key/value pairs for each index in the array.
-5. **every**: Checks if all elements in the array satisfy a provided condition.
-6. **fill**: Fills elements of an array with a static value from a start index to an end index.
-7. **filter**: Creates a new array containing elements that pass the specified condition.
-8. **find**: Returns the value of the first element in the array that satisfies a provided condition.
-9. **findIndex**: Returns the index of the first element in the array that satisfies a provided condition.
-10. **findLast**: Find the last element in an array that satisfies a given condition.
-11. **findLastIndex**: Find the index of the last element in an array that satisfies a given condition.
-12. **flat**: Creates a new array with all sub-array elements concatenated into it recursively up to a specified depth.
-13. **flatMap**: Maps each element using a mapping function and flattens the result into a new array.
-14. **forEach**: Executes a provided function once for each array element.
-15. **includes**: Checks if an array contains a specific element.
-16. **indexOf**: Returns the first index at which a specified element can be found in the array.
-17. **join**: Joins all elements of an array into a string.
-18. **keys**: Return a new Array Iterator object that contains the keys for each index in the array.
-19. **lastIndexOf**: Returns the last index at which a specified element can be found in the array.
-20. **map**: Executes a provided function once for each array element and creates a new array with the results.
-21. **pop**: Removes the last element from an array and returns that element.
-22. **push**: Adds one or more elements to the end of an array and returns the new length.
-23. **reduce**: Reduces the array to a single value by applying a function to each element.
-24. **reduceRight**: Similar to `reduce`, but processes the array from right to left.
-25. **reverse**: Reverses the order of elements in an array.
-26. **shift**: Removes the first element from an array and returns that removed element.
-27. **slice**: Returns a shallow copy of a portion of an array as a new array.
-28. **some**: Checks if at least one element in the array satisfies a provided condition.
-29. **sort**: Sorts the elements of an array in place.
-30. **splice**: Adds or removes elements from an array at a specified index.
-31. **toLocaleString**: Returns a Date object as a string, using locale settings.
-32. **toReversed**: Create a new array with the elements of the original array in reversed order.
-33. **toSorted**: Create a new array with the elements of the original array sorted.
-34. **toSpliced**: Create a new array with some elements added, removed, or replaced without modifying the original array.
-35. **toString**: Returns a string representing the array and its elements.
-36. **unshift**: Adds one or more elements to the beginning of an array and returns the new length.
-37. **values**: Return a new Array Iterator object that contains the values for each index in the array.
-38. **with**: Returns a copy of the array it's called on with the index set to the new value you provide.
+Returns the element at a specified index in the array. Supports negative indexing.
 
-## String Methods
+```javascript
+const arr = [10, 20, 30, 40];
+console.log(arr.at(1)); // Output: 20
+console.log(arr.at(-1)); // Output: 40
+```
 
-1. **length**: Returns the number of characters in a string.
-2. **concat**: Combines two or more strings and returns a new string.
-3. **substring**: Extracts a portion of a string based on start and end indexes.
-4. **indexOf**: Returns the index of the first occurrence of a specified substring within a string.
-5. **replace**: Replaces specified substrings within a string with new values.
-6. **toUpperCase**: Converts all characters in a string to uppercase.
-7. **toLowerCase**: Converts all characters in a string to lowercase.
-8. **startsWith**: Checks if a string starts with a specific substring.
-9. **endsWith**: Checks if a string ends with a specific substring.
-10. **trim**: Removes whitespace from the beginning and end of a string.
-11. **split**: Divides a string into an array of substrings based on a specified separator.
-12. **charAt**: Retrieves the character at a specific index within a string.
-13. **charCodeAt**: Returns the Unicode value of a character at a specified index.
-14. **includes**: Checks if a string contains a specific substring.
-15. **match**: Determines if a string matches a particular pattern using regular expressions.
-16. **repeat**: Repeats a string a specified number of times.
-17. **lastIndexOf**: Finds the index of the last occurrence of a specified substring within a string.
-18. **slice**: Extracts a portion of a string based on start and end indexes.
-19. **isEmpty**: Checks if a string is empty.
-20. **isNaN**: Determines if a string represents a valid number.
+### `concat`
 
-https://zuxcode.medium.com/20-javascript-string-methods-3ce70d1fb52
+Joins two or more arrays and returns a new array without modifying the original arrays.
+
+```javascript
+const arr1 = [1, 2];
+const arr2 = [3, 4];
+const result = arr1.concat(arr2);
+console.log(result); // Output: [1, 2, 3, 4]
+```
+
+### `copyWithin`
+
+Copies a portion of an array to another location within the same array without changing its size.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+arr.copyWithin(0, 3, 5);
+console.log(arr); // Output: [4, 5, 3, 4, 5]
+```
+
+### `entries`
+
+Returns a new array iterator object containing key/value pairs for each index in the array.
+
+```javascript
+const arr = ['a', 'b', 'c'];
+const iterator = arr.entries();
+for (const [index, value] of iterator) {
+  console.log(index, value);
+}
+// Output:
+// 0 'a'
+// 1 'b'
+// 2 'c'
+```
+
+### `every`
+
+Checks if all elements in the array satisfy a provided condition. Returns `true` or `false`.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const allLessThanSix = arr.every((num) => num < 6);
+console.log(allLessThanSix); // Output: true
+```
+
+### `fill`
+
+Fills elements of an array with a static value from a start index to an end index.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+arr.fill(0, 1, 4);
+console.log(arr); // Output: [1, 0, 0, 0, 5]
+```
+
+### `filter`
+
+Creates a new array containing elements that pass the specified condition.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const result = arr.filter((num) => num > 2);
+console.log(result); // Output: [3, 4, 5]
+```
+
+### `find`
+
+Returns the value of the first element in the array that satisfies a provided condition.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const found = arr.find((num) => num > 3);
+console.log(found); // Output: 4
+```
+
+### `findIndex`
+
+Returns the index of the first element in the array that satisfies a provided condition.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const index = arr.findIndex((num) => num > 3);
+console.log(index); // Output: 3
+```
+
+### `findLast`
+
+Returns the value of the last element in the array that satisfies a provided condition.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const found = arr.findLast((num) => num < 4);
+console.log(found); // Output: 3
+```
+
+### `findLastIndex`
+
+Returns the index of the last element in the array that satisfies a provided condition.
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const index = arr.findLastIndex((num) => num < 4);
+console.log(index); // Output: 2
+```
+
+### `flat`
+
+Creates a new array with all sub-array elements concatenated into it recursively up to a specified depth.
+
+```javascript
+const arr = [1, [2, [3, [4]]]];
+const flattened = arr.flat(2);
+console.log(flattened); // Output: [1, 2, 3, [4]]
+```
+
+### `flatMap`
+
+Maps each element using a mapping function and flattens the result into a new array.
+
+```javascript
+const arr = [1, 2, 3];
+const result = arr.flatMap((num) => [num, num * 2]);
+console.log(result); // Output: [1, 2, 2, 4, 3, 6]
+```
+
+### `forEach`
+
+Executes a provided function once for each array element.
+
+```javascript
+const arr = [1, 2, 3];
+arr.forEach((num) => console.log(num * 2));
+// Output:
+// 2
+// 4
+// 6
+```
+
+### `includes`
+
+Checks if an array contains a specific element, returning `true` or `false`.
+
+```javascript
+const arr = [1, 2, 3];
+console.log(arr.includes(2)); // Output: true
+console.log(arr.includes(4)); // Output: false
+```
+
+### `indexOf`
+
+Returns the first index at which a specified element can be found in the array, or -1 if not found.
+
+```javascript
+const arr = [1, 2, 3, 2];
+console.log(arr.indexOf(2)); // Output: 1
+console.log(arr.indexOf(4)); // Output: -1
+```
+
+### `join`
+
+Joins all elements of an array into a string, separated by a specified separator.
+
+```javascript
+const arr = [1, 2, 3];
+const str = arr.join('-');
+console.log(str); // Output: "1-2-3"
+```
+
+### `keys`
+
+Returns a new Array Iterator object that contains the keys (indices) for each index in the array.
+
+```javascript
+const arr = ['a', 'b', 'c'];
+const iterator = arr.keys();
+for (const key of iterator) {
+  console.log(key);
+}
+// Output:
+// 0
+// 1
+// 2
+```
+
+### `lastIndexOf`
+
+Returns the last index at which a specified element can be found in the array, or -1 if not found.
+
+```javascript
+const arr = [1, 2, 3, 2];
+console.log(arr.lastIndexOf(2)); // Output: 3
+console.log(arr.lastIndexOf(4)); // Output: -1
+```
+
+### `map`
+
+Executes a provided function once for each array element and creates a new array with the results.
+
+```javascript
+const arr = [1, 2, 3];
+const result = arr.map((num) => num * 2);
+console.log(result); // Output: [2, 4, 6]
+```
+
+### `pop`
+
+Removes the last element from an array and returns that element.
+
+```javascript
+const arr = [1, 2, 3];
+const lastElement = arr.pop();
+console.log(lastElement); // Output: 3
+console.log(arr); // Output: [1, 2]
+```
+
+### `push`
+
+Adds one or more elements to the end of an array and returns the new length.
+
+```javascript
+const arr = [1, 2];
+const newLength = arr.push(3);
+console.log(newLength); // Output: 3
+console.log(arr); // Output: [1, 2, 3]
+```
+
+### `reduce`
+
+Reduces the array to a single value by applying a function to each element from left to right.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const sum = arr.reduce((accumulator, current) => accumulator + current, 0);
+console.log(sum); // Output: 10
+```
+
+### `reduceRight`
+
+Similar to `reduce`, but processes the array from right to left.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const product = arr.reduceRight((accumulator, current) => accumulator * current, 1);
+console.log(product); // Output: 24
+```
+
+### `reverse`
+
+Reverses the order of elements in an array in place.
+
+```javascript
+const arr = [1, 2, 3];
+arr.reverse();
+console.log(arr); // Output: [3, 2, 1]
+```
+
+### `shift`
+
+Removes the first element from an array and returns that removed element.
+
+```javascript
+const arr = [1, 2, 3];
+const firstElement = arr.shift();
+console.log(firstElement); // Output: [2, 3]
+```
+
+### `slice`
+
+Returns a shallow copy of a portion of an array as a new array.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const sliced = arr.slice(1, 3);
+console.log(sliced); // Output: [2, 3]
+```
+
+### `some`
+
+Checks if at least one element in the array satisfies a provided condition. Returns `true` or `false`.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const hasEven = arr.some((num) => num % 2 === 0);
+console.log(hasEven); // Output: true
+```
+
+### `sort`
+
+Sorts the elements of an array in place and returns the sorted array.
+
+```javascript
+const arr = [3, 1, 4, 1, 5];
+arr.sort();
+console.log(arr); // Output: [1, 1, 3, 4, 5]
+```
+
+### `splice`
+
+Adds or removes elements from an array at a specified index and returns the removed elements.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const removed = arr.splice(1, 2, 'a', 'b');
+console.log(removed); // Output: [2, 3]
+console.log(arr); // Output: [1, 'a', 'b', 4]
+```
+
+### `toLocaleString`
+
+Returns a string representing the array and its elements, formatted using locale settings.
+
+```javascript
+const arr = [1234.56, 'string', new Date()];
+const str = arr.toLocaleString('en-US');
+console.log(str); // Output depends on locale settings
+```
+
+### `toReversed`
+
+Creates a new array with the elements of the original array in reversed order without modifying the original array.
+
+```javascript
+const arr = [1, 2, 3];
+const reversed = arr.toReversed();
+console.log(reversed); // Output: [3, 2, 1]
+console.log(arr); // Output: [1, 2, 3]
+```
+
+### `toSorted`
+
+Creates a new array with the elements of the original array sorted without modifying the original array.
+
+```javascript
+const arr = [3, 1, 4, 1, 5];
+const sorted = arr.toSorted();
+console.log(sorted); // Output: [1, 1, 3, 4, 5]
+console.log(arr); // Output: [3, 1, 4, 1, 5]
+```
+
+### `toSpliced`
+
+Creates a new array with some elements added, removed, or replaced without modifying the original array.
+
+```javascript
+const arr = [1, 2, 3, 4];
+const spliced = arr.toSpliced(1, 2, 'a', 'b');
+console.log(spliced); // Output: [1, 'a', 'b', 4]
+console.log(arr); // Output: [1, 2, 3, 4]
+```
+
+### `toString`
+
+Returns a string representing the array and its elements.
+
+```javascript
+const arr = [1, 2, 3];
+const str = arr.toString();
+console.log(str); // Output: "1,2,3"
+```
+
+### `unshift`
+
+Adds one or more elements to the beginning of an array and returns the new length.
+
+```javascript
+const arr = [2, 3];
+const newLength = arr.unshift(1);
+console.log(newLength); // Output: 3
+console.log(arr); // Output: [1, 2, 3]
+```
+
+### `values`
+
+Returns a new Array Iterator object that contains the values for each index in the array.
+
+```javascript
+const arr = ['a', 'b', 'c'];
+const iterator = arr.values();
+for (const value of iterator) {
+  console.log(value);
+}
+// Output:
+// 'a'
+// 'b'
+// 'c'
+```
+
+### `with`
+
+Returns a copy of the array with the element at the specified index replaced with the new value.
+
+```javascript
+const arr = [1, 2, 3];
+const newArr = arr.with(1, 'a');
+console.log(newArr); // Output: [1, 'a', 3]
+console.log(arr); // Output: [1, 2, 3]
+```
