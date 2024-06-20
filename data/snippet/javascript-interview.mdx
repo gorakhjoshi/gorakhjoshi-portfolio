@@ -268,16 +268,28 @@ error('This is an error message.'); // Outputs: [ERROR] This is an error message
 
 ### 31. What are the features of ES6?
 
-- Arrow functions
+- Arrow Functions
 - Classes
-- Template literals
-- Destructuring assignment
-- Default parameters
-- Rest and spread operators
-- `let` and `const`
+- Enhanced Object Literals
+- Template Literals
+- Destructuring Assignment
+- Default Parameters
+- Rest and Spread Operators
+- Let and Const
+- Iterators and For…of Loop
 - Promises
-- Modules
-- Enhanced object literals
+- Modules (import/export)
+- Generators
+- Map and Set
+- WeakMap and WeakSet
+- Symbol
+- New Built-in Methods (e.g., Array methods, String methods)
+- Block-Scoped Functions
+- New Number Methods
+- New Math Methods
+- Reflect API
+- Proxy API
+- Tail Call Optimization
 
 ### 32. What is the difference between shallow copy and deep copy?
 
@@ -546,28 +558,120 @@ The `this` keyword refers to the context in which a function is called. Its valu
 
 Weak references are objects that do not prevent their referents from being reclaimed by garbage collection. `WeakMap` and `WeakSet` are examples, allowing garbage collection if there are no other strong references to the objects.
 
+`Using WeakMap in React`
+
+Suppose you’re building a modal component in React, and you want to associate some private data with the modal component itself, without preventing the modal from being garbage collected when it’s no longer needed. You can use a WeakMap for this purpose. Here's how you might implement it:
+
+```javascript
+import React, { useEffect } from 'react';
+
+// Create a WeakMap to associate private data with modal components.
+const modalData = new WeakMap();
+
+function Modal({ isOpen, onClose, children }) {
+  useEffect(() => {
+    if (isOpen) {
+      // Associate private data with this instance of the modal component.
+      modalData.set(Modal, { openTime: new Date() });
+    } else {
+      // The modal is closing, and it can be garbage collected along with its associated data.
+      modalData.delete(Modal);
+    }
+  }, [isOpen]);
+
+  return isOpen ? (
+    <div className="modal">
+      {children}
+      <button onClick={onClose}>Close</button>
+    </div>
+  ) : null;
+}
+
+export default Modal;
+```
+
+`Using WeakSet in React`
+
+If your component adds event listeners directly to the DOM (though this is less common in React due to its synthetic event system), you can use WeakSet to manage event listeners
+
+```javascript
+const listenerSet = new WeakSet();
+
+function MyComponent() {
+  useEffect(() => {
+    const handleClick = () => {
+      // handle click event
+    };
+
+    document.addEventListener('click', handleClick);
+    listenerSet.add(handleClick);
+
+    return () => {
+      // Clean up event listener when component unmounts
+      document.removeEventListener('click', handleClick);
+      listenerSet.delete(handleClick);
+    };
+  }, []);
+
+  return <div>Component content</div>;
+}
+```
+
 ### 57. What is memoization?
 
 Memoization is an optimization technique that caches the results of function calls to avoid repeated calculations for the same inputs.
 
+`Without memoization`
+
 ```javascript
-function memoize(fn) {
-  const cache = new Map();
-  return function (...args) {
-    const key = JSON.stringify(args);
-    if (cache.has(key)) {
-      return cache.get(key);
+function square(num) {
+  return num * num;
+}
+
+sqaure(2); // returns 4
+square(9999999999999999); // This is an expensive computation
+square(9999999999999999); // Should we re-compute for same large input?
+```
+
+`With memoization`
+
+```javascript
+function square(n) {
+  return n * n;
+}
+
+function memoizedSquare() {
+  let cache = {};
+  return function optimizedSquare(num) {
+    if (num in cache) {
+      console.log('Returning from cache');
+      return cache[num];
+    } else {
+      console.log('Computing square');
+      const result = square(num);
+      cache[num] = result;
+      return result;
     }
-    const result = fn.apply(this, args);
-    cache.set(key, result);
-    return result;
   };
 }
+
+const memoSquare = memoizedSquare();
+console.log(memoSquare(9999999999999999));
+console.log(memoSquare(9999999999999999));
+
+// Outputs:
+// "Computing square"
+// 1e+32
+
+// "Returning from cache"
+// 1e+32
 ```
 
 ### 58. Explain the concept of tail call optimization.
 
 Tail call optimization is a feature where the last function call in a function can be optimized by the JavaScript engine to avoid creating a new stack frame, thus improving performance and preventing stack overflow in recursive functions.
+
+This feature is however not shipped in all browsers. Currently only safari supports it in strict mode.
 
 ### 59. What are JavaScript Symbols and their use cases?
 

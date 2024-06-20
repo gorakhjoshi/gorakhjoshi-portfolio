@@ -1,0 +1,34 @@
+---
+title: useLayoutEffect
+description: Both of these can be used to do basically the same thing, but they have slightly different use cases.
+logo: /static/images/algorithm/algorithm.png
+categories: ['Extra']
+---
+
+```javascript
+import { useEffect, useLayoutEffect, useState } from 'react';
+
+const Demo = () => {
+  const [isNew, setIsNew] = useState(false);
+
+  for (let i = 0; i < 10000; i++) {
+    console.log('Slow down!');
+  }
+
+  // useEffect(() => {
+  //   setIsNew(true)
+  // }, [])
+
+  useLayoutEffect(() => {
+    setIsNew(true);
+  }, []);
+
+  return (
+    <div>
+      <p style={{ fontSize: '100px' }}>Admin: {isNew ? 'New Content' : 'Old Content'}</p>
+    </div>
+  );
+};
+
+export default Demo;
+```
